@@ -274,7 +274,25 @@ button{background:#4facfe;color:white;}
     background:#dbeafe;
     border-left:6px solid #3b82f6;
 }
+#fbButton{
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #1877f2;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 1000;
+    transition: all 0.3s ease;
+}
 
+#fbButton:hover{
+    background: #0d65d9;
+    transform: scale(1.05);
+}
 .sentenceRow div:nth-child(2){
     display:flex;
     align-items:center;
