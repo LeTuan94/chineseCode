@@ -232,7 +232,7 @@ function scrollToActiveRow(){
 }
 
 /* ================= LOAD JSON HSK ================= */
-const basePath = window.location.pathname;
+const basePath = window.location.origin;
 const hskFiles = {
 "HSK 1": "/data/HSK1.json",
 "HSK 2": "/data/HSK2.json",
