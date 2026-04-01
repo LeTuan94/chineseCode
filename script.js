@@ -232,7 +232,7 @@ function scrollToActiveRow(){
 }
 
 /* ================= LOAD JSON HSK ================= */
-const basePath = window.location.pathname.replace(/\/[^\/]*$/, '') + '/';
+const basePath = window.location.pathname;
 const hskFiles = {
     "HSK 1": "data/hsk1.json",
     "HSK 2": "data/hsk2.json",
