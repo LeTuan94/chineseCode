@@ -232,6 +232,7 @@ function scrollToActiveRow(){
 }
 
 /* ================= LOAD JSON HSK ================= */
+const basePath = window.location.pathname.replace(/\/[^\/]*$/, '') + '/';
 const hskFiles = {
     "HSK 1": "data/hsk1.json",
     "HSK 2": "data/hsk2.json",
@@ -248,7 +249,7 @@ const hskFiles = {
 
 async function loadHSK(level){
     try{
-        const file = hskFiles[level];
+        const file = basePath + hskFiles[level];
         if(!file) return;
         const res = await fetch(file);
         const data = await res.json();
