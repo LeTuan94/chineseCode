@@ -1,0 +1,1352 @@
+[
+  {
+    "STT": "1",
+    "Từ vựng": "吧",
+    "Phiên âm từ": "ba",
+    "Nghĩa từ": "đi, nhé, nhỉ (đứng cuối câu)",
+    "Ví dụ": "请你帮我吧。",
+    "Phiên âm câu": "Qǐng nǐ bāng wǒ ba.",
+    "Dịch": "Xin bạn giúp tôi nhé."
+  },
+  {
+    "STT": "2",
+    "Từ vựng": "白",
+    "Phiên âm từ": "bái",
+    "Nghĩa từ": "trắng",
+    "Ví dụ": "他的白色衬衫很漂亮。",
+    "Phiên âm câu": "Tā de báisè chènshān hěn piàoliang.",
+    "Dịch": "Áo sơ mi trắng của anh ấy rất đẹp."
+  },
+  {
+    "STT": "3",
+    "Từ vựng": "百",
+    "Phiên âm từ": "bǎi",
+    "Nghĩa từ": "trăm",
+    "Ví dụ": "我们要买一百个苹果。",
+    "Phiên âm câu": "Wǒmen yào mǎi yī bǎi gè píngguǒ.",
+    "Dịch": "Chúng tôi muốn mua một trăm quả táo."
+  },
+  {
+    "STT": "4",
+    "Từ vựng": "帮助",
+    "Phiên âm từ": "bāngzhù",
+    "Nghĩa từ": "giúp đỡ",
+    "Ví dụ": "请你帮忙翻译这篇文章。",
+    "Phiên âm câu": "Qǐng nǐ bāngmáng fānyì zhè piān wénzhāng.",
+    "Dịch": "Xin bạn giúp dịch bài viết này."
+  },
+  {
+    "STT": "5",
+    "Từ vựng": "报纸",
+    "Phiên âm từ": "bàozhǐ",
+    "Nghĩa từ": "báo",
+    "Ví dụ": "我每天都看报纸。",
+    "Phiên âm câu": "Wǒ měitiān dōu kàn bàozhǐ.",
+    "Dịch": "Tôi đọc báo mỗi ngày."
+  },
+  {
+    "STT": "6",
+    "Từ vựng": "比",
+    "Phiên âm từ": "bǐ",
+    "Nghĩa từ": "so sánh",
+    "Ví dụ": "我的家比你的家大。",
+    "Phiên âm câu": "Wǒ de jiā bǐ nǐ de jiā dà.",
+    "Dịch": "Nhà của tôi lớn hơn nhà của bạn."
+  },
+  {
+    "STT": "7",
+    "Từ vựng": "别",
+    "Phiên âm từ": "bié",
+    "Nghĩa từ": "đừng, khác biệt",
+    "Ví dụ": "别忘带钥匙。",
+    "Phiên âm câu": "Bié wàng dài yàoshi.",
+    "Dịch": "Đừng quên mang theo chìa khóa."
+  },
+  {
+    "STT": "8",
+    "Từ vựng": "长",
+    "Phiên âm từ": "cháng",
+    "Nghĩa từ": "dài",
+    "Ví dụ": "她的头发很长。",
+    "Phiên âm câu": "Tā de tóufǎ hěn cháng.",
+    "Dịch": "Tóc của cô ấy rất dài."
+  },
+  {
+    "STT": "9",
+    "Từ vựng": "唱歌",
+    "Phiên âm từ": "chànggē",
+    "Nghĩa từ": "hát",
+    "Ví dụ": "我喜欢唱歌。",
+    "Phiên âm câu": "Wǒ xǐhuān chànggē.",
+    "Dịch": "Tôi thích hát."
+  },
+  {
+    "STT": "10",
+    "Từ vựng": "出",
+    "Phiên âm từ": "chū",
+    "Nghĩa từ": "ra ngoài",
+    "Ví dụ": "我们出去玩吧。",
+    "Phiên âm câu": "Wǒmen chūqù wán ba.",
+    "Dịch": "Chúng ta ra ngoài chơi đi."
+  },
+  {
+    "STT": "11",
+    "Từ vựng": "穿",
+    "Phiên âm từ": "chuān",
+    "Nghĩa từ": "mặc",
+    "Ví dụ": "你穿的衣服很漂亮。",
+    "Phiên âm câu": "Nǐ chuān de yīfú hěn piàoliang.",
+    "Dịch": "Quần áo bạn mặc rất đẹp."
+  },
+  {
+    "STT": "12",
+    "Từ vựng": "船",
+    "Phiên âm từ": "chuán",
+    "Nghĩa từ": "thuyền",
+    "Ví dụ": "他坐在船上。",
+    "Phiên âm câu": "Tā zuò zài chuán shàng.",
+    "Dịch": "Anh ấy ngồi trên thuyền."
+  },
+  {
+    "STT": "13",
+    "Từ vựng": "次",
+    "Phiên âm từ": "cì",
+    "Nghĩa từ": "lần",
+    "Ví dụ": "这是我第一次来这里。",
+    "Phiên âm câu": "Zhè shì wǒ dì yī cì lái zhèlǐ.",
+    "Dịch": "Đây là lần đầu tiên tôi đến đây."
+  },
+  {
+    "STT": "14",
+    "Từ vựng": "从",
+    "Phiên âm từ": "cóng",
+    "Nghĩa từ": "từ, theo",
+    "Ví dụ": "他从早上工作到晚上。",
+    "Phiên âm câu": "Tā cóng zǎoshang gōngzuò dào wǎnshang.",
+    "Dịch": "Anh ấy làm việc từ sáng đến tối."
+  },
+  {
+    "STT": "15",
+    "Từ vựng": "错",
+    "Phiên âm từ": "cuò",
+    "Nghĩa từ": "sai",
+    "Ví dụ": "他做错了一个题。",
+    "Phiên âm câu": "Tā zuò cuòle yīgè tí.",
+    "Dịch": "Anh ấy đã làm sai một bài tập."
+  },
+  {
+    "STT": "16",
+    "Từ vựng": "打篮球",
+    "Phiên âm từ": "dǎ lánqiú",
+    "Nghĩa từ": "chơi bóng rổ",
+    "Ví dụ": "他打篮球打得很好。",
+    "Phiên âm câu": "Tā dǎ lánqiú dǎ de hěn hǎo.",
+    "Dịch": "Anh ấy chơi bóng rổ rất giỏi."
+  },
+  {
+    "STT": "17",
+    "Từ vựng": "大家",
+    "Phiên âm từ": "dàjiā",
+    "Nghĩa từ": "mọi người",
+    "Ví dụ": "大家都很高兴。",
+    "Phiên âm câu": "Dàjiā dōu hěn gāoxìng.",
+    "Dịch": "Mọi người đều rất vui."
+  },
+  {
+    "STT": "18",
+    "Từ vựng": "但是",
+    "Phiên âm từ": "dànshì",
+    "Nghĩa từ": "nhưng",
+    "Ví dụ": "我想去，但是没有时间。",
+    "Phiên âm câu": "Wǒ xiǎng qù, dànshì méiyǒu shíjiān.",
+    "Dịch": "Tôi muốn đi, nhưng không có thời gian."
+  },
+  {
+    "STT": "19",
+    "Từ vựng": "到",
+    "Phiên âm từ": "dào",
+    "Nghĩa từ": "đến",
+    "Ví dụ": "我们今天到学校了。",
+    "Phiên âm câu": "Wǒmen jīntiān dào xuéxiào le.",
+    "Dịch": "Hôm nay chúng tôi đã đến trường."
+  },
+  {
+    "STT": "20",
+    "Từ vựng": "得",
+    "Phiên âm từ": "děi",
+    "Nghĩa từ": "phải, đạt được",
+    "Ví dụ": "你得努力学习。",
+    "Phiên âm câu": "Nǐ děi nǔlì xuéxí.",
+    "Dịch": "Bạn phải cố gắng học."
+  },
+  {
+    "STT": "21",
+    "Từ vựng": "等",
+    "Phiên âm từ": "děng",
+    "Nghĩa từ": "đợi",
+    "Ví dụ": "我们等你来。",
+    "Phiên âm câu": "Wǒmen děng nǐ lái.",
+    "Dịch": "Chúng tôi đợi bạn đến."
+  },
+  {
+    "STT": "22",
+    "Từ vựng": "弟弟",
+    "Phiên âm từ": "dìdì",
+    "Nghĩa từ": "em trai",
+    "Ví dụ": "弟弟在玩玩具。",
+    "Phiên âm câu": "Dìdì zài wán wánjù.",
+    "Dịch": "Em trai đang chơi đồ chơi."
+  },
+  {
+    "STT": "23",
+    "Từ vựng": "第一",
+    "Phiên âm từ": "dì yī",
+    "Nghĩa từ": "đầu tiên",
+    "Ví dụ": "他是第一名。",
+    "Phiên âm câu": "Tā shì dì yī míng.",
+    "Dịch": "Anh ấy là người đứng đầu."
+  },
+  {
+    "STT": "24",
+    "Từ vựng": "懂",
+    "Phiên âm từ": "dǒng",
+    "Nghĩa từ": "hiểu",
+    "Ví dụ": "我不懂这个问题。",
+    "Phiên âm câu": "Wǒ bù dǒng zhège wèntí.",
+    "Dịch": "Tôi không hiểu vấn đề này."
+  },
+  {
+    "STT": "25",
+    "Từ vựng": "对",
+    "Phiên âm từ": "duì",
+    "Nghĩa từ": "đúng, đối với",
+    "Ví dụ": "你对我很好。",
+    "Phiên âm câu": "Nǐ duì wǒ hěn hǎo.",
+    "Dịch": "Bạn đối xử tốt với tôi."
+  },
+  {
+    "STT": "26",
+    "Từ vựng": "房间",
+    "Phiên âm từ": "fángjiān",
+    "Nghĩa từ": "phòng",
+    "Ví dụ": "房间里很安静。",
+    "Phiên âm câu": "Fángjiān lǐ hěn ānjìng.",
+    "Dịch": "Trong phòng rất yên tĩnh."
+  },
+  {
+    "STT": "27",
+    "Từ vựng": "非常",
+    "Phiên âm từ": "fēicháng",
+    "Nghĩa từ": "rất, cực kỳ",
+    "Ví dụ": "这道菜非常好吃。",
+    "Phiên âm câu": "Zhè dào cài fēicháng hǎochī.",
+    "Dịch": "Món ăn này rất ngon."
+  },
+  {
+    "STT": "28",
+    "Từ vựng": "服务员",
+    "Phiên âm từ": "fúwùyuán",
+    "Nghĩa từ": "nhân viên phục vụ",
+    "Ví dụ": "服务员请帮忙。",
+    "Phiên âm câu": "Fúwùyuán qǐng bāngmáng.",
+    "Dịch": "Nhân viên phục vụ, xin giúp đỡ."
+  },
+  {
+    "STT": "29",
+    "Từ vựng": "高",
+    "Phiên âm từ": "gāo",
+    "Nghĩa từ": "cao",
+    "Ví dụ": "他很高。",
+    "Phiên âm câu": "Tā hěn gāo.",
+    "Dịch": "Anh ấy rất cao."
+  },
+  {
+    "STT": "30",
+    "Từ vựng": "告诉",
+    "Phiên âm từ": "gàosù",
+    "Nghĩa từ": "nói cho, thông báo",
+    "Ví dụ": "请告诉我答案。",
+    "Phiên âm câu": "Qǐng gàosù wǒ dá'àn.",
+    "Dịch": "Xin cho tôi biết đáp án."
+  },
+  {
+    "STT": "31",
+    "Từ vựng": "哥哥",
+    "Phiên âm từ": "gēge",
+    "Nghĩa từ": "anh trai",
+    "Ví dụ": "哥哥在家里。",
+    "Phiên âm câu": "Gēge zài jiālǐ.",
+    "Dịch": "Anh trai đang ở nhà."
+  },
+  {
+    "STT": "32",
+    "Từ vựng": "给",
+    "Phiên âm từ": "gěi",
+    "Nghĩa từ": "đưa cho, cho",
+    "Ví dụ": "请给我一本书。",
+    "Phiên âm câu": "Qǐng gěi wǒ yī běn shū.",
+    "Dịch": "Xin hãy đưa cho tôi một cuốn sách."
+  },
+  {
+    "STT": "33",
+    "Từ vựng": "公共汽车",
+    "Phiên âm từ": "gōnggòng qìchē",
+    "Nghĩa từ": "xe buýt",
+    "Ví dụ": "公共汽车很方便。",
+    "Phiên âm câu": "Gōnggòng qìchē hěn fāngbiàn.",
+    "Dịch": "Xe buýt rất tiện lợi."
+  },
+  {
+    "STT": "34",
+    "Từ vựng": "公斤",
+    "Phiên âm từ": "gōngjīn",
+    "Nghĩa từ": "kilogram (kg)",
+    "Ví dụ": "这个包十公斤。",
+    "Phiên âm câu": "Zhège bāo shí gōngjīn.",
+    "Dịch": "Cái túi này mười kilogram."
+  },
+  {
+    "STT": "35",
+    "Từ vựng": "公司",
+    "Phiên âm từ": "gōngsī",
+    "Nghĩa từ": "công ty",
+    "Ví dụ": "我在公司工作。",
+    "Phiên âm câu": "Wǒ zài gōngsī gōngzuò.",
+    "Dịch": "Tôi làm việc ở công ty."
+  },
+  {
+    "STT": "36",
+    "Từ vựng": "贵",
+    "Phiên âm từ": "guì",
+    "Nghĩa từ": "đắt, quý",
+    "Ví dụ": "这件衣服很贵。",
+    "Phiên âm câu": "Zhè jiàn yīfú hěn guì.",
+    "Dịch": "Cái áo này rất đắt."
+  },
+  {
+    "STT": "37",
+    "Từ vựng": "过",
+    "Phiên âm từ": "guò",
+    "Nghĩa từ": "qua, đi qua",
+    "Ví dụ": "请过安检门。",
+    "Phiên âm câu": "Qǐng guò ānjiǎn mén.\\",
+    "Dịch": "Mời đi qua cửa an ninh."
+  },
+  {
+    "STT": "38",
+    "Từ vựng": "还",
+    "Phiên âm từ": "hái",
+    "Nghĩa từ": "vẫn, còn",
+    "Ví dụ": "我还想要一杯水。",
+    "Phiên âm câu": "Wǒ hái xiǎng yào yī bēi shuǐ.",
+    "Dịch": "Tôi còn muốn một cốc nước."
+  },
+  {
+    "STT": "39",
+    "Từ vựng": "孩子",
+    "Phiên âm từ": "háizi",
+    "Nghĩa từ": "trẻ con",
+    "Ví dụ": "孩子们都在玩。",
+    "Phiên âm câu": "Háizimen dōu zài wán.",
+    "Dịch": "Những đứa trẻ đang chơi."
+  },
+  {
+    "STT": "40",
+    "Từ vựng": "好吃",
+    "Phiên âm từ": "hǎochī",
+    "Nghĩa từ": "ngon",
+    "Ví dụ": "这道菜很好吃。",
+    "Phiên âm câu": "Zhè dào cài hěn hǎo chī.",
+    "Dịch": "Món ăn này rất ngon."
+  },
+  {
+    "STT": "41",
+    "Từ vựng": "号",
+    "Phiên âm từ": "hào",
+    "Nghĩa từ": "số (như số điện thoại, số nhà)",
+    "Ví dụ": "你的手机号是多少？",
+    "Phiên âm câu": "Nǐ de shǒujī hào shì duōshǎo?",
+    "Dịch": "Số điện thoại của bạn là bao nhiêu?"
+  },
+  {
+    "STT": "42",
+    "Từ vựng": "黑",
+    "Phiên âm từ": "hēi",
+    "Nghĩa từ": "đen",
+    "Ví dụ": "我的车是黑色的。",
+    "Phiên âm câu": "Wǒ de chē shì hēisè de.",
+    "Dịch": "Xe của tôi màu đen."
+  },
+  {
+    "STT": "43",
+    "Từ vựng": "红",
+    "Phiên âm từ": "hóng",
+    "Nghĩa từ": "đỏ",
+    "Ví dụ": "她喜欢红色的衣服。",
+    "Phiên âm câu": "Tā xǐhuān hóngsè de yīfú.",
+    "Dịch": "Cô ấy thích quần áo màu đỏ."
+  },
+  {
+    "STT": "44",
+    "Từ vựng": "欢迎",
+    "Phiên âm từ": "huānyíng",
+    "Nghĩa từ": "hoan nghênh, chào mừng",
+    "Ví dụ": "欢迎你来我家。",
+    "Phiên âm câu": "Huānyíng nǐ lái wǒ jiā.",
+    "Dịch": "Chào mừng bạn đến nhà tôi."
+  },
+  {
+    "STT": "45",
+    "Từ vựng": "回答",
+    "Phiên âm từ": "huídá",
+    "Nghĩa từ": "trả lời",
+    "Ví dụ": "请回答我的问题。",
+    "Phiên âm câu": "Qǐng huídá wǒ de wèntí.",
+    "Dịch": "Xin trả lời câu hỏi của tôi."
+  },
+  {
+    "STT": "46",
+    "Từ vựng": "机场",
+    "Phiên âm từ": "jīchǎng",
+    "Nghĩa từ": "sân bay",
+    "Ví dụ": "机场离这里很近。",
+    "Phiên âm câu": "Jīchǎng lí zhèlǐ hěn jìn.",
+    "Dịch": "Sân bay gần đây."
+  },
+  {
+    "STT": "47",
+    "Từ vựng": "鸡蛋",
+    "Phiên âm từ": "jīdàn",
+    "Nghĩa từ": "trứng gà",
+    "Ví dụ": "我喜欢吃鸡蛋。",
+    "Phiên âm câu": "Wǒ xǐhuān chī jīdàn.",
+    "Dịch": "Tôi thích ăn trứng."
+  },
+  {
+    "STT": "48",
+    "Từ vựng": "件",
+    "Phiên âm từ": "jiàn",
+    "Nghĩa từ": "cái (dùng cho sự việc, quần áo)",
+    "Ví dụ": "这件衣服很好看。",
+    "Phiên âm câu": "Zhè jiàn yīfú hěn hǎokàn.",
+    "Dịch": "Cái áo này rất đẹp."
+  },
+  {
+    "STT": "49",
+    "Từ vựng": "教室",
+    "Phiên âm từ": "jiàoshì",
+    "Nghĩa từ": "lớp học",
+    "Ví dụ": "学生们在教室里学习。",
+    "Phiên âm câu": "Xuéshēngmen zài jiàoshì lǐ xuéxí.",
+    "Dịch": "Học sinh đang học trong lớp học."
+  },
+  {
+    "STT": "50",
+    "Từ vựng": "姐姐",
+    "Phiên âm từ": "jiějie",
+    "Nghĩa từ": "chị gái",
+    "Ví dụ": "姐姐比我大三岁。",
+    "Phiên âm câu": "Jiějiě bǐ wǒ dà sān suì.",
+    "Dịch": "Chị gái lớn hơn tôi ba tuổi."
+  },
+  {
+    "STT": "51",
+    "Từ vựng": "介绍",
+    "Phiên âm từ": "jièshào",
+    "Nghĩa từ": "giới thiệu",
+    "Ví dụ": "请介绍一下你自己。",
+    "Phiên âm câu": "Qǐng jièshào yīxià nǐ zìjǐ.",
+    "Dịch": "Xin hãy giới thiệu về bản thân."
+  },
+  {
+    "STT": "52",
+    "Từ vựng": "进",
+    "Phiên âm từ": "jìn",
+    "Nghĩa từ": "vào",
+    "Ví dụ": "请进，别客气。",
+    "Phiên âm câu": "Qǐng jìn, bié kèqì.",
+    "Dịch": "Mời vào, đừng khách sáo."
+  },
+  {
+    "STT": "53",
+    "Từ vựng": "近",
+    "Phiên âm từ": "jìn",
+    "Nghĩa từ": "gần",
+    "Ví dụ": "学校离我家很近。",
+    "Phiên âm câu": "Xuéxiào lí wǒ jiā hěn jìn.",
+    "Dịch": "Trường học gần nhà tôi."
+  },
+  {
+    "STT": "54",
+    "Từ vựng": "就",
+    "Phiên âm từ": "jiù",
+    "Nghĩa từ": "thì, ngay",
+    "Ví dụ": "他就住在我家旁边。",
+    "Phiên âm câu": "Tā jiù zhù zài wǒ jiā pángbiān.",
+    "Dịch": "Anh ấy sống ngay cạnh nhà tôi."
+  },
+  {
+    "STT": "55",
+    "Từ vựng": "觉得",
+    "Phiên âm từ": "juéde",
+    "Nghĩa từ": "cảm thấy",
+    "Ví dụ": "我觉得今天很热。",
+    "Phiên âm câu": "Wǒ juéde jīntiān hěn rè.",
+    "Dịch": "Tôi cảm thấy hôm nay rất nóng."
+  },
+  {
+    "STT": "56",
+    "Từ vựng": "咖啡",
+    "Phiên âm từ": "kāfēi",
+    "Nghĩa từ": "cà phê",
+    "Ví dụ": "我每天早上喝咖啡。",
+    "Phiên âm câu": "Wǒ měitiān zǎoshang hē kāfēi.",
+    "Dịch": "Tôi uống cà phê mỗi sáng."
+  },
+  {
+    "STT": "57",
+    "Từ vựng": "开始",
+    "Phiên âm từ": "kāishǐ",
+    "Nghĩa từ": "bắt đầu",
+    "Ví dụ": "我们现在开始上课。",
+    "Phiên âm câu": "Wǒmen xiànzài kāishǐ shàngkè.",
+    "Dịch": "Bây giờ chúng ta bắt đầu học."
+  },
+  {
+    "STT": "58",
+    "Từ vựng": "考试",
+    "Phiên âm từ": "kǎoshì",
+    "Nghĩa từ": "thi",
+    "Ví dụ": "我准备好考试了。",
+    "Phiên âm câu": "Wǒ zhǔnbèi hǎo kǎoshì le.",
+    "Dịch": "Tôi đã chuẩn bị sẵn sàng cho kỳ thi."
+  },
+  {
+    "STT": "59",
+    "Từ vựng": "可能",
+    "Phiên âm từ": "kěnéng",
+    "Nghĩa từ": "có thể",
+    "Ví dụ": "可能会下雨。",
+    "Phiên âm câu": "Kěnéng huì xiàyǔ.",
+    "Dịch": "Có thể sẽ mưa."
+  },
+  {
+    "STT": "60",
+    "Từ vựng": "可以",
+    "Phiên âm từ": "kěyǐ",
+    "Nghĩa từ": "có thể",
+    "Ví dụ": "你可以坐在这里。",
+    "Phiên âm câu": "Nǐ kěyǐ zuò zài zhèlǐ.",
+    "Dịch": "Bạn có thể ngồi ở đây."
+  },
+  {
+    "STT": "61",
+    "Từ vựng": "课",
+    "Phiên âm từ": "kè",
+    "Nghĩa từ": "bài học",
+    "Ví dụ": "我们今天有三节课。",
+    "Phiên âm câu": "Wǒmen jīntiān yǒu sān jié kè.",
+    "Dịch": "Hôm nay chúng ta có ba tiết học."
+  },
+  {
+    "STT": "62",
+    "Từ vựng": "快",
+    "Phiên âm từ": "kuài",
+    "Nghĩa từ": "nhanh",
+    "Ví dụ": "他跑得很快。",
+    "Phiên âm câu": "Tā pǎo de hěn kuài.",
+    "Dịch": "Anh ấy chạy rất nhanh."
+  },
+  {
+    "STT": "63",
+    "Từ vựng": "快乐",
+    "Phiên âm từ": "kuàilè",
+    "Nghĩa từ": "vui vẻ",
+    "Ví dụ": "祝你生日快乐。",
+    "Phiên âm câu": "Zhù nǐ shēngrì kuàilè.",
+    "Dịch": "Chúc bạn sinh nhật vui vẻ."
+  },
+  {
+    "STT": "64",
+    "Từ vựng": "累",
+    "Phiên âm từ": "lèi",
+    "Nghĩa từ": "mệt",
+    "Ví dụ": "我累了，想休息一下。",
+    "Phiên âm câu": "Wǒ lèile, xiǎng xiūxí yīxià.",
+    "Dịch": "Tôi mệt rồi, muốn nghỉ ngơi một chút."
+  },
+  {
+    "STT": "65",
+    "Từ vựng": "离",
+    "Phiên âm từ": "lí",
+    "Nghĩa từ": "cách (khoảng cách), rời",
+    "Ví dụ": "学校离我家不远。",
+    "Phiên âm câu": "Xuéxiào lí wǒ jiā bù yuǎn.",
+    "Dịch": "Trường học không xa nhà tôi."
+  },
+  {
+    "STT": "66",
+    "Từ vựng": "两",
+    "Phiên âm từ": "liǎng",
+    "Nghĩa từ": "hai (khi đếm số lượng)",
+    "Ví dụ": "我有两个弟弟。",
+    "Phiên âm câu": "Wǒ yǒu liǎng gè dìdì.",
+    "Dịch": "Tôi có hai em trai."
+  },
+  {
+    "STT": "67",
+    "Từ vựng": "路",
+    "Phiên âm từ": "lù",
+    "Nghĩa từ": "đường",
+    "Ví dụ": "这条路很长。",
+    "Phiên âm câu": "Zhè tiáo lù hěn cháng.",
+    "Dịch": "Con đường này rất dài."
+  },
+  {
+    "STT": "68",
+    "Từ vựng": "旅游",
+    "Phiên âm từ": "lǚyóu",
+    "Nghĩa từ": "du lịch",
+    "Ví dụ": "我喜欢旅游。",
+    "Phiên âm câu": "Wǒ xǐhuān lǚyóu.",
+    "Dịch": "Tôi thích du lịch."
+  },
+  {
+    "STT": "69",
+    "Từ vựng": "卖",
+    "Phiên âm từ": "mài",
+    "Nghĩa từ": "bán",
+    "Ví dụ": "他在商店里卖东西。",
+    "Phiên âm câu": "Tā zài shāngdiàn lǐ mài dōngxī.",
+    "Dịch": "Anh ấy bán hàng trong cửa hàng."
+  },
+  {
+    "STT": "70",
+    "Từ vựng": "慢",
+    "Phiên âm từ": "màn",
+    "Nghĩa từ": "chậm",
+    "Ví dụ": "他走得很慢。",
+    "Phiên âm câu": "Tā zǒu de hěn màn.",
+    "Dịch": "Anh ấy đi rất chậm."
+  },
+  {
+    "STT": "71",
+    "Từ vựng": "忙",
+    "Phiên âm từ": "máng",
+    "Nghĩa từ": "bận",
+    "Ví dụ": "我今天很忙。",
+    "Phiên âm câu": "Wǒ jīntiān hěn máng.",
+    "Dịch": "Hôm nay tôi rất bận."
+  },
+  {
+    "STT": "72",
+    "Từ vựng": "每",
+    "Phiên âm từ": "měi",
+    "Nghĩa từ": "mỗi",
+    "Ví dụ": "每个人都有机会。",
+    "Phiên âm câu": "Měi gèrén dōu yǒu jīhuì.",
+    "Dịch": "Mỗi người đều có cơ hội."
+  },
+  {
+    "STT": "73",
+    "Từ vựng": "妹妹",
+    "Phiên âm từ": "mèimei",
+    "Nghĩa từ": "em gái",
+    "Ví dụ": "妹妹在唱歌。",
+    "Phiên âm câu": "Mèimei zài chànggē.",
+    "Dịch": "Em gái đang hát."
+  },
+  {
+    "STT": "74",
+    "Từ vựng": "门",
+    "Phiên âm từ": "mén",
+    "Nghĩa từ": "cửa",
+    "Ví dụ": "他站在门口。",
+    "Phiên âm câu": "Tā zhàn zài ménkǒu.",
+    "Dịch": "Anh ấy đứng ở cửa."
+  },
+  {
+    "STT": "75",
+    "Từ vựng": "男人",
+    "Phiên âm từ": "nánrén",
+    "Nghĩa từ": "đàn ông",
+    "Ví dụ": "那个男人很高。",
+    "Phiên âm câu": "Nàgè nánrén hěn gāo.",
+    "Dịch": "Người đàn ông đó rất cao."
+  },
+  {
+    "STT": "76",
+    "Từ vựng": "您",
+    "Phiên âm từ": "nín",
+    "Nghĩa từ": "bạn (dùng lịch sự)",
+    "Ví dụ": "您好，请进。",
+    "Phiên âm câu": "Nín hǎo, qǐng jìn.",
+    "Dịch": "Xin chào, mời vào."
+  },
+  {
+    "STT": "77",
+    "Từ vựng": "牛奶",
+    "Phiên âm từ": "niúnǎi",
+    "Nghĩa từ": "sữa bò",
+    "Ví dụ": "我每天早上喝牛奶。",
+    "Phiên âm câu": "Wǒ měitiān zǎoshang hē niúnǎi.",
+    "Dịch": "Tôi uống sữa mỗi sáng."
+  },
+  {
+    "STT": "78",
+    "Từ vựng": "女人",
+    "Phiên âm từ": "nǚrén",
+    "Nghĩa từ": "phụ nữ",
+    "Ví dụ": "那个女人是我妈妈。",
+    "Phiên âm câu": "Nàgè nǚrén shì wǒ māma.",
+    "Dịch": "Người phụ nữ đó là mẹ tôi."
+  },
+  {
+    "STT": "79",
+    "Từ vựng": "旁边",
+    "Phiên âm từ": "pángbiān",
+    "Nghĩa từ": "bên cạnh",
+    "Ví dụ": "学校在我家旁边。",
+    "Phiên âm câu": "Xuéxiào zài wǒ jiā pángbiān.",
+    "Dịch": "Trường học ở cạnh nhà tôi."
+  },
+  {
+    "STT": "80",
+    "Từ vựng": "跑步",
+    "Phiên âm từ": "pǎobù",
+    "Nghĩa từ": "chạy bộ",
+    "Ví dụ": "我每天早上跑步。",
+    "Phiên âm câu": "Wǒ měitiān zǎoshang pǎobù.",
+    "Dịch": "Tôi chạy bộ mỗi sáng."
+  },
+  {
+    "STT": "81",
+    "Từ vựng": "便宜",
+    "Phiên âm từ": "piányí",
+    "Nghĩa từ": "rẻ",
+    "Ví dụ": "这件衣服很便宜。",
+    "Phiên âm câu": "Zhè jiàn yīfú hěn piányí.",
+    "Dịch": "Cái áo này rất rẻ."
+  },
+  {
+    "STT": "82",
+    "Từ vựng": "票",
+    "Phiên âm từ": "piào",
+    "Nghĩa từ": "vé",
+    "Ví dụ": "我买了两张电影票。",
+    "Phiên âm câu": "Wǒ mǎile liǎng zhāng diànyǐng piào.",
+    "Dịch": "Tôi đã mua hai vé xem phim."
+  },
+  {
+    "STT": "83",
+    "Từ vựng": "妻子",
+    "Phiên âm từ": "qīzi",
+    "Nghĩa từ": "vợ",
+    "Ví dụ": "这是我的妻子。",
+    "Phiên âm câu": "Zhè shì wǒ de qīzi.",
+    "Dịch": "Đây là vợ tôi."
+  },
+  {
+    "STT": "84",
+    "Từ vựng": "起床",
+    "Phiên âm từ": "qǐchuáng",
+    "Nghĩa từ": "dậy (rời khỏi giường)",
+    "Ví dụ": "我每天六点起床。",
+    "Phiên âm câu": "Wǒ měitiān liù diǎn qǐchuáng.",
+    "Dịch": "Tôi thức dậy lúc sáu giờ mỗi ngày."
+  },
+  {
+    "STT": "85",
+    "Từ vựng": "千",
+    "Phiên âm từ": "qiān",
+    "Nghĩa từ": "nghìn",
+    "Ví dụ": "我有一千块钱。",
+    "Phiên âm câu": "Wǒ yǒu yīqiān kuài qián.",
+    "Dịch": "Tôi có một ngàn đồng."
+  },
+  {
+    "STT": "86",
+    "Từ vựng": "晴",
+    "Phiên âm từ": "qíng",
+    "Nghĩa từ": "nắng, quang đãng",
+    "Ví dụ": "今天是晴天。",
+    "Phiên âm câu": "Jīntiān shì qíngtiān.",
+    "Dịch": "Hôm nay trời nắng."
+  },
+  {
+    "STT": "87",
+    "Từ vựng": "去年",
+    "Phiên âm từ": "qùnián",
+    "Nghĩa từ": "năm ngoái",
+    "Ví dụ": "我去年去了中国。",
+    "Phiên âm câu": "Wǒ qùnián qùle zhōngguó.",
+    "Dịch": "Năm ngoái tôi đã đi Trung Quốc."
+  },
+  {
+    "STT": "88",
+    "Từ vựng": "让",
+    "Phiên âm từ": "ràng",
+    "Nghĩa từ": "để, làm cho, nhường",
+    "Ví dụ": "请让他进来。",
+    "Phiên âm câu": "Qǐng ràng tā jìnlái.",
+    "Dịch": "Xin hãy để anh ấy vào."
+  },
+  {
+    "STT": "89",
+    "Từ vựng": "上班",
+    "Phiên âm từ": "shàngbān",
+    "Nghĩa từ": "đi làm",
+    "Ví dụ": "我每天八点上班。",
+    "Phiên âm câu": "Wǒ měitiān bā diǎn shàngbān.",
+    "Dịch": "Tôi đi làm lúc tám giờ mỗi ngày."
+  },
+  {
+    "STT": "90",
+    "Từ vựng": "身体",
+    "Phiên âm từ": "shēntǐ",
+    "Nghĩa từ": "cơ thể",
+    "Ví dụ": "你的身体怎么样？",
+    "Phiên âm câu": "Nǐ de shēntǐ zěnme yàng?",
+    "Dịch": "Sức khỏe của bạn thế nào?"
+  },
+  {
+    "STT": "91",
+    "Từ vựng": "生病",
+    "Phiên âm từ": "shēngbìng",
+    "Nghĩa từ": "bị bệnh",
+    "Ví dụ": "他生病了，不能来上课。",
+    "Phiên âm câu": "Tā shēngbìng le, bùnéng lái shàngkè.",
+    "Dịch": "Anh ấy bị ốm, không thể đến lớp."
+  },
+  {
+    "STT": "92",
+    "Từ vựng": "生日",
+    "Phiên âm từ": "shēngrì",
+    "Nghĩa từ": "sinh nhật",
+    "Ví dụ": "今天是我的生日。",
+    "Phiên âm câu": "Jīntiān shì wǒ de shēngrì.",
+    "Dịch": "Hôm nay là sinh nhật của tôi."
+  },
+  {
+    "STT": "93",
+    "Từ vựng": "时间",
+    "Phiên âm từ": "shíjiān",
+    "Nghĩa từ": "thời gian",
+    "Ví dụ": "现在我没有时间。",
+    "Phiên âm câu": "Xiànzài wǒ méiyǒu shíjiān.",
+    "Dịch": "Bây giờ tôi không có thời gian."
+  },
+  {
+    "STT": "94",
+    "Từ vựng": "事情",
+    "Phiên âm từ": "shìqíng",
+    "Nghĩa từ": "việc",
+    "Ví dụ": "你在做什么事情？",
+    "Phiên âm câu": "Nǐ zài zuò shénme shìqíng?",
+    "Dịch": "Bạn đang làm việc gì vậy?"
+  },
+  {
+    "STT": "95",
+    "Từ vựng": "手表",
+    "Phiên âm từ": "shǒubiǎo",
+    "Nghĩa từ": "đồng hồ",
+    "Ví dụ": "这块手表很贵。",
+    "Phiên âm câu": "Zhè kuài shǒubiǎo hěn guì.",
+    "Dịch": "Chiếc đồng hồ này rất đắt."
+  },
+  {
+    "STT": "96",
+    "Từ vựng": "手机",
+    "Phiên âm từ": "shǒujī",
+    "Nghĩa từ": "điện thoại di động",
+    "Ví dụ": "我的手机没电了。",
+    "Phiên âm câu": "Wǒ de shǒujī méi diàn le.",
+    "Dịch": "Điện thoại của tôi hết pin rồi."
+  },
+  {
+    "STT": "97",
+    "Từ vựng": "送",
+    "Phiên âm từ": "sòng",
+    "Nghĩa từ": "tặng",
+    "Ví dụ": "我送你一本书。",
+    "Phiên âm câu": "Wǒ sòng nǐ yī běn shū.",
+    "Dịch": "Tôi tặng bạn một quyển sách."
+  },
+  {
+    "STT": "98",
+    "Từ vựng": "所以",
+    "Phiên âm từ": "suǒyǐ",
+    "Nghĩa từ": "vì vậy",
+    "Ví dụ": "他很累，所以休息了。",
+    "Phiên âm câu": "Tā hěn lèi, suǒyǐ xiūxí le.",
+    "Dịch": "Anh ấy rất mệt, nên đã nghỉ ngơi rồi."
+  },
+  {
+    "STT": "99",
+    "Từ vựng": "它",
+    "Phiên âm từ": "tā",
+    "Nghĩa từ": "nó (cho vật, động vật)",
+    "Ví dụ": "它是一只可爱的小猫。",
+    "Phiên âm câu": "Tā shì yī zhī kě'ài de xiǎo māo.",
+    "Dịch": "Nó là một chú mèo đáng yêu."
+  },
+  {
+    "STT": "100",
+    "Từ vựng": "踢足球",
+    "Phiên âm từ": "tī zúqiú",
+    "Nghĩa từ": "đá bóng",
+    "Ví dụ": "我们一起踢足球吧。",
+    "Phiên âm câu": "Wǒmen yīqǐ tī zúqiú ba.",
+    "Dịch": "Chúng ta cùng chơi đá bóng nhé."
+  },
+  {
+    "STT": "101",
+    "Từ vựng": "题",
+    "Phiên âm từ": "tí",
+    "Nghĩa từ": "câu hỏi, đề bài",
+    "Ví dụ": "这道题很难。",
+    "Phiên âm câu": "Zhè dào tí hěn nán.",
+    "Dịch": "Câu hỏi này rất khó."
+  },
+  {
+    "STT": "102",
+    "Từ vựng": "跳舞",
+    "Phiên âm từ": "tiàowǔ",
+    "Nghĩa từ": "nhảy múa",
+    "Ví dụ": "我喜欢跳舞。",
+    "Phiên âm câu": "Wǒ xǐhuān tiàowǔ.",
+    "Dịch": "Tôi thích nhảy múa."
+  },
+  {
+    "STT": "103",
+    "Từ vựng": "外",
+    "Phiên âm từ": "wài",
+    "Nghĩa từ": "ngoài",
+    "Ví dụ": "他在外面等你。",
+    "Phiên âm câu": "Tā zài wàimiàn děng nǐ.",
+    "Dịch": "Anh ấy đang đợi bạn ở bên ngoài."
+  },
+  {
+    "STT": "104",
+    "Từ vựng": "玩",
+    "Phiên âm từ": "wán",
+    "Nghĩa từ": "chơi",
+    "Ví dụ": "小孩子们在玩游戏。",
+    "Phiên âm câu": "Xiǎo háizimen zài wán yóuxì.",
+    "Dịch": "Các em nhỏ đang chơi trò chơi."
+  },
+  {
+    "STT": "105",
+    "Từ vựng": "完",
+    "Phiên âm từ": "wán",
+    "Nghĩa từ": "xong, hoàn thành",
+    "Ví dụ": "我已经做完了作业。",
+    "Phiên âm câu": "Wǒ yǐjīng zuò wán le zuòyè.",
+    "Dịch": "Tôi đã làm xong bài tập."
+  },
+  {
+    "STT": "106",
+    "Từ vựng": "晚上",
+    "Phiên âm từ": "wǎnshàng",
+    "Nghĩa từ": "buổi tối",
+    "Ví dụ": "我晚上九点睡觉。",
+    "Phiên âm câu": "Wǒ wǎnshàng jiǔ diǎn shuìjiào.",
+    "Dịch": "Tôi đi ngủ lúc chín giờ tối."
+  },
+  {
+    "STT": "107",
+    "Từ vựng": "为什么",
+    "Phiên âm từ": "wèishénme",
+    "Nghĩa từ": "tại sao",
+    "Ví dụ": "你为什么不来？",
+    "Phiên âm câu": "Nǐ wèishéme bù lái?",
+    "Dịch": "Tại sao bạn không đến?"
+  },
+  {
+    "STT": "108",
+    "Từ vựng": "问",
+    "Phiên âm từ": "wèn",
+    "Nghĩa từ": "hỏi",
+    "Ví dụ": "请问你叫什么名字？",
+    "Phiên âm câu": "Qǐng wèn nǐ jiào shénme míngzì?",
+    "Dịch": "Xin hỏi bạn tên là gì?"
+  },
+  {
+    "STT": "109",
+    "Từ vựng": "问题",
+    "Phiên âm từ": "wèntí",
+    "Nghĩa từ": "vấn đề",
+    "Ví dụ": "这个问题很重要。",
+    "Phiên âm câu": "Zhège wèntí hěn zhòngyào.",
+    "Dịch": "Vấn đề này rất quan trọng."
+  },
+  {
+    "STT": "110",
+    "Từ vựng": "西瓜",
+    "Phiên âm từ": "xīguā",
+    "Nghĩa từ": "dưa hấu",
+    "Ví dụ": "我喜欢吃西瓜。",
+    "Phiên âm câu": "Wǒ xǐhuān chī xīguā.",
+    "Dịch": "Tôi thích ăn dưa hấu."
+  },
+  {
+    "STT": "111",
+    "Từ vựng": "希望",
+    "Phiên âm từ": "xīwàng",
+    "Nghĩa từ": "hy vọng",
+    "Ví dụ": "我希望你能来。",
+    "Phiên âm câu": "Wǒ xīwàng nǐ néng lái.",
+    "Dịch": "Tôi hy vọng bạn có thể đến."
+  },
+  {
+    "STT": "112",
+    "Từ vựng": "洗",
+    "Phiên âm từ": "xǐ",
+    "Nghĩa từ": "rửa",
+    "Ví dụ": "请洗手。",
+    "Phiên âm câu": "Qǐng xǐ shǒu.",
+    "Dịch": "Xin rửa tay."
+  },
+  {
+    "STT": "113",
+    "Từ vựng": "向",
+    "Phiên âm từ": "xiàng",
+    "Nghĩa từ": "hướng về, đối với",
+    "Ví dụ": "向左走。",
+    "Phiên âm câu": "Xiàng zuǒ zǒu.",
+    "Dịch": "Đi về phía bên trái."
+  },
+  {
+    "STT": "114",
+    "Từ vựng": "小时",
+    "Phiên âm từ": "xiǎoshí",
+    "Nghĩa từ": "tiếng đồng hồ",
+    "Ví dụ": "我每天学习一个小时。",
+    "Phiên âm câu": "Wǒ měitiān xuéxí yī gè xiǎoshí.",
+    "Dịch": "Tôi học một tiếng mỗi ngày."
+  },
+  {
+    "STT": "115",
+    "Từ vựng": "笑",
+    "Phiên âm từ": "xiào",
+    "Nghĩa từ": "cười",
+    "Ví dụ": "他在笑什么？",
+    "Phiên âm câu": "Tā zài xiào shénme?",
+    "Dịch": "Anh ấy đang cười gì vậy?"
+  },
+  {
+    "STT": "116",
+    "Từ vựng": "新",
+    "Phiên âm từ": "xīn",
+    "Nghĩa từ": "mới",
+    "Ví dụ": "我有一个新手机。",
+    "Phiên âm câu": "Wǒ yǒu yī gè xīn shǒujī.",
+    "Dịch": "Tôi có một chiếc điện thoại mới."
+  },
+  {
+    "STT": "117",
+    "Từ vựng": "姓",
+    "Phiên âm từ": "xìng",
+    "Nghĩa từ": "họ",
+    "Ví dụ": "你姓什么？",
+    "Phiên âm câu": "Nǐ xìng shénme?",
+    "Dịch": "Họ của bạn là gì?"
+  },
+  {
+    "STT": "118",
+    "Từ vựng": "休息",
+    "Phiên âm từ": "xiūxi",
+    "Nghĩa từ": "nghỉ ngơi",
+    "Ví dụ": "我累了，需要休息。",
+    "Phiên âm câu": "Wǒ lèile, xūyào xiūxí.",
+    "Dịch": "Tôi mệt rồi, cần nghỉ ngơi."
+  },
+  {
+    "STT": "119",
+    "Từ vựng": "雪",
+    "Phiên âm từ": "xuě",
+    "Nghĩa từ": "tuyết",
+    "Ví dụ": "明天会下雪。",
+    "Phiên âm câu": "Míngtiān huì xià xuě.",
+    "Dịch": "Ngày mai sẽ có tuyết rơi."
+  },
+  {
+    "STT": "120",
+    "Từ vựng": "颜色",
+    "Phiên âm từ": "yánsè",
+    "Nghĩa từ": "màu sắc",
+    "Ví dụ": "你喜欢什么颜色？",
+    "Phiên âm câu": "Nǐ xǐhuān shénme yánsè?",
+    "Dịch": "Bạn thích màu gì?"
+  },
+  {
+    "STT": "121",
+    "Từ vựng": "眼睛",
+    "Phiên âm từ": "yǎnjing",
+    "Nghĩa từ": "mắt",
+    "Ví dụ": "他的眼睛很大。",
+    "Phiên âm câu": "Tā de yǎnjīng hěn dà.",
+    "Dịch": "Mắt của anh ấy rất to."
+  },
+  {
+    "STT": "122",
+    "Từ vựng": "羊肉",
+    "Phiên âm từ": "yángròu",
+    "Nghĩa từ": "thịt cừu",
+    "Ví dụ": "我喜欢吃羊肉。",
+    "Phiên âm câu": "Wǒ xǐhuān chī yángròu.",
+    "Dịch": "Tôi thích ăn thịt cừu."
+  },
+  {
+    "STT": "123",
+    "Từ vựng": "要",
+    "Phiên âm từ": "yào",
+    "Nghĩa từ": "muốn, cần",
+    "Ví dụ": "我要一杯水。",
+    "Phiên âm câu": "Wǒ yào yī bēi shuǐ.",
+    "Dịch": "Tôi muốn một cốc nước."
+  },
+  {
+    "STT": "124",
+    "Từ vựng": "药",
+    "Phiên âm từ": "yào",
+    "Nghĩa từ": "thuốc",
+    "Ví dụ": "我生病了，要吃药。",
+    "Phiên âm câu": "Wǒ shēngbìng le, yào chī yào.",
+    "Dịch": "Tôi bị ốm, cần uống thuốc."
+  },
+  {
+    "STT": "125",
+    "Từ vựng": "也",
+    "Phiên âm từ": "yě",
+    "Nghĩa từ": "cũng",
+    "Ví dụ": "他也喜欢游泳。",
+    "Phiên âm câu": "Tā yě xǐhuān yóuyǒng.",
+    "Dịch": "Anh ấy cũng thích bơi lội."
+  },
+  {
+    "STT": "126",
+    "Từ vựng": "已经",
+    "Phiên âm từ": "yǐjīng",
+    "Nghĩa từ": "đã",
+    "Ví dụ": "我已经吃过饭了。",
+    "Phiên âm câu": "Wǒ yǐjīng chī guò fàn le.",
+    "Dịch": "Tôi đã ăn cơm rồi."
+  },
+  {
+    "STT": "127",
+    "Từ vựng": "一起",
+    "Phiên âm từ": "yìqǐ",
+    "Nghĩa từ": "cùng nhau",
+    "Ví dụ": "我们一起去看电影吧。",
+    "Phiên âm câu": "Wǒmen yīqǐ qù kàn diànyǐng ba.",
+    "Dịch": "Chúng ta cùng đi xem phim nhé."
+  },
+  {
+    "STT": "128",
+    "Từ vựng": "意思",
+    "Phiên âm từ": "yìsi",
+    "Nghĩa từ": "ý nghĩa",
+    "Ví dụ": "这是什么意思？",
+    "Phiên âm câu": "Zhè shì shénme yìsi?",
+    "Dịch": "Điều này có nghĩa là gì?"
+  },
+  {
+    "STT": "129",
+    "Từ vựng": "阴",
+    "Phiên âm từ": "yīn",
+    "Nghĩa từ": "âm u, trời nhiều mây",
+    "Ví dụ": "今天是阴天。",
+    "Phiên âm câu": "Jīntiān shì yīntiān.",
+    "Dịch": "Hôm nay là ngày trời âm u."
+  },
+  {
+    "STT": "130",
+    "Từ vựng": "因为",
+    "Phiên âm từ": "yīnwèi",
+    "Nghĩa từ": "vì",
+    "Ví dụ": "因为下雨，我不去跑步。",
+    "Phiên âm câu": "Yīnwèi xiàyǔ, wǒ bú qù pǎobù.",
+    "Dịch": "Vì trời mưa, tôi không đi chạy bộ."
+  },
+  {
+    "STT": "131",
+    "Từ vựng": "游泳",
+    "Phiên âm từ": "yóuyǒng",
+    "Nghĩa từ": "bơi",
+    "Ví dụ": "我喜欢游泳。",
+    "Phiên âm câu": "Wǒ xǐhuān yóuyǒng.",
+    "Dịch": "Tôi thích bơi lội."
+  },
+  {
+    "STT": "132",
+    "Từ vựng": "右边",
+    "Phiên âm từ": "yòubiān",
+    "Nghĩa từ": "bên phải",
+    "Ví dụ": "他坐在我右边。",
+    "Phiên âm câu": "Tā zuò zài wǒ yòubiān.",
+    "Dịch": "Anh ấy ngồi bên phải tôi."
+  },
+  {
+    "STT": "133",
+    "Từ vựng": "鱼",
+    "Phiên âm từ": "yú",
+    "Nghĩa từ": "cá",
+    "Ví dụ": "我们晚饭吃鱼。",
+    "Phiên âm câu": "Wǒmen wǎnfàn chī yú.",
+    "Dịch": "Chúng tôi ăn cá vào bữa tối."
+  },
+  {
+    "STT": "134",
+    "Từ vựng": "元",
+    "Phiên âm từ": "yuán",
+    "Nghĩa từ": "Đồng (đơn vị tiền tệ)",
+    "Ví dụ": "这本书要十元。",
+    "Phiên âm câu": "Zhè běn shū yào shí yuán.",
+    "Dịch": "Quyển sách này giá mười đồng."
+  },
+  {
+    "STT": "135",
+    "Từ vựng": "远",
+    "Phiên âm từ": "yuǎn",
+    "Nghĩa từ": "xa",
+    "Ví dụ": "他家离学校很远。",
+    "Phiên âm câu": "Tā jiā lí xuéxiào hěn yuǎn.",
+    "Dịch": "Nhà anh ấy cách xa trường học."
+  },
+  {
+    "STT": "136",
+    "Từ vựng": "运动",
+    "Phiên âm từ": "yùndòng",
+    "Nghĩa từ": "vận",
+    "Ví dụ": "我每天都运动。",
+    "Phiên âm câu": "Wǒ měitiān dōu yùndòng.",
+    "Dịch": "Tôi tập thể dục mỗi ngày."
+  },
+  {
+    "STT": "137",
+    "Từ vựng": "再",
+    "Phiên âm từ": "zài",
+    "Nghĩa từ": "lại",
+    "Ví dụ": "请再说一遍。",
+    "Phiên âm câu": "Qǐng zài shuō yī biàn.",
+    "Dịch": "Xin hãy nói lại một lần nữa."
+  },
+  {
+    "STT": "138",
+    "Từ vựng": "早上",
+    "Phiên âm từ": "zǎoshàng",
+    "Nghĩa từ": "buổi sáng",
+    "Ví dụ": "我每天早上六点起床。",
+    "Phiên âm câu": "Wǒ měitiān zǎoshang liù diǎn qǐchuáng.",
+    "Dịch": "Tôi dậy lúc sáu giờ sáng mỗi ngày."
+  },
+  {
+    "STT": "139",
+    "Từ vựng": "张",
+    "Phiên âm từ": "zhāng",
+    "Nghĩa từ": "tờ, bức (dùng cho vật phẳng, giấy, tranh, bàn)",
+    "Ví dụ": "这是一张照片。",
+    "Phiên âm câu": "Zhè shì yī zhāng zhàopiàn.",
+    "Dịch": "Đây là một tấm ảnh."
+  },
+  {
+    "STT": "140",
+    "Từ vựng": "丈夫",
+    "Phiên âm từ": "zhàngfu",
+    "Nghĩa từ": "chồng",
+    "Ví dụ": "这是我的丈夫。",
+    "Phiên âm câu": "Zhè shì wǒ de zhàngfu.",
+    "Dịch": "Đây là chồng tôi."
+  },
+  {
+    "STT": "141",
+    "Từ vựng": "找",
+    "Phiên âm từ": "zhǎo",
+    "Nghĩa từ": "tìm",
+    "Ví dụ": "我在找我的钥匙。",
+    "Phiên âm câu": "Wǒ zài zhǎo wǒ de yàoshi.",
+    "Dịch": "Tôi đang tìm chìa khóa của mình."
+  },
+  {
+    "STT": "142",
+    "Từ vựng": "着",
+    "Phiên âm từ": "zhe",
+    "Nghĩa từ": "đang (dùng để chỉ trạng thái hiện tại)",
+    "Ví dụ": "他在吃着饭呢。",
+    "Phiên âm câu": "Tā zài chī zhe fàn ne.",
+    "Dịch": "Anh ấy đang ăn cơm."
+  },
+  {
+    "STT": "143",
+    "Từ vựng": "真",
+    "Phiên âm từ": "zhēn",
+    "Nghĩa từ": "thật",
+    "Ví dụ": "这个苹果真好吃。",
+    "Phiên âm câu": "Zhège píngguǒ zhēn hào chī.",
+    "Dịch": "Quả táo này thật ngon."
+  },
+  {
+    "STT": "144",
+    "Từ vựng": "正在",
+    "Phiên âm từ": "zhèngzài",
+    "Nghĩa từ": "đang",
+    "Ví dụ": "妈妈正在打电话。",
+    "Phiên âm câu": "Māma zhèngzài dǎ diànhuà.",
+    "Dịch": "Mẹ đang gọi điện thoại.\n"
+  },
+  {
+    "STT": "145",
+    "Từ vựng": "知道",
+    "Phiên âm từ": "zhīdào",
+    "Nghĩa từ": "biết",
+    "Ví dụ": "我知道他是谁。",
+    "Phiên âm câu": "Wǒ zhīdào tā shì shéi.",
+    "Dịch": "Tôi biết anh ấy là ai."
+  },
+  {
+    "STT": "146",
+    "Từ vựng": "准备",
+    "Phiên âm từ": "zhǔnbèi",
+    "Nghĩa từ": "chuẩn bị",
+    "Ví dụ": "我正在准备考试。",
+    "Phiên âm câu": "Wǒ zhèngzài zhǔnbèi kǎoshì.",
+    "Dịch": "Tôi đang chuẩn bị cho kỳ thi."
+  },
+  {
+    "STT": "147",
+    "Từ vựng": "自行车",
+    "Phiên âm từ": "zìxíngchē",
+    "Nghĩa từ": "xe đạp",
+    "Ví dụ": "他骑自行车去上班。",
+    "Phiên âm câu": "Tā qí zìxíngchē qù shàngbān.",
+    "Dịch": "Anh ấy đi làm bằng xe đạp."
+  },
+  {
+    "STT": "148",
+    "Từ vựng": "走",
+    "Phiên âm từ": "zǒu",
+    "Nghĩa từ": "đi",
+    "Ví dụ": "我们一起走吧。",
+    "Phiên âm câu": "Wǒmen yīqǐ zǒu ba.",
+    "Dịch": "Chúng ta cùng đi nhé."
+  },
+  {
+    "STT": "149",
+    "Từ vựng": "最",
+    "Phiên âm từ": "zuì",
+    "Nghĩa từ": "nhất (so sánh nhất)",
+    "Ví dụ": "这是我最喜欢的书。",
+    "Phiên âm câu": "Zhè shì wǒ zuì xǐhuān de shū.",
+    "Dịch": "Đây là cuốn sách tôi thích nhất."
+  },
+  {
+    "STT": "150",
+    "Từ vựng": "左边",
+    "Phiên âm từ": "zuǒbiān",
+    "Nghĩa từ": "bên trái",
+    "Ví dụ": "他坐在我左边。",
+    "Phiên âm câu": "Tā zuò zài wǒ zuǒbiān.",
+    "Dịch": "Anh ấy ngồi bên trái tôi."
+  }
+]
