@@ -245,14 +245,14 @@ button{background:#4facfe;color:white;}
         grid-template-columns: 40px 120px 120px 80px 120px 160px 140px 180px 60px;
     }}
 
-@media screen and (max-width: 900px) {
+/*@media screen and (max-width: 900px) {
     #topWrapper, #animationWrapper, #sentenceSection, #backToTop {
         display: none;
     }
     #responsiveMessage {
         display: block !important;
     }
-}
+}*/
 
 .sentenceHeader{
     display:grid;
