@@ -310,3 +310,146 @@ button{background:#4facfe;color:white;}
     max-width: 1550px;
     box-sizing: border-box;
 }
+/* ================= MOBILE ONLY ================= */
+@media screen and (max-width: 768px){
+
+    /* 1. Title nhỏ lại */
+    h1{
+        font-size:28px;
+        margin:10px;
+    }
+
+    /* 2. TOP */
+    #topWrapper{
+        width:100%;
+    }
+
+    #searchWrapper{
+        flex-direction:column;
+        gap:10px;
+        padding:10px;
+    }
+
+    #hskButtons{
+        width:100%;
+        text-align:center;
+    }
+
+    #searchBox{
+        width:100%;
+        text-align:center;
+    }
+
+    /* ❌ QUAN TRỌNG: bỏ fixed */
+    #searchWrapper.fixed{
+        position:static;
+        transform:none;
+        width:100%;
+    }
+
+    /* 3. MID (animationWrapper) */
+    #animationWrapper{
+        position:relative; /* 🔥 FIX CHÍNH */
+        top:0;
+        left:0;
+        transform:none;
+        width:100%;
+        opacity:1;
+        pointer-events:auto;
+        margin-top:10px;
+    }
+
+    #animationWrapper.show{
+        transform:none;
+    }
+
+    #animationArea{
+        height:auto;
+        max-height:250px;
+        padding:10px;
+    }
+
+    .charBox{
+        width:90px;
+        margin:5px;
+    }
+
+    .writer{
+        width:70px;
+        height:70px;
+    }
+
+    /* 4. BOT (sentenceSection) */
+    #sentenceSection{
+        width:100%;
+        margin:10px 0;
+        padding:10px;
+    }
+
+    /* Table scroll ngang */
+    .tableWrapper{
+        overflow-x:auto;
+    }
+
+    /* Giữ layout nhưng nhỏ lại */
+    .sentenceHeader, .sentenceRow{
+        font-size:12px;
+        grid-template-columns:
+            40px 120px 120px 80px 120px 200px 160px 200px 60px;
+    }
+
+    /* Back to top nhỏ lại */
+    #backToTop{
+        width:40px;
+        height:40px;
+        font-size:16px;
+    }
+    /* ================= MOBILE ONLY: animationWrapper 1 hàng cuộn ngang ================= */
+/* ================= MOBILE: animationWrapper 1 hàng ngang ================= */
+@media screen and (max-width: 768px){
+
+    #animationWrapper{
+        position: relative;   /* không fixed */
+        width: 100%;
+        overflow-x: auto;     /* cuộn ngang */
+        overflow-y: hidden;   /* ẩn dọc */
+        white-space: nowrap;  /* giữ 1 hàng */
+        padding: 10px 0;
+        margin-top:10px;
+    }
+
+    #animationArea{
+        display: flex;
+        flex-wrap: nowrap;    /* 1 hàng */
+        gap: 8px;             /* khoảng cách chữ */
+        padding: 0 10px;
+        height: 120px;        /* vừa mobile */
+    }
+
+    .charBox{
+        display: inline-block;
+        width: 80px;          /* giảm size chữ cho vừa */
+        margin: 0;
+        text-align: center;
+        flex: 0 0 auto;       /* không co lại */
+    }
+
+    .writer{
+        width: 70px;
+        height: 70px;
+        margin: auto;
+    }
+
+    .pinyin{
+        font-size: 12px;
+    }
+
+    .meaningChar{
+        font-size: 10px;
+    }
+
+    .playChar{
+        font-size: 10px;
+        padding: 2px 5px;
+    }
+}
