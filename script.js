@@ -1,3 +1,4 @@
+<script>
 let historyData=[];
 let currentRenderedText="";
 let activeRowElement=null;
@@ -57,54 +58,71 @@ async function translateChar(char){
     }catch(e){ return char; }
 }
 
-async function drawCharacters(text, vocab=""){
-    const wrapper=document.getElementById("animationWrapper");
-    const area=document.getElementById("animationArea");
-    area.innerHTML="";
-    wrapper.classList.add("show"); 
-    currentRenderedText=text;
+async function drawCharacters(text, vocab = "") {
+    const wrapper = document.getElementById("animationWrapper");
+    const area = document.getElementById("animationArea");
+    area.innerHTML = "";
+    wrapper.classList.add("show");
+    currentRenderedText = text;
 
-    const chars=[...text];
-    for(let i=0;i<chars.length;i++){
-        const char=chars[i];
-        if(!isChinese(char)) continue;
+    const chars = [...text];
+    for (let i = 0; i < chars.length; i++) {
+        const char = chars[i];
+        if (!isChinese(char)) continue;
 
-        const box=document.createElement("div"); 
-        box.className="charBox";
+        const box = document.createElement("div");
+        box.className = "charBox";
 
-        const wdiv=document.createElement("div"); 
-        wdiv.id="w"+i+Date.now(); 
-        wdiv.className="writer";
+        // --- DIV CON 1: Nhóm thông tin ---
+        const infoDiv = document.createElement("div");
+        infoDiv.className = "char-info";
 
-        const py=document.createElement("div"); 
-        py.className="pinyin"; 
-        py.innerText=pinyinPro.pinyin(char);
+        const py = document.createElement("div");
+        py.className = "pinyin";
+        py.innerText = pinyinPro.pinyin(char);
+        if (vocab.includes(char)) py.style.color = "#ef4444";
 
-        if(vocab.includes(char)) py.style.color="#ef4444";
-        else py.style.color="#000";
+        const mean = document.createElement("div");
+        mean.className = "meaningChar";
+        mean.innerText = "...";
+        translateChar(char).then(res => { mean.innerText = res; });
 
-        const mean=document.createElement("div"); 
-        mean.className="meaningChar"; 
-        mean.innerText="..."; 
-        translateChar(char).then(res=>{mean.innerText=res;});
+        const btn = document.createElement("button");
+        btn.className = "playChar";
+        btn.innerText = "🔊";
+        btn.onclick = (e) => { e.stopPropagation(); speak(char); };
 
-        const btn=document.createElement("button"); 
-        btn.className="playChar"; 
-        btn.innerText="🔊"; 
-        btn.onclick=()=>speak(char);
+        infoDiv.append(py, mean, btn);
 
-        box.append(wdiv,py,mean,btn); 
+        // --- DIV CON 2: Khối vẽ chữ (SVG) ---
+        const wdiv = document.createElement("div");
+        const uniqueId = "w" + i + Date.now();
+        wdiv.id = uniqueId;
+        wdiv.className = "writer";
+
+        // Cho vào box (chỉ có 2 con)
+        box.append(infoDiv, wdiv);
         area.appendChild(box);
 
-        const writer=HanziWriter.create(wdiv.id,char,{width:120,height:120,strokeAnimationSpeed:3,delayBetweenStrokes:30});
-        function loop(){writer.animateCharacter({onComplete:loop});} 
+        // Khởi tạo HanziWriter
+        const writer = HanziWriter.create(uniqueId, char, {
+            width: 100,
+            height: 100,
+            strokeAnimationSpeed: 3,
+            delayBetweenStrokes: 30,
+            padding: 5
+        });
+
+        function loop() {
+            writer.animateCharacter({ onComplete: loop });
+        }
         loop();
     }
 }
-
 function renderHistory(){
     const list=document.getElementById("sentenceList");
     list.innerHTML="";
+    
     historyData.forEach((item,index)=>{
         const row=document.createElement("div"); 
         row.className="sentenceRow";
@@ -220,36 +238,49 @@ function repeatSentence(){
     if(!isRepeating) startRepeat(); else stopRepeat();
 }
 
-function scrollToActiveRow(){
-    if(activeRowElement){
-        const animationHeight = document.getElementById("animationWrapper").offsetHeight;
-        const y = activeRowElement.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-            top: y - animationHeight - 40,
-            behavior: "smooth"
+function scrollToActiveRow() {
+    if (activeRowElement) {
+        // block: 'center' sẽ đưa dòng đang chọn vào giữa khung nhìn của danh sách
+        activeRowElement.scrollIntoView({
+            behavior: 'smooth', 
+            block: 'center' 
+        });
+
+        // Hiệu ứng nháy nhẹ để người dùng biết dòng nào đang được focus (tùy chọn)
+        activeRowElement.style.transition = "background 0.5s";
+        const originalBg = activeRowElement.style.background;
+        activeRowElement.style.background = "#fef08a"; // Màu vàng nhạt
+        setTimeout(() => {
+            activeRowElement.style.background = originalBg;
+        }, 1000);
+
+    } else {
+        // Nếu chưa chọn câu nào thì cuộn lên đầu danh sách
+        document.getElementById("sentenceSection").scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
     }
 }
 
 /* ================= LOAD JSON HSK ================= */
-const basePath = window.location.origin;
 const hskFiles = {
-"HSK 1": "/data/HSK1.json",
-"HSK 2": "/data/HSK2.json",
-"HSK 3": "/data/HSK3.json",
-"HSK 4": "/data/HSK4.json",
-"HSK 5": "/data/HSK5.json",
-"HSK 6": "/data/HSK6.json",
-"HSK 1 (3.0)": "/data/HSK1_3.json",
-"HSK 2 (3.0)": "/data/HSK2_3.json",
-"HSK 3 (3.0)": "/data/HSK3_3.json",
-"HSK 4 (3.0)": "/data/HSK4_3.json",
-"HSK 5 (3.0)": "/data/HSK5_3.json"
+    "HSK 1": "/data/hsk1.json",
+    "HSK 2": "/data/hsk2.json",
+    "HSK 3": "/data/hsk3.json",
+    "HSK 4": "/data/hsk4.json",
+    "HSK 5": "/data/hsk5.json",
+    "HSK 6": "/data/hsk6.json",
+    "HSK 1 (3.0)": "/data/hsk1_3.json",
+    "HSK 2 (3.0)": "/data/hsk2_3.json",
+    "HSK 3 (3.0)": "/data/hsk3_3.json",
+    "HSK 4 (3.0)": "/data/hsk4_3.json",
+    "HSK 5 (3.0)": "/data/hsk5_3.json"
 };
 
 async function loadHSK(level){
     try{
-        const file = basePath + hskFiles[level];
+        const file = hskFiles[level];
         if(!file) return;
         const res = await fetch(file);
         const data = await res.json();
@@ -296,3 +327,17 @@ function showError(message) {
         errorDiv.style.display = "none";
     }, 5000); // Ẩn sau 5 giây
 }
+// Lưu dữ liệu
+function saveData() {
+    localStorage.setItem('hsk_history', JSON.stringify(historyData));
+}
+
+// Load dữ liệu khi mở trang
+window.onload = () => {
+    const saved = localStorage.getItem('hsk_history');
+    if (saved) {
+        historyData = JSON.parse(saved);
+        renderHistory();
+    }
+};
+</script>
