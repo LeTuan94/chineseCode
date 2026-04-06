@@ -278,7 +278,7 @@ const hskFiles = {
     "HSK 4 (3.0)": "data/hsk4_3.json",
     "HSK 5 (3.0)": "data/hsk5_3.json"
 };
-};
+
 
 async function loadHSK(level){
     try{
