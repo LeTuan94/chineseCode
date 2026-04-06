@@ -264,12 +264,12 @@ function scrollToActiveRow() {
 
 /* ================= LOAD JSON HSK ================= */
 const hskFiles = {
-    "HSK 1": "/data/hsk1.json",
-    "HSK 2": "/data/hsk2.json",
-    "HSK 3": "/data/hsk3.json",
-    "HSK 4": "/data/hsk4.json",
-    "HSK 5": "/data/hsk5.json",
-    "HSK 6": "/data/hsk6.json",
+    "HSK 1": "https:/learnforfree.fun/data/hsk1.json",
+    "HSK 2": "https:/learnforfree.fun/data/hsk1.json",
+    "HSK 3": "https:/learnforfree.fun/data/hsk1.json",
+    "HSK 4": "https:/learnforfree.fun/data/hsk1.json",
+    "HSK 5": "https:/learnforfree.fun/data/hsk1.json",
+    "HSK 6": "https:/learnforfree.fun/data/hsk1.json",
     "HSK 1 (3.0)": "/data/hsk1_3.json",
     "HSK 2 (3.0)": "/data/hsk2_3.json",
     "HSK 3 (3.0)": "/data/hsk3_3.json",
