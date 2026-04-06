@@ -1,5 +1,4 @@
-<style>
-    * {
+* {
     box-sizing: border-box; /* Đảm bảo padding không làm nở chiều rộng */
 }
     /* Thiết lập nền tảng để không cuộn toàn trang */
@@ -585,5 +584,3 @@ button{background:#4facfe;color:white;}
     flex-shrink: 0;
 }
 
-
-</style>
