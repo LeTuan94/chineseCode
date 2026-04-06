@@ -1,4 +1,3 @@
-<script>
 let historyData=[];
 let currentRenderedText="";
 let activeRowElement=null;
@@ -340,4 +339,3 @@ window.onload = () => {
         renderHistory();
     }
 };
-</script>
