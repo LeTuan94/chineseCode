@@ -188,6 +188,7 @@ function renderHistory(){
         }
         list.appendChild(row);
     });
+    saveData();
 }
 
 function importExcel(){
