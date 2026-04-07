@@ -1,4 +1,5 @@
-* {
+<style>
+    * {
     box-sizing: border-box; /* Đảm bảo padding không làm nở chiều rộng */
 }
     /* Thiết lập nền tảng để không cuộn toàn trang */
@@ -54,6 +55,37 @@ h1{
     font-weight:800;
 }
 
+#pullLoader{
+    position: fixed;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    width: 30px;
+    height: 30px;
+    border: 3px solid #ccc;
+    border-top: 3px solid #4facfe;
+    border-radius: 50%;
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+/* Khi kéo */
+#pullLoader.show{
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* Khi loading */
+#pullLoader.spin{
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin{
+    from{ transform: translateX(-50%) rotate(0deg); }
+    to{ transform: translateX(-50%) rotate(360deg); }
+}
+
 #searchWrapper {
     width: 100%; 
     background: #fff;
@@ -100,36 +132,7 @@ h1{
     cursor:pointer;
     font-size:14px;
 }
-#pullLoader{
-    position: fixed;
-    top: 10px;
-    left: 50%;
-    transform: translateX(-50%) scale(0);
-    width: 30px;
-    height: 30px;
-    border: 3px solid #ccc;
-    border-top: 3px solid #4facfe;
-    border-radius: 50%;
-    z-index: 9999;
-    opacity: 0;
-    transition: all 0.2s ease;
-}
-/* phần pullLoader */
-/* Khi kéo */
-#pullLoader.show{
-    opacity: 1;
-    transform: translateX(-50%) scale(1);
-}
 
-/* Khi loading */
-#pullLoader.spin{
-    animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin{
-    from{ transform: translateX(-50%) rotate(0deg); }
-    to{ transform: translateX(-50%) rotate(360deg); }
-}
 .hsk1{background:#ef4444;}
 .hsk2{background:#f97316;}
 .hsk3{background:#eab308;}
@@ -172,7 +175,7 @@ input{
     border:1px solid #ddd;
     outline:none;
     margin-right:10px;
-    width: stretch;
+    width: 100%;
     margin-bottom: 8px;
 }
 
@@ -206,22 +209,6 @@ button{background:#4facfe;color:white;}
 .sentenceRow:hover {
     background-color: #f1f5f9;
 }
-/*#animationWrapper{
-    position:fixed;
-    top:140px;
-    left:50%;
-    transform:translateX(-50%) translateY(-20px);
-    width:1550px;
-    z-index:9999;
-    opacity:0;
-    pointer-events:none;
-    transition:opacity 0.35s ease, transform 0.35s ease;
-}
-#animationWrapper.show{
-    opacity:1;
-    transform:translateX(-50%) translateY(0);
-    pointer-events:auto;
-}*/
 
 #animationWrapper {
     display: none; /* Ẩn hoàn toàn lúc đầu */
@@ -324,9 +311,7 @@ button{background:#4facfe;color:white;}
     overflow-x: auto;
     width: 100%;
 }
-.sentenceHeader, .sentenceRow {
-    min-width: 1100px;
-}
+
 #sentenceSection{
     margin:10px auto 30px;
     background:#fff;
@@ -426,6 +411,7 @@ button{background:#4facfe;color:white;}
     #searchWrapper {
         padding: 5px;
     }
+
     .hskBtn {
         padding: 5px 7px;
         font-size: 12px;
@@ -438,6 +424,9 @@ button{background:#4facfe;color:white;}
         flex-wrap:wrap;
         justify-content:center;
     }
+
+    /* Ẩn bớt các thành phần không cần thiết khi học trên mobile để tăng diện tích cuộn */
+    
     
     /* Giảm bớt padding của các dòng để nhìn được nhiều câu hơn */
     .sentenceRow {
@@ -528,6 +517,9 @@ button{background:#4facfe;color:white;}
     .tableWrapper{
         overflow-x:auto;
     }
+    .sentenceHeader, .sentenceRow {
+    min-width: 1100px;
+}
 
     /* Giữ layout nhưng nhỏ lại */
     .sentenceHeader, .sentenceRow{
@@ -626,3 +618,5 @@ button{background:#4facfe;color:white;}
     flex-shrink: 0;
 }
 
+
+</style>
