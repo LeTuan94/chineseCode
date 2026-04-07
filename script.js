@@ -212,27 +212,35 @@ function clearAll(){
 
 function startRepeat(){
     const button = document.getElementById("repeatBtn");
+
     if(!currentRenderedText || !currentRenderedText.trim()) return;
-    if(isRepeating) return;
-    isRepeating = true;
-    button.textContent = "STOP";
-    button.style.background = "red";
+
+    speechSynthesis.cancel(); // 🔥 reset trước
+
     const u = new SpeechSynthesisUtterance(currentRenderedText);
     u.lang = "zh-CN";
     u.rate = speechRate;
+
+    u.onstart = () => {
+        isRepeating = true; // ✅ set đúng thời điểm
+        button.textContent = "STOP";
+        button.style.background = "red";
+    };
+
     u.onend = () => {
         isRepeating = false;
         button.textContent = "Repeat";
         button.style.background = "";
     };
-    speechSynthesis.cancel();
+
     speechSynthesis.speak(u);
 }
 
 function stopRepeat(){
     const button = document.getElementById("repeatBtn");
-    if(!isRepeating) return;
+
     speechSynthesis.cancel();
+
     isRepeating = false;
     button.textContent = "Repeat";
     button.style.background = "";
