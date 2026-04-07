@@ -1,11 +1,10 @@
-
 let historyData=[];
 let currentRenderedText="";
 let activeRowElement=null;
 let speechRate = 1;
 let isLowSpeed = false;
 let isRepeating = false;
-
+const charCache = JSON.parse(localStorage.getItem("charCache")) || {};
 const searchWrapper = document.getElementById("searchWrapper");
 const searchOffset = searchWrapper.offsetTop;
 
@@ -54,12 +53,30 @@ function toggleAnimation(){
 
 function isChinese(c){return /[\u4e00-\u9fff]/.test(c);}
 
+if(!/[\u4e00-\u9fff]/.test(char)) return char;
 async function translateChar(char){
+    if(charCache[char]) return charCache[char];
+
     try{
-        const res=await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(char)}&langpair=zh-CN|vi`);
-        const data=await res.json();
-        return data.responseData.translatedText || char;
-    }catch(e){ return char; }
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(char)}&langpair=zh-CN|vi`);
+
+        if(!res.ok) throw new Error("API lỗi");
+
+        const data = await res.json();
+
+        const result = data?.responseData?.translatedText || char;
+
+        charCache[char] = result;
+
+        // 🔥 Lưu vào localStorage
+        localStorage.setItem("charCache", JSON.stringify(charCache));
+
+        return result;
+
+    }catch(e){
+        console.error("Translate error:", e);
+        return char; // fallback
+    }
 }
 
 async function drawCharacters(text, vocab = "") {
