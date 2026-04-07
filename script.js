@@ -1,3 +1,4 @@
+
 let historyData=[];
 let currentRenderedText="";
 let activeRowElement=null;
@@ -8,56 +9,24 @@ let isRepeating = false;
 const searchWrapper = document.getElementById("searchWrapper");
 const searchOffset = searchWrapper.offsetTop;
 
-function initPullToRefresh() {
-
-    if (window.innerWidth > 768) return;
-
-    let startY = 0;
-    let currentY = 0;
-    let isPulling = false;
-    const threshold = 100;
-
-    const loader = document.getElementById("pullLoader");
-
-    document.addEventListener("touchstart", (e) => {
-        if (e.target.closest("#sentenceSection")) return;
-
-        startY = e.touches[0].clientY;
-        isPulling = true;
-    });
-
-    document.addEventListener("touchmove", (e) => {
-        if (!isPulling) return;
-
-        currentY = e.touches[0].clientY;
-        let diff = currentY - startY;
-
-        if (diff > 0) {
-            loader.classList.add("show");
-
-            let scale = Math.min(diff / threshold, 1);
-            loader.style.transform = `translateX(-50%) scale(${scale})`;
-        }
-    });
-
-    document.addEventListener("touchend", () => {
-        if (!isPulling) return;
-
-        let diff = currentY - startY;
-
-        if (diff > threshold) {
-            loader.classList.add("spin");
-
-            setTimeout(() => {
-                location.reload();
-            }, 300);
-        }
-
-        loader.classList.remove("show", "spin");
-        loader.style.transform = "translateX(-50%) scale(0)";
-        isPulling = false;
-    });
+function reloadPage(){
+    location.reload();
 }
+
+window.addEventListener("scroll", function() {
+    if (window.scrollY >= searchOffset) {
+        searchWrapper.classList.add("fixed");
+    } else {
+        searchWrapper.classList.remove("fixed");
+    }
+
+    const backToTop = document.getElementById("backToTop");
+    if (window.scrollY > 300) {
+        backToTop.style.display = "block";
+    } else {
+        backToTop.style.display = "none";
+    }
+});
 
 function speak(text){
     const u=new SpeechSynthesisUtterance(text); 
@@ -299,14 +268,13 @@ function scrollToActiveRow() {
 }
 
 /* ================= LOAD JSON HSK ================= */
-const basePath = window.location.pathname;
-    const hskFiles = {
-    "HSK 1": "data/hsk1.json",
+const hskFiles = {
+    "HSK 1": "/data/hsk1.json",
     "HSK 2": "/data/hsk2.json",
-    "HSK 3": "data/hsk3.json",
-    "HSK 4": "data/hsk4.json",
-    "HSK 5": "data/hsk5.json",
-    "HSK 6": "data/hsk6.json",
+    "HSK 3": "/data/hsk3.json",
+    "HSK 4": "/data/hsk4.json",
+    "HSK 5": "/data/hsk5.json",
+    "HSK 6": "/data/hsk6.json",
     "HSK 1 (3.0)": "data/hsk1_3.json",
     "HSK 2 (3.0)": "data/hsk2_3.json",
     "HSK 3 (3.0)": "data/hsk3_3.json",
@@ -368,6 +336,61 @@ function saveData() {
     localStorage.setItem('hsk_history', JSON.stringify(historyData));
 }
 
+//initPullToRefresh: Kéo xuống để làm mới trang (chỉ trên mobile)
+function initPullToRefresh() {
+
+    if (window.innerWidth > 768) return;
+
+    let startY = 0;
+    let currentY = 0;
+    let isPulling = false;
+    const threshold = 100;
+
+    const loader = document.getElementById("pullLoader");
+
+    document.addEventListener("touchstart", (e) => {
+        if (e.target.closest("#sentenceSection")) return;
+
+        startY = e.touches[0].clientY;
+        isPulling = true;
+    });
+
+    document.addEventListener("touchmove", (e) => {
+        if (!isPulling) return;
+
+        currentY = e.touches[0].clientY;
+        let diff = currentY - startY;
+
+        if (diff > 0) {
+            loader.classList.add("show");
+
+            // scale theo lực kéo (max 1)
+            let scale = Math.min(diff / threshold, 1);
+            loader.style.transform = `translateX(-50%) scale(${scale})`;
+        }
+    });
+
+    document.addEventListener("touchend", () => {
+        if (!isPulling) return;
+
+        let diff = currentY - startY;
+
+        if (diff > threshold) {
+            loader.classList.add("spin");
+
+            setTimeout(() => {
+                location.reload();
+            }, 300);
+        }
+
+        // reset
+        loader.classList.remove("show", "spin");
+        loader.style.transform = "translateX(-50%) scale(0)";
+
+        isPulling = false;
+    });
+}
+
 // Load dữ liệu khi mở trang
 window.onload = () => {
     const saved = localStorage.getItem('hsk_history');
@@ -375,4 +398,5 @@ window.onload = () => {
         historyData = JSON.parse(saved);
         renderHistory();
     }
+    initPullToRefresh();
 };
