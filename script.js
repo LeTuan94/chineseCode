@@ -412,10 +412,17 @@ function initPullToRefresh() {
 
 // Load dữ liệu khi mở trang
 window.onload = () => {
-    const saved = localStorage.getItem('hsk_history');
-    if (saved) {
-        historyData = JSON.parse(saved);
-        renderHistory();
+    try{
+        const saved = localStorage.getItem('hsk_history');
+        if (saved) {
+            historyData = JSON.parse(saved);
+        }
+    }catch(e){
+        console.error("Lỗi parse localStorage:", e);
+        historyData = [];
+        localStorage.removeItem('hsk_history');
     }
+
+    renderHistory();
     initPullToRefresh();
 };
