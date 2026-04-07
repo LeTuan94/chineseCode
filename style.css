@@ -397,9 +397,18 @@ button{background:#4facfe;color:white;}
     #searchWrapper {
         padding: 5px;
     }
+    .hskBtn {
+        padding: 5px 7px;
+        font-size: 12px;
+        margin: 7px;
+        border-radius: 8px;
+    }
 
-    /* Ẩn bớt các thành phần không cần thiết khi học trên mobile để tăng diện tích cuộn */
-    
+    .hskRow{
+        display:flex;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
     
     /* Giảm bớt padding của các dòng để nhìn được nhiều câu hơn */
     .sentenceRow {
