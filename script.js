@@ -26,6 +26,57 @@ window.addEventListener("scroll", function() {
     }
 });
 
+function initPullToRefresh() {
+
+    if (window.innerWidth > 768) return;
+
+    let startY = 0;
+    let currentY = 0;
+    let isPulling = false;
+    const threshold = 100;
+
+    const loader = document.getElementById("pullLoader");
+
+    document.addEventListener("touchstart", (e) => {
+        if (e.target.closest("#sentenceSection")) return;
+
+        startY = e.touches[0].clientY;
+        isPulling = true;
+    });
+
+    document.addEventListener("touchmove", (e) => {
+        if (!isPulling) return;
+
+        currentY = e.touches[0].clientY;
+        let diff = currentY - startY;
+
+        if (diff > 0) {
+            loader.classList.add("show");
+
+            let scale = Math.min(diff / threshold, 1);
+            loader.style.transform = `translateX(-50%) scale(${scale})`;
+        }
+    });
+
+    document.addEventListener("touchend", () => {
+        if (!isPulling) return;
+
+        let diff = currentY - startY;
+
+        if (diff > threshold) {
+            loader.classList.add("spin");
+
+            setTimeout(() => {
+                location.reload();
+            }, 300);
+        }
+
+        loader.classList.remove("show", "spin");
+        loader.style.transform = "translateX(-50%) scale(0)";
+        isPulling = false;
+    });
+}
+
 function speak(text){
     const u=new SpeechSynthesisUtterance(text); 
     u.lang="zh-CN"; 
