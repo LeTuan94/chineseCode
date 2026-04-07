@@ -313,12 +313,6 @@ document.querySelectorAll(".hskBtn").forEach(btn=>{
     });
 });
 
-const repeatBtnEl = document.getElementById('repeatBtn');
-if(repeatBtnEl){
-    repeatBtnEl.addEventListener('mouseenter',(e)=>{e.stopPropagation(); startRepeat();});
-    repeatBtnEl.addEventListener('mouseleave',(e)=>{e.stopPropagation(); stopRepeat();});
-}
-
 function scrollToTop() {
     window.scrollTo({top: 0, behavior: 'smooth'});
 }
