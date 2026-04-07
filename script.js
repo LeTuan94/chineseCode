@@ -53,7 +53,6 @@ function toggleAnimation(){
 
 function isChinese(c){return /[\u4e00-\u9fff]/.test(c);}
 
-if(!/[\u4e00-\u9fff]/.test(char)) return char;
 async function translateChar(char){
     if(charCache[char]) return charCache[char];
 
