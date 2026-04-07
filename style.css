@@ -386,7 +386,9 @@ button{background:#4facfe;color:white;}
 /* ================= MOBILE ONLY ================= */
 @media screen and (max-width: 768px){
     h1 { font-size: 20px; margin: 5px; }
-    
+    .sentenceRow div:nth-child(2){
+        margin-left: 0;
+    }
     /* Thu nhỏ animation area để chừa chỗ cho danh sách */
     #animationArea {
         height: 120px !important; 
