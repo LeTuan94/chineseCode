@@ -8,6 +8,9 @@ let isRepeating = false;
 const searchWrapper = document.getElementById("searchWrapper");
 const searchOffset = searchWrapper.offsetTop;
 
+function reloadPage(){
+    location.reload();
+}
 window.addEventListener("scroll", function() {
     if (window.scrollY >= searchOffset) {
         searchWrapper.classList.add("fixed");
