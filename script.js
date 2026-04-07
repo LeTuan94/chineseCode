@@ -8,40 +8,6 @@ let isRepeating = false;
 const searchWrapper = document.getElementById("searchWrapper");
 const searchOffset = searchWrapper.offsetTop;
 
-//initPullToRefresh: Kéo xuống để làm mới trang (chỉ trên mobile)
-function initPullToRefresh() {
-
-    if (window.innerWidth > 768) return;
-
-    let startY = 0;
-    let currentY = 0;
-    let isPulling = false;
-    const threshold = 100;
-
-    const loader = document.getElementById("pullLoader");
-
-    document.addEventListener("touchstart", (e) => {
-        if (e.target.closest("#sentenceSection")) return;
-
-        startY = e.touches[0].clientY;
-        isPulling = true;
-    });
-
-    document.addEventListener("touchmove", (e) => {
-        if (!isPulling) return;
-
-        currentY = e.touches[0].clientY;
-        let diff = currentY - startY;
-
-        if (diff > 0) {
-            loader.classList.add("show");
-
-            // scale theo lực kéo (max 1)
-            let scale = Math.min(diff / threshold, 1);
-            loader.style.transform = `translateX(-50%) scale(${scale})`;
-        }
-    });
-
 function initPullToRefresh() {
 
     if (window.innerWidth > 768) return;
