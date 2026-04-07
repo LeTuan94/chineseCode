@@ -295,7 +295,9 @@ button{background:#4facfe;color:white;}
     overflow-x: auto;
     width: 100%;
 }
-
+.sentenceHeader, .sentenceRow {
+    min-width: 1100px;
+}
 #sentenceSection{
     margin:10px auto 30px;
     background:#fff;
