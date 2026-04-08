@@ -11,6 +11,42 @@ html, body {
     flex-direction: column;
 }
 
+#fbIconBtn{
+    position: fixed;
+    top: 44px;
+    left: 20px;
+    width: 45px;
+    height: 45px;
+    background: #1877f2;
+    color: white;
+    border-radius: 50%;
+    font-weight: bold;
+    font-size: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    z-index: 10000;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    transition: all 0.3s ease;
+}
+
+#fbIconBtn:hover{
+    background: #0d65d9;
+    transform: scale(1.1);
+}
+
+/* Mobile nhỏ lại */
+@media screen and (max-width: 768px){
+    #fbIconBtn{
+        width: 38px;
+        height: 38px;
+        font-size: 20px;
+        top: 10px;
+        left: 15px;
+    }
+}
+
 /* Các phần phía trên giữ nguyên kích thước */
 #topWrapper, #animationWrapper {
     flex-shrink: 0; /* Không cho phép bị co lại */
