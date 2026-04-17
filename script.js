@@ -269,8 +269,17 @@ class LearnChineseApp {
             const targetElement = this.dom.animationArea.children[charIndex].querySelector('.writer');
             charIndex++;
 
+            // Kiểm tra xem chữ Hán hiện tại (chars[i]) có nằm trong Từ vựng (vocab) hay không
+            const isTargetVocab = vocab.includes(chars[i]);
+
             const writer = HanziWriter.create(targetElement, chars[i], {
-                width: 100, height: 100, strokeAnimationSpeed: 3, delayBetweenStrokes: 30, padding: 5
+                width: 100, 
+                height: 100, 
+                strokeAnimationSpeed: 3, 
+                delayBetweenStrokes: 30, 
+                padding: 5,
+                // Nếu là từ vựng đang học -> đổi màu (Ví dụ: màu đỏ). Nếu không phải -> màu xám đậm.
+                strokeColor: isTargetVocab ? '#ef4444' : '#555555' 
             });
 
             const loop = () => {
