@@ -129,13 +129,55 @@ class LearnChineseApp {
         }
     }
 
-    processSearch() {
-        const text = this.dom.searchInput.value.trim();
-        if(!text) return;
-        this.historyData.push({text, pinyin: pinyinPro.pinyin(text), wordMeaning: ""});
+async processSearch() {
+    const text = this.dom.searchInput.value.trim();
+    if (!text) return;
+
+    // Thay đổi trạng thái nút để báo hiệu đang tải (UX tốt hơn)
+    const originalBtnText = this.dom.findBtn.innerText;
+    this.dom.findBtn.innerText = "Finding...";
+    this.dom.findBtn.disabled = true;
+
+    try {
+        // Tự động gọi API để dịch từ/câu sang tiếng Việt
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=zh-CN|vi`);
+        const data = await res.json();
+        const translatedText = data?.responseData?.translatedText || "";
+
+        // Logic phân loại: Nếu text ngắn (<= 4 ký tự) thì coi là "Từ vựng", nếu dài thì coi là "Câu/Ví dụ"
+        const isWord = text.length <= 4;
+
+        // Tạo object với đầy đủ các trường dữ liệu cho bảng
+        const newItem = {
+            vocab: isWord ? text : "",
+            wordPinyin: isWord ? pinyinPro.pinyin(text) : "",
+            type: "", // Loại từ (API dịch thường không cấp loại từ, có thể để trống hoặc cho phép sửa sau)
+            wordMeaning: isWord ? translatedText : "",
+            text: isWord ? "" : text,
+            pinyin: isWord ? "" : pinyinPro.pinyin(text),
+            meaning: isWord ? "" : translatedText
+        };
+
+        // Đẩy vào mảng và render lại
+        this.historyData.push(newItem);
         this.renderHistory();
+        
+        // Cuộn xuống cuối bảng để thấy từ vừa thêm
+        setTimeout(() => {
+            const rows = document.querySelectorAll('.sentenceRow');
+            if (rows.length > 0) rows[rows.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+
         this.dom.searchInput.value = "";
+    } catch (error) {
+        this.showError("Không thể tra cứu nghĩa lúc này. Vui lòng thử lại!");
+        console.error("Lỗi dịch:", error);
+    } finally {
+        // Khôi phục lại nút
+        this.dom.findBtn.innerText = originalBtnText;
+        this.dom.findBtn.disabled = false;
     }
+}
 
     clearAll() {
         this.historyData = [];
@@ -184,8 +226,13 @@ class LearnChineseApp {
                 document.querySelectorAll('.sentenceRow').forEach(r => r.classList.remove('activeRow'));
                 row.classList.add('activeRow'); 
                 this.activeRowElement = row;
-                this.drawCharacters(item.text, item.vocab || ""); 
-                this.speak(item.text);
+                
+                // Ưu tiên lấy câu ví dụ (item.text), nếu không có thì lấy từ vựng (item.vocab)
+                const textToProcess = item.text || item.vocab || "";
+                
+                // Truyền dữ liệu mới vào hàm vẽ và hàm đọc
+                this.drawCharacters(textToProcess, item.vocab || ""); 
+                this.speak(textToProcess);
             };
 
             const delBtn = row.querySelector(".deleteBtn");
