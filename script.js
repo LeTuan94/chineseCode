@@ -219,8 +219,7 @@ async processSearch() {
                 <div>${item.text || ""}</div>
                 <div>${item.pinyin || ""}</div>
                 <div>${item.meaning || ""}</div>
-                <div>${item.text ? "<span class='deleteBtn'>X</span>" : ""}</div>
-            `;
+                <div><span class='deleteBtn'>X</span></div>            `;
             
             row.onclick = () => {
                 document.querySelectorAll('.sentenceRow').forEach(r => r.classList.remove('activeRow'));
