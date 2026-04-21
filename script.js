@@ -1,6 +1,6 @@
-class LearnChineseApp {
+    class LearnChineseApp {
     constructor() {
-        // State (Trạng thái dữ liệu)
+        // State
         this.historyData = [];
         this.currentRenderedText = "";
         this.activeRowElement = null;
@@ -14,7 +14,7 @@ class LearnChineseApp {
         this.charCache = JSON.parse(localStorage.getItem("charCache")) || {};
         this.LOCAL_KEY = 'hsk_history';
 
-        // DOM Elements (Chọn qua class)
+        // DOM Elements
         this.dom = {
             title: document.querySelector('.app-title'),
             searchInput: document.querySelector('.input-text'),
@@ -33,7 +33,15 @@ class LearnChineseApp {
             sentenceSection: document.querySelector('.sentence-section'),
             backToTop: document.querySelector('.back-to-top'),
             errorMsg: document.querySelector('.error-message'),
-            pullLoader: document.querySelector('.pull-loader')
+            pullLoader: document.querySelector('.pull-loader'),
+            
+            // DOM Quick Jump & Logic vuốt
+            jumpInput: document.getElementById('jumpInput'),
+            jumpBtn: document.getElementById('jumpBtn'),
+            hskButtonsContainer: document.querySelector('.hsk-buttons'),
+            tableWrapper: document.querySelector('.tableWrapper'),
+            hskHint: document.querySelector('.hsk-hint'),
+            tableHint: document.querySelector('.table-hint')
         };
 
         this.init();
@@ -44,6 +52,9 @@ class LearnChineseApp {
         this.bindEvents();
         this.initPullToRefresh();
         this.initScrollEvents();
+        
+        // Kiểm tra xem màn hình hiện tại có làm tràn các nút không
+        window.addEventListener('load', () => this.checkOverflows());
     }
 
     bindEvents() {
@@ -58,12 +69,91 @@ class LearnChineseApp {
         this.dom.backBtn.addEventListener('click', () => this.scrollToActiveRow());
         this.dom.backToTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 
+        // Sự kiện HSK
         this.dom.hskBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const level = e.target.getAttribute('data-level');
                 this.loadHSK(level);
             });
         });
+        
+        // --- SỰ KIỆN QUICK JUMP ---
+        this.dom.jumpBtn.addEventListener('click', () => this.jumpToRow());
+        this.dom.jumpInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') this.jumpToRow();
+        });
+        
+        // --- SỰ KIỆN LÀM ẨN DÒNG GỢI Ý KHI VUỐT ---
+        if (this.dom.hskButtonsContainer && this.dom.hskHint) {
+            this.dom.hskButtonsContainer.addEventListener('scroll', () => {
+                if (this.dom.hskButtonsContainer.scrollLeft > 30) this.dom.hskHint.classList.add('fade-out');
+            }, { passive: true });
+        }
+        
+        if (this.dom.tableWrapper && this.dom.tableHint) {
+            this.dom.tableWrapper.addEventListener('scroll', () => {
+                if (this.dom.tableWrapper.scrollLeft > 100) this.dom.tableHint.classList.add('fade-out');
+            }, { passive: true });
+        }
+
+        // Cập nhật hiển thị Gợi ý vuốt khi xoay/đổi kích thước màn hình
+        window.addEventListener('resize', () => {
+            this.checkOverflows();
+        });
+    }
+
+    // Kiểm tra xem thẻ chứa có thực sự bị tràn nội dung (cần cuộn) không
+    checkOverflows() {
+        // Đặt timeout nhỏ để đảm bảo trình duyệt đã vẽ DOM xong mới tính toán kích thước
+        setTimeout(() => {
+            if (this.dom.hskButtonsContainer && this.dom.hskHint) {
+                const hskCont = this.dom.hskButtonsContainer;
+                this.dom.hskHint.classList.remove('fade-out');
+                // Buffer 2px để tránh sai số tính toán của trình duyệt
+                if (hskCont.scrollWidth > hskCont.clientWidth + 2) {
+                    this.dom.hskHint.classList.remove('hidden-by-js');
+                } else {
+                    this.dom.hskHint.classList.add('hidden-by-js');
+                }
+            }
+
+            if (this.dom.tableWrapper && this.dom.tableHint) {
+                const tableCont = this.dom.tableWrapper;
+                this.dom.tableHint.classList.remove('fade-out');
+                if (tableCont.scrollWidth > tableCont.clientWidth + 2) {
+                    this.dom.tableHint.classList.remove('hidden-by-js');
+                } else {
+                    this.dom.tableHint.classList.add('hidden-by-js');
+                }
+            }
+        }, 100);
+    }
+
+    // Logic xử lý khi bấm nút Go (Quick Jump)
+    jumpToRow() {
+        const targetNumber = parseInt(this.dom.jumpInput.value);
+        if (isNaN(targetNumber) || targetNumber < 1 || targetNumber > this.historyData.length) {
+            this.showError("Số thứ tự không tồn tại trong bảng!");
+            return;
+        }
+        
+        const rows = document.querySelectorAll('.sentenceRow');
+        const targetRow = rows[targetNumber - 1]; 
+        
+        if (targetRow) {
+            // Trượt mềm mại tới dòng mục tiêu
+            targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            // Tự động kích hoạt hành động Click để đọc và vẽ chữ
+            targetRow.click();
+            
+            // Hiệu ứng nhấp nháy làm nổi bật dòng vừa nhảy tới
+            const originalBg = targetRow.style.background;
+            targetRow.style.background = "#fef08a"; // Màu vàng nhạt
+            setTimeout(() => { targetRow.style.background = originalBg; }, 1500);
+        }
+        
+        // Reset input
+        this.dom.jumpInput.value = "";
     }
 
     initScrollEvents() {
@@ -85,7 +175,6 @@ class LearnChineseApp {
         });
     }
 
-    // --- LOGIC GỌI DATA & RENDER ---
     loadInitialData() {
         try {
             const saved = localStorage.getItem(this.LOCAL_KEY);
@@ -133,36 +222,30 @@ async processSearch() {
     const text = this.dom.searchInput.value.trim();
     if (!text) return;
 
-    // Thay đổi trạng thái nút để báo hiệu đang tải (UX tốt hơn)
     const originalBtnText = this.dom.findBtn.innerText;
     this.dom.findBtn.innerText = "Finding...";
     this.dom.findBtn.disabled = true;
 
     try {
-        // Tự động gọi API để dịch từ/câu sang tiếng Việt
         const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=zh-CN|vi`);
         const data = await res.json();
         const translatedText = data?.responseData?.translatedText || "";
 
-        // Logic phân loại: Nếu text ngắn (<= 4 ký tự) thì coi là "Từ vựng", nếu dài thì coi là "Câu/Ví dụ"
         const isWord = text.length <= 4;
 
-        // Tạo object với đầy đủ các trường dữ liệu cho bảng
         const newItem = {
             vocab: isWord ? text : "",
             wordPinyin: isWord ? pinyinPro.pinyin(text) : "",
-            type: "", // Loại từ (API dịch thường không cấp loại từ, có thể để trống hoặc cho phép sửa sau)
+            type: "", 
             wordMeaning: isWord ? translatedText : "",
             text: isWord ? "" : text,
             pinyin: isWord ? "" : pinyinPro.pinyin(text),
             meaning: isWord ? "" : translatedText
         };
 
-        // Đẩy vào mảng và render lại
         this.historyData.push(newItem);
         this.renderHistory();
         
-        // Cuộn xuống cuối bảng để thấy từ vừa thêm
         setTimeout(() => {
             const rows = document.querySelectorAll('.sentenceRow');
             if (rows.length > 0) rows[rows.length - 1].scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -173,7 +256,6 @@ async processSearch() {
         this.showError("Không thể tra cứu nghĩa lúc này. Vui lòng thử lại!");
         console.error("Lỗi dịch:", error);
     } finally {
-        // Khôi phục lại nút
         this.dom.findBtn.innerText = originalBtnText;
         this.dom.findBtn.disabled = false;
     }
@@ -226,10 +308,8 @@ async processSearch() {
                 row.classList.add('activeRow'); 
                 this.activeRowElement = row;
                 
-                // Ưu tiên lấy câu ví dụ (item.text), nếu không có thì lấy từ vựng (item.vocab)
                 const textToProcess = item.text || item.vocab || "";
                 
-                // Truyền dữ liệu mới vào hàm vẽ và hàm đọc
                 this.drawCharacters(textToProcess, item.vocab || ""); 
                 this.speak(textToProcess);
             };
@@ -249,8 +329,12 @@ async processSearch() {
             }
             fragment.appendChild(row);
         });
+        
         this.dom.sentenceList.appendChild(fragment);
         this.saveData();
+        
+        // Kiểm tra lại trạng thái tràn ngay sau khi vẽ bảng mới
+        this.checkOverflows();
     }
 
     // --- ANIMATION & TTS ---
@@ -315,7 +399,6 @@ async processSearch() {
             const targetElement = this.dom.animationArea.children[charIndex].querySelector('.writer');
             charIndex++;
 
-            // Kiểm tra xem chữ Hán hiện tại (chars[i]) có nằm trong Từ vựng (vocab) hay không
             const isTargetVocab = vocab.includes(chars[i]);
 
             const writer = HanziWriter.create(targetElement, chars[i], {
@@ -324,7 +407,6 @@ async processSearch() {
                 strokeAnimationSpeed: 3, 
                 delayBetweenStrokes: 30, 
                 padding: 5,
-                // Nếu là từ vựng đang học -> đổi màu (Ví dụ: màu đỏ). Nếu không phải -> màu xám đậm.
                 strokeColor: isTargetVocab ? '#ef4444' : '#555555' 
             });
 
