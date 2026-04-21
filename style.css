@@ -1,71 +1,124 @@
-/* ==================== 1. RESET & GLOBALS ==================== */
-* { box-sizing: border-box; }
-html, body { height: 100%; margin: 0; overflow: hidden; display: flex; flex-direction: column; font-family: Arial, sans-serif; background: linear-gradient(135deg, #eef2ff, #f8fafc); text-align: center; zoom: 100%; }
-h1.app-title { font-size: 60px; margin: 20px; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; color: transparent; font-weight: 800; cursor: pointer; }
+    /* ==================== 1. RESET & GLOBALS ==================== */
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; overflow: hidden; display: flex; flex-direction: column; font-family: Arial, sans-serif; background: linear-gradient(135deg, #eef2ff, #f8fafc); text-align: center; zoom: 100%; }
+    h1.app-title { font-size: 60px; margin: 20px; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; color: transparent; font-weight: 800; cursor: pointer; }
 
-/* ==================== 2. LAYOUT WRAPPERS ==================== */
-.top-wrapper, .animation-wrapper, .sentence-section { width: 100%; max-width: 1550px; margin-left: auto; margin-right: auto; }
-.top-wrapper, .animation-wrapper { flex-shrink: 0; position: relative; }
-.sentence-section { flex-grow: 1; overflow-y: auto; background: #fff; padding: 20px; border-radius: 15px; margin-top: 10px; margin-bottom: 30px; -webkit-overflow-scrolling: touch; }
+    /* ==================== 2. LAYOUT WRAPPERS ==================== */
+    .top-wrapper, .animation-wrapper, .sentence-section { width: 100%; max-width: 1550px; margin-left: auto; margin-right: auto; }
+    .top-wrapper, .animation-wrapper { flex-shrink: 0; position: relative; }
+    .sentence-section { flex-grow: 1; overflow-y: auto; background: #fff; padding: 20px; border-radius: 15px; margin-top: 10px; margin-bottom: 30px; -webkit-overflow-scrolling: touch; }
 
-/* ==================== 3. SEARCH & CONTROLS ==================== */
-.search-wrapper { background: #fff; padding: 15px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
-.search-wrapper.fixed { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1550px; z-index: 10000; }
-.hsk-buttons { width: 66%; text-align: left; }
-.hskRow { margin: 5px 0; }
-.hskBtn { padding: 8px 14px; border: none; border-radius: 15px; color: white; font-weight: 600; margin: 3px; cursor: pointer; font-size: 14px; }
-.hsk1 { background: #ef4444; } .hsk2 { background: #f97316; } .hsk3 { background: #eab308; } .hsk4 { background: #22c55e; } .hsk5 { background: #06b6d4; } .hsk6 { background: #3b82f6; } .hsk3_0 { background: #8b5cf6; } .hsk3_1 { background: #ec4899; } .hsk3_2 { background: #14b8a6; } .hsk3_3 { background: #f43f5e; } .hsk3_4 { background: #6366f1; }
-.search-box { width: 34%; text-align: right; }
-input.input-text { padding: 12px 18px; width: 100%; border-radius: 30px; border: 1px solid #ddd; outline: none; margin-bottom: 8px; }
-button, .fileLabel { padding: 10px 18px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; background-color:aquamarine}
-.buttonRow { display: flex; justify-content: center; gap: 10px; }
-.findBtn { background: #4facfe; color: white; } .clearBtn { background: #e74c3c; color: white; } .fileLabel { background: #2ecc71; color: white; }
+    /* ==================== 3. SEARCH & CONTROLS ==================== */
+    .search-wrapper { background: #fff; padding: 15px; border-radius: 20px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+    .search-wrapper.fixed { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); width: 95%; max-width: 1550px; z-index: 10000; }
+    
+    .hsk-container { width: 66%; text-align: left; }
+    .hsk-buttons { width: 100%; }
+    .hskRow { margin: 5px 0; }
+    .hskBtn { padding: 8px 14px; border: none; border-radius: 15px; color: white; font-weight: 600; margin: 3px; cursor: pointer; font-size: 14px; }
+    .hsk1 { background: #ef4444; } .hsk2 { background: #f97316; } .hsk3 { background: #eab308; } .hsk4 { background: #22c55e; } .hsk5 { background: #06b6d4; } .hsk6 { background: #3b82f6; } .hsk3_0 { background: #8b5cf6; } .hsk3_1 { background: #ec4899; } .hsk3_2 { background: #14b8a6; } .hsk3_3 { background: #f43f5e; } .hsk3_4 { background: #6366f1; }
+    
+    .search-box { width: 34%; text-align: right; }
+    input.input-text { padding: 12px 18px; width: 100%; border-radius: 30px; border: 1px solid #ddd; outline: none; margin-bottom: 12px; }
+    
+    /* Điều chỉnh hàng nút (Button Row) thành 2 khối để dễ ngắt dòng */
+    .buttonRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .action-btns { display: flex; align-items: center; gap: 10px; }
+    
+    button, .fileLabel { padding: 10px 18px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; }
+    .findBtn { background: #4facfe; color: white; } .clearBtn { background: #e74c3c; color: white; } .fileLabel { background: #2ecc71; color: white; display: inline-block; }
 
-/* ==================== 4. ANIMATION SECTION ==================== */
-.animation-wrapper { display: none; margin-top: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 20px; }
-.animation-wrapper.show { display: block; }
-.animation-area { background: #ffffff; border-radius: 15px; width: 100%; height: 200px; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 20px; }
-.control-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 10px; width: 100%; }
-.charBox { display: inline-flex; align-items: center; width: auto; min-width: 200px; margin: 10px; padding: 10px; background: #fdfdfd; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; }
-.char-info { display: flex; flex-direction: column; justify-content: center; margin-right: 15px; min-width: 80px; }
-.writer { width: 100px !important; height: 100px !important; flex-shrink: 0; margin: auto; }
-.pinyin { margin-top: 6px; font-weight: 600; } .meaningChar { font-size: 13px; color: #374151; margin-top: 4px; } .playChar { margin-top: 5px; background: #22c55e; color: white; border: none; border-radius: 10px; padding: 3px 8px; cursor: pointer; font-size: 12px; }
+    /* --- QUICK JUMP CSS NẰM TRONG BUTTON ROW --- */
+    .quick-jump { display: flex; align-items: center; gap: 8px; }
+    .quick-jump input { padding: 8px 15px; border: 1px solid #cbd5e1; border-radius: 20px; width: 80px; outline: none; text-align: center; font-size: 13px; transition: border-color 0.3s; }
+    .quick-jump input:focus { border-color: #3b82f6; }
+    .quick-jump button { padding: 8px 15px; background: linear-gradient(90deg, #4facfe, #00f2fe); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; font-size: 13px; }
+    .quick-jump button:hover { transform: scale(1.05); }
 
-/* ==================== 5. TABLE SECTION ==================== */
-.tableWrapper { width: 100%; overflow-x: auto; }
-.sentenceHeader, .sentenceRow { display: grid; grid-template-columns: 60px 160px 160px 120px 180px 240px 200px 260px 80px; padding: 10px; width: max-content; min-width: 100%; }
-.sentenceHeader { padding: 12px; font-weight: 700; text-align: center; background-color: bisque; }
-.sentenceRow { border-bottom: 1px solid #eee; cursor: pointer; transition: background-color 0.2s ease; }
-.sentenceRow:hover { background-color: #f1f5f9; } .sentenceRow.activeRow { background: #dbeafe; border-left: 6px solid #3b82f6; }
-.sentenceRow div:nth-child(2) { display: flex; align-items: center; gap: 10px; justify-content: flex-start; color: red; margin-left: 53px; }
-.playVocab { padding: 3px 6px; background: #4facfe; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; } .deleteBtn { color: red; cursor: pointer; font-weight: bold; }
+    /* ==================== 4. ANIMATION SECTION ==================== */
+    .animation-wrapper { display: none; margin-top: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 20px; }
+    .animation-wrapper.show { display: block; }
+    .animation-area { background: #ffffff; border-radius: 15px; width: 100%; height: 200px; overflow-y: auto; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 20px; }
+    
+    .control-buttons { display: flex; justify-content: flex-end; gap: 10px; margin-top: 15px; width: 100%; flex-wrap: wrap; }
+    
+    .charBox { display: inline-flex; align-items: center; width: auto; min-width: 200px; margin: 10px; padding: 10px; background: #fdfdfd; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); text-align: left; }
+    .char-info { display: flex; flex-direction: column; justify-content: center; margin-right: 15px; min-width: 80px; }
+    .writer { width: 100px !important; height: 100px !important; flex-shrink: 0; margin: auto; }
+    .pinyin { margin-top: 6px; font-weight: 600; } .meaningChar { font-size: 13px; color: #374151; margin-top: 4px; } .playChar { margin-top: 5px; background: #22c55e; color: white; border: none; border-radius: 10px; padding: 3px 8px; cursor: pointer; font-size: 12px; }
 
-/* ==================== 6. FLOATING ITEMS & ERROR MESSAGES ==================== */
-.fb-icon-btn { position: fixed; top: 44px; left: 20px; width: 45px; height: 45px; background: #1877f2; color: white; border-radius: 50%; font-weight: bold; font-size: 26px; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 10000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; }
-.fb-icon-btn:hover { background: #0d65d9; transform: scale(1.1); }
-.back-to-top { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #4facfe; color: white; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; display: none; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease; }
-.back-to-top:hover { background: #00f2fe; transform: scale(1.1); }
-.pull-loader { position: fixed; top: 10px; left: 50%; transform: translateX(-50%) scale(0); width: 30px; height: 30px; border: 3px solid #ccc; border-top: 3px solid #4facfe; border-radius: 50%; z-index: 9999; opacity: 0; transition: all 0.2s ease; }
-.pull-loader.show { opacity: 1; transform: translateX(-50%) scale(1); } .pull-loader.spin { animation: spin 0.8s linear infinite; }
-@keyframes spin { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(360deg); } }
-.responsive-message { display: none; font-size: 24px; color: #ef4444; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10001; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
-.error-message { display: none; position: fixed; top: 20px; right: 20px; background: #ffcccc; color: #cc0000; padding: 10px; border-radius: 5px; z-index: 10000; }
+    /* ==================== 5. TABLE SECTION ==================== */
+    .tableWrapper { width: 100%; overflow-x: auto; }
+    .sentenceHeader, .sentenceRow { display: grid; grid-template-columns: 60px 160px 160px 120px 180px 240px 200px 260px 80px; padding: 10px; width: max-content; min-width: 100%; }
+    .sentenceHeader { padding: 12px; font-weight: 700; text-align: center; background-color: bisque; }
+    .sentenceRow { border-bottom: 1px solid #eee; cursor: pointer; transition: background-color 0.2s ease; }
+    .sentenceRow:hover { background-color: #f1f5f9; } .sentenceRow.activeRow { background: #dbeafe; border-left: 6px solid #3b82f6; }
+    .sentenceRow div:nth-child(2) { display: flex; align-items: center; gap: 10px; justify-content: flex-start; color: red; margin-left: 53px; }
+    .playVocab { padding: 3px 6px; background: #4facfe; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; } .deleteBtn { color: red; cursor: pointer; font-weight: bold; }
 
-/* ==================== 7. RESPONSIVE ==================== */
-@media screen and (max-width: 1600px) { .top-wrapper, .animation-wrapper, .search-wrapper.fixed { width: 95%; } .sentenceHeader, .sentenceRow { grid-template-columns: 50px 140px 140px 100px 150px 200px 170px 220px 70px; } }
-@media screen and (max-width: 1200px) { .sentenceHeader, .sentenceRow { grid-template-columns: 40px 120px 120px 80px 120px 160px 140px 180px 60px; } }
-@media screen and (max-width: 768px) {
-    h1.app-title { font-size: 28px; margin: 10px; }
-    .fb-icon-btn { width: 38px; height: 38px; font-size: 20px; top: 10px; left: 15px; } .back-to-top { width: 40px; height: 40px; font-size: 16px; }
-    .search-wrapper { flex-direction: column; gap: 10px; padding: 10px; } .search-wrapper.fixed { position: static; transform: none; width: 100%; } .hsk-buttons, .search-box { width: 100%; text-align: center; } .hskRow { display: flex; flex-wrap: wrap; justify-content: center; } .hskBtn { padding: 5px 7px; font-size: 12px; margin: 7px; border-radius: 8px; }
-    .hide-btn { display: none !important; }
-    .animation-wrapper { position: relative; top: 0; left: 0; transform: none; width: 100%; opacity: 1; pointer-events: auto; overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 10px 0; margin-top: 10px; }
-    .animation-area { display: flex; flex-wrap: nowrap; gap: 8px; padding: 0 10px; height: 135px; }
-    .charBox { display: inline-flex; align-items: center; flex: 0 0 auto; width: auto; min-width: 160px; margin: 0 5px; padding: 8px 12px; text-align: left; }
-    .char-info { display: flex; flex-direction: column; justify-content: center; margin-right: 10px; min-width: 50px; }
-    .writer { width: 70px !important; height: 70px !important; flex-shrink: 0; }
-    .pinyin { font-size: 26px; } .meaningChar { font-size: 14px; } .playChar { font-size: 10px; padding: 2px 5px; margin-top: 5px; }
-    .sentence-section { margin: 10px 0; padding: 10px; } .sentenceRow { padding: 8px 5px; } .sentenceRow div:nth-child(2) { margin-left: 0; }
-    .sentenceHeader, .sentenceRow { min-width: 1100px; font-size: 12px; grid-template-columns: 40px 120px 120px 80px 120px 200px 160px 200px 60px; }
-}
-@media screen and (max-width: 600px) { .search-box { display: flex; flex-direction: column; align-items: center; } input.input-text { margin-bottom: 10px; margin-right: 0; } .buttonRow { flex-direction: row; } .search-box button, .fileLabel { width: 100px; margin: 0; } }
+    /* ==================== 6. FLOATING ITEMS & ERROR MESSAGES & MAGIC HINTS ==================== */
+    .fb-icon-btn { position: fixed; top: 44px; left: 20px; width: 45px; height: 45px; background: #1877f2; color: white; border-radius: 50%; font-weight: bold; font-size: 26px; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 10000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; }
+    .fb-icon-btn:hover { background: #0d65d9; transform: scale(1.1); }
+    .back-to-top { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #4facfe; color: white; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; display: none; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease; }
+    .back-to-top:hover { background: #00f2fe; transform: scale(1.1); }
+    .pull-loader { position: fixed; top: 10px; left: 50%; transform: translateX(-50%) scale(0); width: 30px; height: 30px; border: 3px solid #ccc; border-top: 3px solid #4facfe; border-radius: 50%; z-index: 9999; opacity: 0; transition: all 0.2s ease; }
+    .pull-loader.show { opacity: 1; transform: translateX(-50%) scale(1); } .pull-loader.spin { animation: spin 0.8s linear infinite; }
+    @keyframes spin { from { transform: translateX(-50%) rotate(0deg); } to { transform: translateX(-50%) rotate(360deg); } }
+    .responsive-message { display: none; font-size: 24px; color: #ef4444; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10001; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
+    .error-message { display: none; position: fixed; top: 20px; right: 20px; background: #ffcccc; color: #cc0000; padding: 10px; border-radius: 5px; z-index: 10000; }
+    
+    /* --- CSS HIỆU ỨNG GỢI Ý VUỐT --- */
+    .swipe-hint {
+        display: none; 
+        font-size: 13px;
+        font-style: italic;
+        text-align: right;
+        font-weight: 800;
+        background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #ff007f);
+        background-size: 300% 300%;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: magicShimmer 3s ease infinite;
+        transition: opacity 0.6s ease-out, transform 0.6s ease-out, margin 0.6s ease-out, height 0.6s ease-out;
+        transform-origin: right top;
+    }
+    .swipe-hint.hsk-hint { margin-bottom: 5px; text-align: center; } 
+    .swipe-hint.table-hint { margin-bottom: 10px; }
+    .swipe-hint i { -webkit-text-fill-color: #ff007f; display: inline-block; animation: swipeLeftRight 1.5s infinite; }
+    
+    @keyframes magicShimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+    @keyframes swipeLeftRight { 0% { transform: translateX(0); } 50% { transform: translateX(5px); } 100% { transform: translateX(0); } }
+    
+    .fade-out { opacity: 0; transform: scale(0.8) translateY(-10px); margin-bottom: 0 !important; pointer-events: none; height: 0; overflow: hidden; }
+    .hidden-by-js { display: none !important; }
+
+    /* ==================== 7. RESPONSIVE ==================== */
+    @media screen and (max-width: 1600px) { .top-wrapper, .animation-wrapper, .search-wrapper.fixed { width: 95%; } .sentenceHeader, .sentenceRow { grid-template-columns: 50px 140px 140px 100px 150px 200px 170px 220px 70px; } }
+    @media screen and (max-width: 1200px) { .sentenceHeader, .sentenceRow { grid-template-columns: 40px 120px 120px 80px 120px 160px 140px 180px 60px; } }
+    @media screen and (max-width: 768px) {
+        h1.app-title { font-size: 28px; margin: 10px; }
+        .fb-icon-btn { width: 38px; height: 38px; font-size: 20px; top: 10px; left: 15px; } .back-to-top { width: 40px; height: 40px; font-size: 16px; }
+        
+        .swipe-hint { display: block; }
+
+        .search-wrapper { flex-direction: column; gap: 15px; padding: 15px 10px; } 
+        .search-wrapper.fixed { position: static; transform: none; width: 100%; } 
+        .hsk-container { width: 100%; }
+        .search-box { width: 100%; text-align: center; } 
+
+        .hsk-buttons { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 5px; scrollbar-width: none; -ms-overflow-style: none; }
+        .hsk-buttons::-webkit-scrollbar { display: none; }
+        .hskRow { display: flex; flex-wrap: nowrap; width: max-content; margin: 0 0 8px 0; } 
+        .hskBtn { padding: 6px 12px; font-size: 13px; margin: 0 8px 0 0; border-radius: 12px; flex-shrink: 0; }
+
+        .hide-btn { display: none !important; }
+        .animation-wrapper { position: relative; top: 0; left: 0; transform: none; width: 100%; opacity: 1; pointer-events: auto; overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 10px 0; margin-top: 10px; }
+        .animation-area { display: flex; flex-wrap: nowrap; gap: 8px; padding: 0 10px; height: 135px; }
+        .charBox { display: inline-flex; align-items: center; flex: 0 0 auto; width: auto; min-width: 160px; margin: 0 5px; padding: 8px 12px; text-align: left; }
+        .char-info { display: flex; flex-direction: column; justify-content: center; margin-right: 10px; min-width: 50px; }
+        .writer { width: 70px !important; height: 70px !important; flex-shrink: 0; }
+        .pinyin { font-size: 26px; } .meaningChar { font-size: 14px; } .playChar { font-size: 10px; padding: 2px 5px; margin-top: 5px; }
+        .sentence-section { margin: 10px 0; padding: 10px; } .sentenceRow { padding: 8px 5px; } .sentenceRow div:nth-child(2) { margin-left: 0; }
+        .sentenceHeader, .sentenceRow { min-width: 1100px; font-size: 12px; grid-template-columns: 40px 120px 120px 80px 120px 200px 160px 200px 60px; }
+    }
+    
