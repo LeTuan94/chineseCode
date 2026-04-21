@@ -56,12 +56,18 @@
         <div class="search-box">
             <input class="input-text" placeholder="Chinese word...">
             <div class="buttonRow">
-                <button class="findBtn">Find</button>
-                <label class="fileLabel">
-                    Excel
-                    <input type="file" class="excel-file" accept=".xlsx" style="display: none;">
-                </label>
-                <button class="clearBtn">Clear All</button>
+                <div class="quick-jump">
+                    <input type="number" id="jumpInput" placeholder="Jump to row..." min="1">
+                    <button id="jumpBtn">Go</button>
+                </div>
+                <div class="action-btns">
+                    <button class="findBtn">Find</button>
+                    <label class="fileLabel">
+                        Excel
+                        <input type="file" class="excel-file" accept=".xlsx" style="display: none;">
+                    </label>
+                    <button class="clearBtn">Clear All</button>
+                </div>
             </div>
         </div>
     </div>
