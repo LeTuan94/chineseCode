@@ -123,7 +123,6 @@
     }
     
     /* ==================== 8. MINI MODE ==================== */
-    /* ==================== 8. MINI MODE ==================== */
     .mini-toggle-btn {
         position: fixed;
         bottom: 20px;
@@ -161,23 +160,44 @@
     }
 
     /* Mobile: Hiển thị 2 dòng, dư thì cuộn ngang như cũ */
-    @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
         body.mini-mode .animation-area {
-            display: grid !important; /* Dùng Grid để chia đúng 2 dòng nằm ngang */
-            grid-template-rows: 1fr 1fr; /* Chia 2 hàng đều nhau */
-            grid-auto-flow: column; /* Dư chữ sẽ tự động xếp sang cột dọc tiếp theo (cuộn ngang) */
-            grid-auto-columns: max-content;
-            max-height: 290px; /* Đủ chiều cao cho 2 dòng trên mobile */
-            height: auto;
-            overflow-x: auto; /* Vuốt ngang như cũ */
+            display: flex !important;
+            flex-wrap: nowrap; /* Ép về 1 hàng duy nhất */
+            overflow-x: auto;  /* Vẫn cho vuốt ngang */
             overflow-y: hidden;
-            gap: 8px; /* Khoảng cách giữa các ô */
-            padding: 10px;
-            align-content: start;
+            height: 300px; /* Giữ nguyên chiều cao khung như bạn muốn */
+            align-items: center; /* Đẩy các thẻ ra chính giữa khung theo chiều dọc */
+            padding: 10px 20px;
         }
         
-        /* Reset lại margin của thẻ charBox khi dùng grid để nó xếp ngay ngắn */
         body.mini-mode .charBox {
-            margin: 0; 
+            min-width: 240px; /* Phóng to toàn bộ thẻ chứa chữ */
+            padding: 15px 20px;
+            margin: 0 10px;
+        }
+
+        body.mini-mode .char-info {
+            min-width: 70px;
+            margin-right: 15px;
+        }
+
+        body.mini-mode .pinyin {
+            font-size: 34px; /* Phóng to phiên âm pinyin */
+        }
+
+        body.mini-mode .meaningChar {
+            font-size: 16px; /* Phóng to nghĩa của từ */
+        }
+
+        body.mini-mode .writer {
+            width: 120px !important;  /* Phóng to khung vẽ chữ */
+            height: 120px !important;
+        }
+
+        /* Giúp nét vẽ HanziWriter (bản chất là SVG) tự động phóng to theo khung chứa */
+        body.mini-mode .writer svg {
+            width: 100%; 
+            height: 100%;
         }
     }
