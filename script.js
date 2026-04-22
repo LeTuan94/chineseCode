@@ -41,7 +41,10 @@
             hskButtonsContainer: document.querySelector('.hsk-buttons'),
             tableWrapper: document.querySelector('.tableWrapper'),
             hskHint: document.querySelector('.hsk-hint'),
-            tableHint: document.querySelector('.table-hint')
+            tableHint: document.querySelector('.table-hint'),
+
+            // Nút Mini Version
+            miniToggleBtn: document.querySelector('.mini-toggle-btn')
         };
 
         this.init();
@@ -95,6 +98,7 @@
                 if (this.dom.tableWrapper.scrollLeft > 100) this.dom.tableHint.classList.add('fade-out');
             }, { passive: true });
         }
+
         document.addEventListener('keydown', (e) => {
             // Kiểm tra xem có đang focus vào thẻ input nào không (để tránh lỗi khi đang gõ chữ tìm kiếm)
             const isInputFocused = document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA';
@@ -123,11 +127,27 @@
                     }
                 }
             }
-        });
+        });        
+
         // Cập nhật hiển thị Gợi ý vuốt khi xoay/đổi kích thước màn hình
         window.addEventListener('resize', () => {
             this.checkOverflows();
         });
+
+        // --- SỰ KIỆN NÚT MINI VERSION ---
+        if(this.dom.miniToggleBtn) {
+            this.dom.miniToggleBtn.addEventListener('click', () => {
+                // Thêm/xóa class mini-mode ở thẻ body
+                document.body.classList.toggle('mini-mode');
+                
+                // Kiểm tra trạng thái để đổi tên nút
+                const isMini = document.body.classList.contains('mini-mode');
+                this.dom.miniToggleBtn.innerText = isMini ? "Full Version" : "Mini Version";
+                
+                // Tự động cuộn trang lên trên cùng cho mượt
+                window.scrollTo({top: 0, behavior: 'smooth'});
+            });
+        }
     }
 
     // Kiểm tra xem thẻ chứa có thực sự bị tràn nội dung (cần cuộn) không
