@@ -122,3 +122,62 @@
         .sentenceHeader, .sentenceRow { min-width: 1100px; font-size: 12px; grid-template-columns: 40px 120px 120px 80px 120px 200px 160px 200px 60px; }
     }
     
+    /* ==================== 8. MINI MODE ==================== */
+    /* ==================== 8. MINI MODE ==================== */
+    .mini-toggle-btn {
+        position: fixed;
+        bottom: 20px;
+        left: 20px; /* Đặt ở góc dưới bên trái */
+        padding: 12px 24px;
+        background: linear-gradient(90deg, #ff8a00, #e52e71);
+        color: white;
+        border: none;
+        border-radius: 30px;
+        font-weight: 800;
+        cursor: pointer;
+        z-index: 10000;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+    }
+
+    .mini-toggle-btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Khi kích hoạt mini-mode: Ẩn phần tìm kiếm/HSK */
+    body.mini-mode .top-wrapper {
+        display: none !important;
+    }
+
+    /* Desktop: Hiển thị tối đa 2 dòng, dư thì cuộn dọc như cũ */
+    body.mini-mode .animation-area {
+        display: flex;
+        flex-wrap: wrap; 
+        max-height: 320px; /* Chiều cao vừa đủ 2 dòng charBox (140px/dòng + padding) */
+        height: auto;
+        overflow-y: auto;  /* Cuộn dọc nếu dư */
+        overflow-x: hidden;
+        align-content: flex-start;
+    }
+
+    /* Mobile: Hiển thị 2 dòng, dư thì cuộn ngang như cũ */
+    @media screen and (max-width: 768px) {
+        body.mini-mode .animation-area {
+            display: grid !important; /* Dùng Grid để chia đúng 2 dòng nằm ngang */
+            grid-template-rows: 1fr 1fr; /* Chia 2 hàng đều nhau */
+            grid-auto-flow: column; /* Dư chữ sẽ tự động xếp sang cột dọc tiếp theo (cuộn ngang) */
+            grid-auto-columns: max-content;
+            max-height: 290px; /* Đủ chiều cao cho 2 dòng trên mobile */
+            height: auto;
+            overflow-x: auto; /* Vuốt ngang như cũ */
+            overflow-y: hidden;
+            gap: 8px; /* Khoảng cách giữa các ô */
+            padding: 10px;
+            align-content: start;
+        }
+        
+        /* Reset lại margin của thẻ charBox khi dùng grid để nó xếp ngay ngắn */
+        body.mini-mode .charBox {
+            margin: 0; 
+        }
+    }
