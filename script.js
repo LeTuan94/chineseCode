@@ -95,7 +95,35 @@
                 if (this.dom.tableWrapper.scrollLeft > 100) this.dom.tableHint.classList.add('fade-out');
             }, { passive: true });
         }
+        document.addEventListener('keydown', (e) => {
+            // Kiểm tra xem có đang focus vào thẻ input nào không (để tránh lỗi khi đang gõ chữ tìm kiếm)
+            const isInputFocused = document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA';
+            
+            if (!isInputFocused && this.activeRowElement) {
+                if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+                    // Ngăn hành vi cuộn trang mặc định của trình duyệt
+                    e.preventDefault(); 
+                    
+                    let targetRow;
+                    if (e.key === 'ArrowDown') {
+                        // Lấy phần tử kế tiếp
+                        targetRow = this.activeRowElement.nextElementSibling;
+                    } else if (e.key === 'ArrowUp') {
+                        // Lấy phần tử phía trước
+                        targetRow = this.activeRowElement.previousElementSibling;
+                    }
 
+                    // Nếu có dòng tiếp theo/phía trước và nó là một hàng câu hợp lệ
+                    if (targetRow && targetRow.classList.contains('sentenceRow')) {
+                        // Cuộn màn hình tới dòng đó một cách mượt mà
+                        targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        
+                        // Tự động kích hoạt sự kiện click để chạy logic đọc âm và vẽ chữ
+                        targetRow.click();
+                    }
+                }
+            }
+        });
         // Cập nhật hiển thị Gợi ý vuốt khi xoay/đổi kích thước màn hình
         window.addEventListener('resize', () => {
             this.checkOverflows();
