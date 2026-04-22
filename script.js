@@ -104,26 +104,42 @@
             const isInputFocused = document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA';
             
             if (!isInputFocused && this.activeRowElement) {
+                // 1. Phím Lên / Xuống: Di chuyển dòng
                 if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-                    // Ngăn hành vi cuộn trang mặc định của trình duyệt
-                    e.preventDefault(); 
+                    e.preventDefault(); // Ngăn cuộn trang mặc định
                     
                     let targetRow;
                     if (e.key === 'ArrowDown') {
-                        // Lấy phần tử kế tiếp
                         targetRow = this.activeRowElement.nextElementSibling;
                     } else if (e.key === 'ArrowUp') {
-                        // Lấy phần tử phía trước
                         targetRow = this.activeRowElement.previousElementSibling;
                     }
 
-                    // Nếu có dòng tiếp theo/phía trước và nó là một hàng câu hợp lệ
                     if (targetRow && targetRow.classList.contains('sentenceRow')) {
-                        // Cuộn màn hình tới dòng đó một cách mượt mà
                         targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        
-                        // Tự động kích hoạt sự kiện click để chạy logic đọc âm và vẽ chữ
                         targetRow.click();
+                    }
+                }
+                
+                // 2. Phím Trái: Phát âm Từ vựng (Cột 2)
+                if (e.key === 'ArrowLeft') {
+                    e.preventDefault();
+                    // Lấy text cột 2 (index 1), xóa biểu tượng loa đi để đọc cho chuẩn
+                    const vocab = this.activeRowElement.children[1].textContent.replace('🔊', '').trim();
+                    if (vocab) this.speak(vocab);
+                }
+                
+                // 3. Phím Phải: Phát âm Câu ví dụ (Cột 6)
+                if (e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    // Lấy text cột 6 (index 5)
+                    const sentence = this.activeRowElement.children[5].textContent.trim();
+                    if (sentence) {
+                        this.speak(sentence);
+                    } else {
+                        // Nếu từ đó không có câu ví dụ, đọc lại từ vựng thay thế
+                        const vocabFallback = this.activeRowElement.children[1].textContent.replace('🔊', '').trim();
+                        if (vocabFallback) this.speak(vocabFallback);
                     }
                 }
             }
