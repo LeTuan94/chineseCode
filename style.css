@@ -113,6 +113,8 @@
     
     .hint-btn { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
     .hint-btn:hover { background: #bae6fd; color: #0c4a6e; }
+    .speak-btn { background: #dcfce7; color: #166534; border-color: #86efac; }
+    .speak-btn:hover { background: #bbf7d0; color: #14532d; }
 
     /* ==================== 8. RESPONSIVE ==================== */
     @media screen and (max-width: 1600px) { .top-wrapper, .animation-wrapper, .search-wrapper.fixed { width: 95%; } .sentenceHeader, .sentenceRow { grid-template-columns: 50px 140px 140px 100px 150px 200px 170px 220px 70px; } }
