@@ -1,6 +1,5 @@
-    class LearnChineseApp {
+class LearnChineseApp {
     constructor() {
-        // State
         this.historyData = [];
         this.currentRenderedText = "";
         this.activeRowElement = null;
@@ -10,11 +9,9 @@
         this.currentDrawSession = 0;
         this.pendingTranslations = {};
         
-        // Cache & LocalStorage
         this.charCache = JSON.parse(localStorage.getItem("charCache")) || {};
         this.LOCAL_KEY = 'hsk_history';
 
-        // DOM Elements
         this.dom = {
             title: document.querySelector('.app-title'),
             searchInput: document.querySelector('.input-text'),
@@ -35,7 +32,6 @@
             errorMsg: document.querySelector('.error-message'),
             pullLoader: document.querySelector('.pull-loader'),
             
-            // DOM Quick Jump & Logic vuốt
             jumpInput: document.getElementById('jumpInput'),
             jumpBtn: document.getElementById('jumpBtn'),
             hskButtonsContainer: document.querySelector('.hsk-buttons'),
@@ -43,8 +39,12 @@
             hskHint: document.querySelector('.hsk-hint'),
             tableHint: document.querySelector('.table-hint'),
 
-            // Nút Mini Version
-            miniToggleBtn: document.querySelector('.mini-toggle-btn')
+            practiceStart: document.getElementById('practiceStart'),
+            practiceEnd: document.getElementById('practiceEnd'),
+            practiceBtn: document.getElementById('practiceBtn'),
+            practiceModal: document.getElementById('practiceModal'),
+            closePracticeBtn: document.getElementById('closePracticeBtn'),
+            practiceContainer: document.getElementById('practiceContainer')
         };
 
         this.init();
@@ -55,8 +55,6 @@
         this.bindEvents();
         this.initPullToRefresh();
         this.initScrollEvents();
-        
-        // Kiểm tra xem màn hình hiện tại có làm tràn các nút không
         window.addEventListener('load', () => this.checkOverflows());
     }
 
@@ -72,7 +70,6 @@
         this.dom.backBtn.addEventListener('click', () => this.scrollToActiveRow());
         this.dom.backToTop.addEventListener('click', () => window.scrollTo({top: 0, behavior: 'smooth'}));
 
-        // Sự kiện HSK
         this.dom.hskBtns.forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const level = e.target.getAttribute('data-level');
@@ -80,13 +77,16 @@
             });
         });
         
-        // --- SỰ KIỆN QUICK JUMP ---
         this.dom.jumpBtn.addEventListener('click', () => this.jumpToRow());
         this.dom.jumpInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.jumpToRow();
         });
+
+        this.dom.practiceBtn.addEventListener('click', () => this.startPractice());
+        this.dom.closePracticeBtn.addEventListener('click', () => {
+            this.dom.practiceModal.classList.remove('show');
+        });
         
-        // --- SỰ KIỆN LÀM ẨN DÒNG GỢI Ý KHI VUỐT ---
         if (this.dom.hskButtonsContainer && this.dom.hskHint) {
             this.dom.hskButtonsContainer.addEventListener('scroll', () => {
                 if (this.dom.hskButtonsContainer.scrollLeft > 30) this.dom.hskHint.classList.add('fade-out');
@@ -100,80 +100,215 @@
         }
 
         document.addEventListener('keydown', (e) => {
-            // Kiểm tra xem có đang focus vào thẻ input nào không (để tránh lỗi khi đang gõ chữ tìm kiếm)
             const isInputFocused = document.activeElement.tagName === 'INPUT' || document.activeElement.tagName === 'TEXTAREA';
-            
-            if (!isInputFocused && this.activeRowElement) {
-                // 1. Phím Lên / Xuống: Di chuyển dòng
+            const isModalOpen = this.dom.practiceModal.classList.contains('show');
+
+            if (!isInputFocused && this.activeRowElement && !isModalOpen) {
                 if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
-                    e.preventDefault(); // Ngăn cuộn trang mặc định
-                    
+                    e.preventDefault(); 
                     let targetRow;
-                    if (e.key === 'ArrowDown') {
-                        targetRow = this.activeRowElement.nextElementSibling;
-                    } else if (e.key === 'ArrowUp') {
-                        targetRow = this.activeRowElement.previousElementSibling;
-                    }
+                    if (e.key === 'ArrowDown') targetRow = this.activeRowElement.nextElementSibling;
+                    else if (e.key === 'ArrowUp') targetRow = this.activeRowElement.previousElementSibling;
 
                     if (targetRow && targetRow.classList.contains('sentenceRow')) {
                         targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
                         targetRow.click();
                     }
                 }
-                
-                // 2. Phím Trái: Phát âm Từ vựng (Cột 2)
-                if (e.key === 'ArrowLeft') {
-                    e.preventDefault();
-                    // Lấy text cột 2 (index 1), xóa biểu tượng loa đi để đọc cho chuẩn
-                    const vocab = this.activeRowElement.children[1].textContent.replace('🔊', '').trim();
-                    if (vocab) this.speak(vocab);
-                }
-                
-                // 3. Phím Phải: Phát âm Câu ví dụ (Cột 6)
-                if (e.key === 'ArrowRight') {
-                    e.preventDefault();
-                    // Lấy text cột 6 (index 5)
-                    const sentence = this.activeRowElement.children[5].textContent.trim();
-                    if (sentence) {
-                        this.speak(sentence);
-                    } else {
-                        // Nếu từ đó không có câu ví dụ, đọc lại từ vựng thay thế
-                        const vocabFallback = this.activeRowElement.children[1].textContent.replace('🔊', '').trim();
-                        if (vocabFallback) this.speak(vocabFallback);
-                    }
-                }
             }
         });        
 
-        // Cập nhật hiển thị Gợi ý vuốt khi xoay/đổi kích thước màn hình
         window.addEventListener('resize', () => {
             this.checkOverflows();
         });
+    }
 
-        // --- SỰ KIỆN NÚT MINI VERSION ---
-        if(this.dom.miniToggleBtn) {
-            this.dom.miniToggleBtn.addEventListener('click', () => {
-                // Thêm/xóa class mini-mode ở thẻ body
-                document.body.classList.toggle('mini-mode');
-                
-                // Kiểm tra trạng thái để đổi tên nút
-                const isMini = document.body.classList.contains('mini-mode');
-                this.dom.miniToggleBtn.innerText = isMini ? "Full Version" : "Mini Version";
-                
-                // Tự động cuộn trang lên trên cùng cho mượt
-                window.scrollTo({top: 0, behavior: 'smooth'});
-            });
+    startPractice() {
+        if (this.historyData.length === 0) {
+            this.showError("Bảng dữ liệu đang trống!");
+            return;
+        }
+
+        let start = parseInt(this.dom.practiceStart.value);
+        let end = parseInt(this.dom.practiceEnd.value);
+        
+        if (isNaN(start)) start = 1;
+        if (isNaN(end)) end = Math.min(this.historyData.length, start + 4);
+
+        if (start < 1 || end > this.historyData.length || start > end) {
+            this.showError(`Phạm vi không hợp lệ. Vui lòng nhập từ 1 đến ${this.historyData.length}`);
+            return;
+        }
+
+        this.dom.practiceContainer.innerHTML = '';
+        let hasValidSentences = false;
+
+        for (let i = start - 1; i <= end - 1; i++) {
+            let item = this.historyData[i];
+            let textToPractice = item.text || item.vocab; 
+            
+            if (!textToPractice) continue;
+            hasValidSentences = true;
+
+            const block = this.createExerciseBlock(i + 1, textToPractice, item.meaning || item.wordMeaning, item.pinyin || item.wordPinyin);
+            this.dom.practiceContainer.appendChild(block);
+        }
+
+        if(hasValidSentences) {
+            this.dom.practiceModal.classList.add('show');
+            this.dom.practiceModal.scrollTo(0,0);
+        } else {
+            this.showError("Các câu trong khoảng đã chọn không có dữ liệu để ghép!");
         }
     }
 
-    // Kiểm tra xem thẻ chứa có thực sự bị tràn nội dung (cần cuộn) không
+    createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
+        const block = document.createElement('div');
+        block.className = 'exercise-block';
+
+        // LOẠI BỎ DẤU CÂU TRƯỚC KHI TẠO Ô TRỐNG
+        // Các dấu phổ biến: Chấm, Phẩy, Hỏi chấm, Chấm than, Dấu ngắt tiếng Trung...
+        const cleanText = originalText.replace(/[。，？！、：；.,?!:;]/g, '').trim();
+
+        // Title
+        const title = document.createElement('div');
+        title.className = 'exercise-title';
+        title.innerHTML = `Câu ${sentenceIndex}: ${meaning || 'Không có dịch nghĩa'} <span class="pinyin-hint">(${pinyinText || 'Không có pinyin'})</span>`;
+        block.appendChild(title);
+
+        const slotsArea = document.createElement('div');
+        slotsArea.className = 'slots-area';
+
+        const wordsArea = document.createElement('div');
+        wordsArea.className = 'words-area';
+
+        // Actions Area (chứa thông báo đúng/sai và 2 nút)
+        const actionsArea = document.createElement('div');
+        actionsArea.className = 'exercise-actions';
+
+        const statusText = document.createElement('div');
+        statusText.className = 'exercise-status';
+
+        const btnGroup = document.createElement('div');
+        btnGroup.className = 'action-group';
+
+        const showBtn = document.createElement('button');
+        showBtn.className = 'reset-btn hint-btn';
+        showBtn.innerHTML = '<i class="fas fa-eye"></i> Xem đáp án';
+
+        const resetBtn = document.createElement('button');
+        resetBtn.className = 'reset-btn';
+        resetBtn.innerHTML = '<i class="fas fa-undo"></i> Làm lại';
+
+        // Xáo trộn chữ (Sử dụng text đã xóa dấu câu)
+        const chars = cleanText.split('');
+        const scrambled = [...chars].sort(() => Math.random() - 0.5);
+
+        const slotElements = [];
+        const wordElements = [];
+
+        // Tạo các ô trống
+        chars.forEach((char, idx) => {
+            const slot = document.createElement('div');
+            slot.className = 'slot';
+            
+            slot.onclick = () => {
+                if (slot.innerText !== '') {
+                    // Trả lại ĐÚNG cái chip lúc nãy vào đúng vị trí nhờ lưu reference
+                    if (slot.linkedChip) {
+                        slot.linkedChip.classList.remove('hidden');
+                        slot.linkedChip = null;
+                    }
+                    
+                    slot.innerText = '';
+                    slot.classList.remove('filled');
+                    statusText.innerText = '';
+                    statusText.className = 'exercise-status';
+                }
+            };
+            slotsArea.appendChild(slot);
+            slotElements.push(slot);
+        });
+
+        // Hàm kiểm tra đúng/sai
+        const checkWin = () => {
+            const currentString = slotElements.map(s => s.innerText).join('');
+            if (currentString.length === cleanText.length) {
+                if (currentString === cleanText) {
+                    statusText.innerText = 'Chính xác! 🎉';
+                    statusText.className = 'exercise-status text-green';
+                    // Đọc nguyên bản có cả dấu câu để nghe tự nhiên hơn
+                    this.speak(originalText);
+                } else {
+                    statusText.innerText = 'Chưa đúng vị trí, hãy thử lại nhé!';
+                    statusText.className = 'exercise-status text-red';
+                }
+            }
+        };
+
+        // Tạo các chip từ xáo trộn
+        scrambled.forEach((char, idx) => {
+            const chip = document.createElement('div');
+            chip.className = 'word-chip';
+            chip.innerText = char;
+            
+            chip.onclick = () => {
+                if(chip.classList.contains('hidden')) return;
+                
+                const emptySlot = slotElements.find(s => s.innerText === '');
+                if (emptySlot) {
+                    emptySlot.innerText = char;
+                    emptySlot.classList.add('filled');
+                    
+                    // LƯU TRỰC TIẾP ELEMENT VÀO SLOT để sau này bấm vào slot là tìm lại được ngay
+                    emptySlot.linkedChip = chip; 
+                    
+                    chip.classList.add('hidden');
+                    checkWin(); 
+                }
+            };
+            wordsArea.appendChild(chip);
+            wordElements.push(chip);
+        });
+
+        // Sự kiện Nút Hiện Đáp Án
+        showBtn.onclick = () => {
+            statusText.innerText = `Đáp án: ${cleanText}`;
+            statusText.className = 'exercise-status text-blue';
+        };
+
+        // Sự kiện Nút Reset
+        resetBtn.onclick = () => {
+            slotElements.forEach(slot => {
+                slot.innerText = '';
+                slot.classList.remove('filled');
+                slot.linkedChip = null;
+            });
+            wordElements.forEach(chip => {
+                chip.classList.remove('hidden');
+            });
+            statusText.innerText = '';
+            statusText.className = 'exercise-status';
+        };
+
+        btnGroup.appendChild(showBtn);
+        btnGroup.appendChild(resetBtn);
+        
+        actionsArea.appendChild(statusText);
+        actionsArea.appendChild(btnGroup);
+
+        block.appendChild(slotsArea);
+        block.appendChild(wordsArea);
+        block.appendChild(actionsArea);
+        return block;
+    }
+
+
     checkOverflows() {
-        // Đặt timeout nhỏ để đảm bảo trình duyệt đã vẽ DOM xong mới tính toán kích thước
         setTimeout(() => {
             if (this.dom.hskButtonsContainer && this.dom.hskHint) {
                 const hskCont = this.dom.hskButtonsContainer;
                 this.dom.hskHint.classList.remove('fade-out');
-                // Buffer 2px để tránh sai số tính toán của trình duyệt
                 if (hskCont.scrollWidth > hskCont.clientWidth + 2) {
                     this.dom.hskHint.classList.remove('hidden-by-js');
                 } else {
@@ -193,7 +328,6 @@
         }, 100);
     }
 
-    // Logic xử lý khi bấm nút Go (Quick Jump)
     jumpToRow() {
         const targetNumber = parseInt(this.dom.jumpInput.value);
         if (isNaN(targetNumber) || targetNumber < 1 || targetNumber > this.historyData.length) {
@@ -205,18 +339,13 @@
         const targetRow = rows[targetNumber - 1]; 
         
         if (targetRow) {
-            // Trượt mềm mại tới dòng mục tiêu
             targetRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
-            // Tự động kích hoạt hành động Click để đọc và vẽ chữ
             targetRow.click();
             
-            // Hiệu ứng nhấp nháy làm nổi bật dòng vừa nhảy tới
             const originalBg = targetRow.style.background;
-            targetRow.style.background = "#fef08a"; // Màu vàng nhạt
+            targetRow.style.background = "#fef08a";
             setTimeout(() => { targetRow.style.background = originalBg; }, 1500);
         }
-        
-        // Reset input
         this.dom.jumpInput.value = "";
     }
 
@@ -396,12 +525,9 @@ async processSearch() {
         
         this.dom.sentenceList.appendChild(fragment);
         this.saveData();
-        
-        // Kiểm tra lại trạng thái tràn ngay sau khi vẽ bảng mới
         this.checkOverflows();
     }
 
-    // --- ANIMATION & TTS ---
     isChinese(c) { return /[\u4e00-\u9fff]/.test(c); }
 
     async translateChar(char) {
@@ -515,7 +641,6 @@ async processSearch() {
         }
     }
 
-    // --- HELPERS ---
     scrollToActiveRow() {
         if (this.activeRowElement) {
             this.activeRowElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -566,7 +691,6 @@ async processSearch() {
     }
 }
 
-// Khởi chạy App khi trang đã tải xong
 document.addEventListener("DOMContentLoaded", () => {
     new LearnChineseApp();
 });
