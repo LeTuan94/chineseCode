@@ -1,4 +1,4 @@
-    /* ==================== 1. RESET & GLOBALS ==================== */
+/* ==================== 1. RESET & GLOBALS ==================== */
     * { box-sizing: border-box; }
     html, body { height: 100%; margin: 0; overflow: hidden; display: flex; flex-direction: column; font-family: Arial, sans-serif; background: linear-gradient(135deg, #eef2ff, #f8fafc); text-align: center; zoom: 100%; }
     h1.app-title { font-size: 60px; margin: 20px; background: linear-gradient(90deg, #4facfe, #00f2fe); -webkit-background-clip: text; color: transparent; font-weight: 800; cursor: pointer; }
@@ -21,19 +21,25 @@
     .search-box { width: 34%; text-align: right; }
     input.input-text { padding: 12px 18px; width: 100%; border-radius: 30px; border: 1px solid #ddd; outline: none; margin-bottom: 12px; }
     
-    /* Điều chỉnh hàng nút (Button Row) thành 2 khối để dễ ngắt dòng */
     .buttonRow { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
     .action-btns { display: flex; align-items: center; gap: 10px; }
     
     button, .fileLabel { padding: 10px 18px; border: none; border-radius: 25px; cursor: pointer; font-weight: 600; }
     .findBtn { background: #4facfe; color: white; } .clearBtn { background: #e74c3c; color: white; } .fileLabel { background: #2ecc71; color: white; display: inline-block; }
 
-    /* --- QUICK JUMP CSS NẰM TRONG BUTTON ROW --- */
+    /* --- QUICK JUMP --- */
     .quick-jump { display: flex; align-items: center; gap: 8px; }
     .quick-jump input { padding: 8px 15px; border: 1px solid #cbd5e1; border-radius: 20px; width: 80px; outline: none; text-align: center; font-size: 13px; transition: border-color 0.3s; }
     .quick-jump input:focus { border-color: #3b82f6; }
     .quick-jump button { padding: 8px 15px; background: linear-gradient(90deg, #4facfe, #00f2fe); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; font-size: 13px; }
     .quick-jump button:hover { transform: scale(1.05); }
+
+    /* --- PRACTICE CONTROLS --- */
+    .practice-controls { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .practice-controls input { padding: 8px 15px; border: 1px solid #cbd5e1; border-radius: 20px; width: 90px; outline: none; text-align: center; font-size: 13px; transition: border-color 0.3s; }
+    .practice-controls input:focus { border-color: #8b5cf6; }
+    .practice-btn { padding: 8px 20px; background: linear-gradient(90deg, #8b5cf6, #ec4899); color: white; border: none; border-radius: 20px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; font-size: 13px; }
+    .practice-btn:hover { transform: scale(1.05); }
 
     /* ==================== 4. ANIMATION SECTION ==================== */
     .animation-wrapper { display: none; margin-top: 20px; background: #ffffff; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding: 20px; }
@@ -56,7 +62,7 @@
     .sentenceRow div:nth-child(2) { display: flex; align-items: center; gap: 10px; justify-content: flex-start; color: red; margin-left: 53px; }
     .playVocab { padding: 3px 6px; background: #4facfe; color: white; border: none; border-radius: 8px; cursor: pointer; font-size: 12px; } .deleteBtn { color: red; cursor: pointer; font-weight: bold; }
 
-    /* ==================== 6. FLOATING ITEMS & ERROR MESSAGES & MAGIC HINTS ==================== */
+    /* ==================== 6. FLOATING ITEMS & ERROR MESSAGES ==================== */
     .fb-icon-btn { position: fixed; top: 44px; left: 20px; width: 45px; height: 45px; background: #1877f2; color: white; border-radius: 50%; font-weight: bold; font-size: 26px; display: flex; align-items: center; justify-content: center; text-decoration: none; z-index: 10000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: all 0.3s ease; }
     .fb-icon-btn:hover { background: #0d65d9; transform: scale(1.1); }
     .back-to-top { position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; background: #4facfe; color: white; border: none; border-radius: 50%; font-size: 20px; cursor: pointer; display: none; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.3); transition: all 0.3s ease; }
@@ -67,21 +73,7 @@
     .responsive-message { display: none; font-size: 24px; color: #ef4444; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10001; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     .error-message { display: none; position: fixed; top: 20px; right: 20px; background: #ffcccc; color: #cc0000; padding: 10px; border-radius: 5px; z-index: 10000; }
     
-    /* --- CSS HIỆU ỨNG GỢI Ý VUỐT --- */
-    .swipe-hint {
-        display: none; 
-        font-size: 13px;
-        font-style: italic;
-        text-align: right;
-        font-weight: 800;
-        background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #ff007f);
-        background-size: 300% 300%;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: magicShimmer 3s ease infinite;
-        transition: opacity 0.6s ease-out, transform 0.6s ease-out, margin 0.6s ease-out, height 0.6s ease-out;
-        transform-origin: right top;
-    }
+    .swipe-hint { display: none; font-size: 13px; font-style: italic; text-align: right; font-weight: 800; background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #ff007f); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: magicShimmer 3s ease infinite; transition: opacity 0.6s ease-out, transform 0.6s ease-out, margin 0.6s ease-out, height 0.6s ease-out; transform-origin: right top; }
     .swipe-hint.hsk-hint { margin-bottom: 5px; text-align: center; } 
     .swipe-hint.table-hint { margin-bottom: 10px; }
     .swipe-hint i { -webkit-text-fill-color: #ff007f; display: inline-block; animation: swipeLeftRight 1.5s infinite; }
@@ -92,25 +84,58 @@
     .fade-out { opacity: 0; transform: scale(0.8) translateY(-10px); margin-bottom: 0 !important; pointer-events: none; height: 0; overflow: hidden; }
     .hidden-by-js { display: none !important; }
 
-    /* ==================== 7. RESPONSIVE ==================== */
+    /* ==================== 7. PRACTICE MODAL ==================== */
+    .practice-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #f8fafc; z-index: 99999; flex-direction: column; overflow-y: auto; text-align: left; }
+    .practice-modal.show { display: flex; }
+    .practice-header { display: flex; justify-content: space-between; align-items: center; padding: 15px 30px; background: linear-gradient(90deg, #4facfe, #00f2fe); color: white; box-shadow: 0 4px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
+    .practice-header h2 { margin: 0; font-size: 24px; }
+    .close-practice-btn { background: #e74c3c; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+    .practice-content { padding: 30px; max-width: 1200px; margin: 0 auto; width: 100%; }
+    
+    .exercise-block { background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 30px; border-left: 5px solid #4facfe; }
+    .exercise-title { font-size: 18px; color: #333; margin-bottom: 15px; line-height: 1.5; font-weight: bold; }
+    .exercise-title span.pinyin-hint { color: #8b5cf6; font-size: 16px; font-weight: normal; margin-left: 10px; }
+    
+    .slots-area { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 25px; min-height: 50px; }
+    .slot { width: 50px; height: 50px; border: 2px dashed #cbd5e1; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; transition: all 0.2s; background: #f1f5f9; color: #333; }
+    .slot.filled { border: 2px solid #3b82f6; background: #dbeafe; color: #1e3a8a; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    .slot:hover { border-color: #3b82f6; }
+
+    .words-area { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 15px; border-top: 1px dashed #e2e8f0; }
+    .word-chip { padding: 10px 18px; background: #fff; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 24px; user-select: none; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: all 0.2s; color: #333; }
+    .word-chip:hover { border-color: #4facfe; background: #f0f9ff; transform: translateY(-2px); }
+    .word-chip.hidden { visibility: hidden; opacity: 0; pointer-events: none; width: 0; padding: 0; margin: 0; border: none; }
+    
+    /* ACTIONS AREA CỦA TỪNG BÀI TẬP */
+    .exercise-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; min-height: 35px; }
+    .exercise-status { font-size: 18px; font-weight: bold; }
+    .text-green { color: #16a34a; }
+    .text-red { color: #dc2626; }
+    .text-blue { color: #2563eb; }
+    
+    .action-group { display: flex; gap: 10px; align-items: center; }
+    
+    .reset-btn { padding: 8px 15px; background: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.2s; font-size: 14px; display: flex; align-items: center; gap: 5px; }
+    .reset-btn:hover { background: #e2e8f0; color: #1e293b; }
+    
+    .hint-btn { background: #e0f2fe; color: #0369a1; border-color: #bae6fd; }
+    .hint-btn:hover { background: #bae6fd; color: #0c4a6e; }
+
+    /* ==================== 8. RESPONSIVE ==================== */
     @media screen and (max-width: 1600px) { .top-wrapper, .animation-wrapper, .search-wrapper.fixed { width: 95%; } .sentenceHeader, .sentenceRow { grid-template-columns: 50px 140px 140px 100px 150px 200px 170px 220px 70px; } }
     @media screen and (max-width: 1200px) { .sentenceHeader, .sentenceRow { grid-template-columns: 40px 120px 120px 80px 120px 160px 140px 180px 60px; } }
     @media screen and (max-width: 768px) {
         h1.app-title { font-size: 28px; margin: 10px; }
         .fb-icon-btn { width: 38px; height: 38px; font-size: 20px; top: 10px; left: 15px; } .back-to-top { width: 40px; height: 40px; font-size: 16px; }
-        
         .swipe-hint { display: block; }
-
         .search-wrapper { flex-direction: column; gap: 15px; padding: 15px 10px; } 
         .search-wrapper.fixed { position: static; transform: none; width: 100%; } 
         .hsk-container { width: 100%; }
         .search-box { width: 100%; text-align: center; } 
-
         .hsk-buttons { width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 5px; scrollbar-width: none; -ms-overflow-style: none; }
         .hsk-buttons::-webkit-scrollbar { display: none; }
         .hskRow { display: flex; flex-wrap: nowrap; width: max-content; margin: 0 0 8px 0; } 
         .hskBtn { padding: 6px 12px; font-size: 13px; margin: 0 8px 0 0; border-radius: 12px; flex-shrink: 0; }
-
         .hide-btn { display: none !important; }
         .animation-wrapper { position: relative; top: 0; left: 0; transform: none; width: 100%; opacity: 1; pointer-events: auto; overflow-x: auto; overflow-y: hidden; white-space: nowrap; padding: 10px 0; margin-top: 10px; }
         .animation-area { display: flex; flex-wrap: nowrap; gap: 8px; padding: 0 10px; height: 135px; }
@@ -120,84 +145,11 @@
         .pinyin { font-size: 26px; } .meaningChar { font-size: 14px; } .playChar { font-size: 10px; padding: 2px 5px; margin-top: 5px; }
         .sentence-section { margin: 10px 0; padding: 10px; } .sentenceRow { padding: 8px 5px; } .sentenceRow div:nth-child(2) { margin-left: 0; }
         .sentenceHeader, .sentenceRow { min-width: 1100px; font-size: 12px; grid-template-columns: 40px 120px 120px 80px 120px 200px 160px 200px 60px; }
-    }
-    
-    /* ==================== 8. MINI MODE ==================== */
-    .mini-toggle-btn {
-        position: fixed;
-        bottom: 20px;
-        left: 20px; /* Đặt ở góc dưới bên trái */
-        padding: 12px 24px;
-        background: linear-gradient(90deg, #ff8a00, #e52e71);
-        color: white;
-        border: none;
-        border-radius: 30px;
-        font-weight: 800;
-        cursor: pointer;
-        z-index: 10000;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        transition: all 0.3s ease;
-    }
-
-    .mini-toggle-btn:hover {
-        transform: scale(1.05);
-    }
-
-    /* Khi kích hoạt mini-mode: Ẩn phần tìm kiếm/HSK */
-    body.mini-mode .top-wrapper {
-        display: none !important;
-    }
-
-    /* Desktop: Hiển thị tối đa 2 dòng, dư thì cuộn dọc như cũ */
-    body.mini-mode .animation-area {
-        display: flex;
-        flex-wrap: wrap; 
-        max-height: 320px; /* Chiều cao vừa đủ 2 dòng charBox (140px/dòng + padding) */
-        height: auto;
-        overflow-y: auto;  /* Cuộn dọc nếu dư */
-        overflow-x: hidden;
-        align-content: flex-start;
-    }
-
-    /* Mobile: Hiển thị 2 dòng, dư thì cuộn ngang như cũ */
-@media screen and (max-width: 768px) {
-        body.mini-mode .animation-area {
-            display: flex !important;
-            flex-wrap: nowrap; /* Ép về 1 hàng duy nhất */
-            overflow-x: auto;  /* Vẫn cho vuốt ngang */
-            overflow-y: hidden;
-            height: 300px; /* Giữ nguyên chiều cao khung như bạn muốn */
-            align-items: center; /* Đẩy các thẻ ra chính giữa khung theo chiều dọc */
-            padding: 10px 20px;
-        }
-        
-        body.mini-mode .charBox {
-            min-width: 240px; /* Phóng to toàn bộ thẻ chứa chữ */
-            padding: 15px 20px;
-            margin: 0 10px;
-        }
-
-        body.mini-mode .char-info {
-            min-width: 70px;
-            margin-right: 15px;
-        }
-
-        body.mini-mode .pinyin {
-            font-size: 34px; /* Phóng to phiên âm pinyin */
-        }
-
-        body.mini-mode .meaningChar {
-            font-size: 16px; /* Phóng to nghĩa của từ */
-        }
-
-        body.mini-mode .writer {
-            width: 120px !important;  /* Phóng to khung vẽ chữ */
-            height: 120px !important;
-        }
-
-        /* Giúp nét vẽ HanziWriter (bản chất là SVG) tự động phóng to theo khung chứa */
-        body.mini-mode .writer svg {
-            width: 100%; 
-            height: 100%;
-        }
+        .practice-controls { justify-content: center; }
+        .practice-header { padding: 15px; }
+        .practice-header h2 { font-size: 20px; }
+        .practice-content { padding: 15px; }
+        .slot, .word-chip { font-size: 20px; width: 40px; height: 40px; padding: 5px; }
+        .word-chip { width: auto; }
+        .exercise-actions { flex-direction: column; align-items: flex-start; gap: 10px; }
     }
