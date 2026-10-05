@@ -73,14 +73,7 @@
     .responsive-message { display: none; font-size: 24px; color: #ef4444; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 10001; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5); }
     .error-message { display: none; position: fixed; top: 20px; right: 20px; background: #ffcccc; color: #cc0000; padding: 10px; border-radius: 5px; z-index: 10000; }
     
-    .swipe-hint { display: none; font-size: 13px; font-style: italic; text-align: right; font-weight: 800; background: linear-gradient(270deg, #ff007f, #7f00ff, #00d2ff, #ff007f); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: magicShimmer 3s ease infinite; transition: opacity 0.6s ease-out, transform 0.6s ease-out, margin 0.6s ease-out, height 0.6s ease-out; transform-origin: right top; }
-    .swipe-hint.hsk-hint { margin-bottom: 5px; text-align: center; } 
-    .swipe-hint.table-hint { margin-bottom: 10px; }
-    .swipe-hint i { -webkit-text-fill-color: #ff007f; display: inline-block; animation: swipeLeftRight 1.5s infinite; }
-    
-    @keyframes magicShimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-    @keyframes swipeLeftRight { 0% { transform: translateX(0); } 50% { transform: translateX(5px); } 100% { transform: translateX(0); } }
-    
+    @keyframes magicShimmer { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }    
     .fade-out { opacity: 0; transform: scale(0.8) translateY(-10px); margin-bottom: 0 !important; pointer-events: none; height: 0; overflow: hidden; }
     .hidden-by-js { display: none !important; }
 
@@ -127,7 +120,6 @@
     @media screen and (max-width: 768px) {
         h1.app-title { font-size: 28px; margin: 10px; }
         .fb-icon-btn { width: 38px; height: 38px; font-size: 20px; top: 10px; left: 15px; } .back-to-top { width: 40px; height: 40px; font-size: 16px; }
-        .swipe-hint { display: block; }
         .search-wrapper { flex-direction: column; gap: 15px; padding: 15px 10px; } 
         .search-wrapper.fixed { position: static; transform: none; width: 100%; } 
         .hsk-container { width: 100%; }
