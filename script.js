@@ -684,7 +684,8 @@ async processSearch() {
         let startY = 0, currentY = 0, isPulling = false;
         
         document.addEventListener("touchstart", (e) => {
-            if (e.target.closest(".sentence-section")) return;
+            // Chặn refresh khi đang lướt ở bảng câu HOẶC màn hình luyện tập
+            if (e.target.closest(".sentence-section") || e.target.closest(".practice-modal")) return;
             startY = e.touches[0].clientY; isPulling = true;
         }, {passive: true});
 
