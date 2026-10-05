@@ -162,12 +162,11 @@ class LearnChineseApp {
         }
     }
 
-    createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
+createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
         const block = document.createElement('div');
         block.className = 'exercise-block';
 
         // LOẠI BỎ DẤU CÂU TRƯỚC KHI TẠO Ô TRỐNG
-        // Các dấu phổ biến: Chấm, Phẩy, Hỏi chấm, Chấm than, Dấu ngắt tiếng Trung...
         const cleanText = originalText.replace(/[。，？！、：；.,?!:;]/g, '').trim();
 
         // Title
@@ -182,7 +181,7 @@ class LearnChineseApp {
         const wordsArea = document.createElement('div');
         wordsArea.className = 'words-area';
 
-        // Actions Area (chứa thông báo đúng/sai và 2 nút)
+        // Actions Area (chứa thông báo đúng/sai và các nút)
         const actionsArea = document.createElement('div');
         actionsArea.className = 'exercise-actions';
 
@@ -191,6 +190,11 @@ class LearnChineseApp {
 
         const btnGroup = document.createElement('div');
         btnGroup.className = 'action-group';
+
+        // NÚT MỚI: PHÁT ÂM (NGHE ĐỌC)
+        const speakBtn = document.createElement('button');
+        speakBtn.className = 'reset-btn speak-btn';
+        speakBtn.innerHTML = '<i class="fas fa-volume-up"></i> Phát âm';
 
         const showBtn = document.createElement('button');
         showBtn.className = 'reset-btn hint-btn';
@@ -214,7 +218,6 @@ class LearnChineseApp {
             
             slot.onclick = () => {
                 if (slot.innerText !== '') {
-                    // Trả lại ĐÚNG cái chip lúc nãy vào đúng vị trí nhờ lưu reference
                     if (slot.linkedChip) {
                         slot.linkedChip.classList.remove('hidden');
                         slot.linkedChip = null;
@@ -237,7 +240,6 @@ class LearnChineseApp {
                 if (currentString === cleanText) {
                     statusText.innerText = 'Chính xác! 🎉';
                     statusText.className = 'exercise-status text-green';
-                    // Đọc nguyên bản có cả dấu câu để nghe tự nhiên hơn
                     this.speak(originalText);
                 } else {
                     statusText.innerText = 'Chưa đúng vị trí, hãy thử lại nhé!';
@@ -259,10 +261,7 @@ class LearnChineseApp {
                 if (emptySlot) {
                     emptySlot.innerText = char;
                     emptySlot.classList.add('filled');
-                    
-                    // LƯU TRỰC TIẾP ELEMENT VÀO SLOT để sau này bấm vào slot là tìm lại được ngay
                     emptySlot.linkedChip = chip; 
-                    
                     chip.classList.add('hidden');
                     checkWin(); 
                 }
@@ -271,13 +270,19 @@ class LearnChineseApp {
             wordElements.push(chip);
         });
 
-        // Sự kiện Nút Hiện Đáp Án
+        // --- SỰ KIỆN CÁC NÚT ---
+        
+        // Sự kiện Phát âm khi hover (onmouseenter) và ngưng khi đưa chuột ra (onmouseleave)
+        // (Thêm sự kiện onclick hỗ trợ riêng cho trường hợp bạn bấm trên màn hình cảm ứng điện thoại)
+        speakBtn.onmouseenter = () => { this.speak(originalText); };
+        speakBtn.onmouseleave = () => { speechSynthesis.cancel(); };
+        speakBtn.onclick = () => { this.speak(originalText); };
+
         showBtn.onclick = () => {
             statusText.innerText = `Đáp án: ${cleanText}`;
             statusText.className = 'exercise-status text-blue';
         };
 
-        // Sự kiện Nút Reset
         resetBtn.onclick = () => {
             slotElements.forEach(slot => {
                 slot.innerText = '';
@@ -291,6 +296,8 @@ class LearnChineseApp {
             statusText.className = 'exercise-status';
         };
 
+        // Gắn các nút vào nhóm
+        btnGroup.appendChild(speakBtn);
         btnGroup.appendChild(showBtn);
         btnGroup.appendChild(resetBtn);
         
@@ -302,8 +309,7 @@ class LearnChineseApp {
         block.appendChild(actionsArea);
         return block;
     }
-
-
+    
     checkOverflows() {
         setTimeout(() => {
             if (this.dom.hskButtonsContainer && this.dom.hskHint) {
