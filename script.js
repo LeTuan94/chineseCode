@@ -216,7 +216,8 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
             const slot = document.createElement('div');
             slot.className = 'slot';
             
-            slot.onclick = () => {
+            // Tách logic ra để dùng chung cho cả Click và Hover
+            const handleSlotAction = () => {
                 if (slot.innerText !== '') {
                     if (slot.linkedChip) {
                         slot.linkedChip.classList.remove('hidden');
@@ -229,6 +230,11 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
                     statusText.className = 'exercise-status';
                 }
             };
+
+            // Gắn sự kiện: Bấm (cho điện thoại) và Hover (cho máy tính)
+            slot.onclick = handleSlotAction;
+            slot.onmouseenter = handleSlotAction;
+
             slotsArea.appendChild(slot);
             slotElements.push(slot);
         });
@@ -254,18 +260,26 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
             chip.className = 'word-chip';
             chip.innerText = char;
             
-            chip.onclick = () => {
+            // Tách logic ra để dùng chung cho cả Click và Hover
+            const handleChipAction = () => {
                 if(chip.classList.contains('hidden')) return;
                 
                 const emptySlot = slotElements.find(s => s.innerText === '');
                 if (emptySlot) {
                     emptySlot.innerText = char;
                     emptySlot.classList.add('filled');
+                    
                     emptySlot.linkedChip = chip; 
+                    
                     chip.classList.add('hidden');
                     checkWin(); 
                 }
             };
+
+            // Gắn sự kiện: Bấm (cho điện thoại) và Hover (cho máy tính)
+            chip.onclick = handleChipAction;
+            chip.onmouseenter = handleChipAction;
+
             wordsArea.appendChild(chip);
             wordElements.push(chip);
         });
