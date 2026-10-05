@@ -97,7 +97,7 @@
     .words-area { display: flex; flex-wrap: wrap; gap: 12px; padding-top: 15px; border-top: 1px dashed #e2e8f0; }
     .word-chip { padding: 10px 18px; background: #fff; border: 2px solid #e2e8f0; border-radius: 10px; cursor: pointer; font-size: 24px; user-select: none; box-shadow: 0 2px 6px rgba(0,0,0,0.05); transition: all 0.2s; color: #333; }
     .word-chip:hover { border-color: #4facfe; background: #f0f9ff; transform: translateY(-2px); }
-    .word-chip.hidden { visibility: hidden; opacity: 0; pointer-events: none; width: 0; padding: 0; margin: 0; border: none; }
+    .word-chip.hidden { visibility: hidden; opacity: 0; pointer-events: none; }
     
     /* ACTIONS AREA CỦA TỪNG BÀI TẬP */
     .exercise-actions { display: flex; justify-content: space-between; align-items: center; margin-top: 15px; min-height: 35px; }
