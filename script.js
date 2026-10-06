@@ -123,7 +123,7 @@ class LearnChineseApp {
         });
     }
 
-    startPractice() {
+startPractice() {
         if (this.historyData.length === 0) {
             this.showError("Bảng dữ liệu đang trống!");
             return;
@@ -150,7 +150,8 @@ class LearnChineseApp {
             if (!textToPractice) continue;
             hasValidSentences = true;
 
-            const block = this.createExerciseBlock(i + 1, textToPractice, item.meaning || item.wordMeaning, item.pinyin || item.wordPinyin);
+            // Truyền thêm item.vocab và item.wordMeaning vào hàm tạo giao diện
+            const block = this.createExerciseBlock(i + 1, textToPractice, item.meaning || item.wordMeaning, item.pinyin || item.wordPinyin, item.vocab, item.wordMeaning);
             this.dom.practiceContainer.appendChild(block);
         }
 
@@ -162,18 +163,29 @@ class LearnChineseApp {
         }
     }
 
-createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
+    createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, vocabMeaning) {
         const block = document.createElement('div');
         block.className = 'exercise-block';
 
-        // LOẠI BỎ DẤU CÂU TRƯỚC KHI TẠO Ô TRỐNG
         const cleanText = originalText.replace(/[。，？！、：；.,?!:;]/g, '').trim();
 
-        // Title
         const title = document.createElement('div');
         title.className = 'exercise-title';
         title.innerHTML = `Câu ${sentenceIndex}: ${meaning || 'Không có dịch nghĩa'} <span class="pinyin-hint">(${pinyinText || 'Không có pinyin'})</span>`;
         block.appendChild(title);
+
+        // HIỂN THỊ TỪ VỰNG KÈM NGHĨA (ĐÁNH DẤU ĐỎ)
+        if (vocab) {
+            const vocabInfo = document.createElement('div');
+            vocabInfo.style.marginBottom = '20px';
+            vocabInfo.style.padding = '10px 15px';
+            vocabInfo.style.background = '#fef2f2'; 
+            vocabInfo.style.borderLeft = '4px solid #ef4444';
+            vocabInfo.style.borderRadius = '0 8px 8px 0';
+            vocabInfo.style.color = '#333';
+            vocabInfo.innerHTML = `🎯 Từ cần học: <strong style="color: #ef4444; font-size: 18px; margin: 0 5px;">${vocab}</strong> <span>(${vocabMeaning || 'Chưa có nghĩa'})</span>`;
+            block.appendChild(vocabInfo);
+        }
 
         const slotsArea = document.createElement('div');
         slotsArea.className = 'slots-area';
@@ -181,7 +193,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
         const wordsArea = document.createElement('div');
         wordsArea.className = 'words-area';
 
-        // Actions Area (chứa thông báo đúng/sai và các nút)
         const actionsArea = document.createElement('div');
         actionsArea.className = 'exercise-actions';
 
@@ -191,7 +202,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
         const btnGroup = document.createElement('div');
         btnGroup.className = 'action-group';
 
-        // NÚT MỚI: PHÁT ÂM (NGHE ĐỌC)
         const speakBtn = document.createElement('button');
         speakBtn.className = 'reset-btn speak-btn';
         speakBtn.innerHTML = '<i class="fas fa-volume-up"></i> Phát âm';
@@ -204,26 +214,22 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
         resetBtn.className = 'reset-btn';
         resetBtn.innerHTML = '<i class="fas fa-undo"></i> Làm lại';
 
-        // Xáo trộn chữ (Sử dụng text đã xóa dấu câu)
         const chars = cleanText.split('');
         const scrambled = [...chars].sort(() => Math.random() - 0.5);
 
         const slotElements = [];
         const wordElements = [];
 
-        // Tạo các ô trống
         chars.forEach((char, idx) => {
             const slot = document.createElement('div');
             slot.className = 'slot';
             
-            // Tách logic ra để dùng chung cho cả Click và Hover
             const handleSlotAction = () => {
                 if (slot.innerText !== '') {
                     if (slot.linkedChip) {
                         slot.linkedChip.classList.remove('hidden');
                         slot.linkedChip = null;
                     }
-                    
                     slot.innerText = '';
                     slot.classList.remove('filled');
                     statusText.innerText = '';
@@ -231,7 +237,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
                 }
             };
 
-            // Gắn sự kiện: Bấm (cho điện thoại) và Hover (cho máy tính)
             slot.onclick = handleSlotAction;
             slot.onmouseenter = handleSlotAction;
 
@@ -239,7 +244,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
             slotElements.push(slot);
         });
 
-        // Hàm kiểm tra đúng/sai
         const checkWin = () => {
             const currentString = slotElements.map(s => s.innerText).join('');
             if (currentString.length === cleanText.length) {
@@ -254,29 +258,35 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
             }
         };
 
-        // Tạo các chip từ xáo trộn
         scrambled.forEach((char, idx) => {
             const chip = document.createElement('div');
             chip.className = 'word-chip';
             chip.innerText = char;
             
-            // Tách logic ra để dùng chung cho cả Click và Hover
+            // Tô đỏ chữ nếu thuộc từ vựng cần học
+            if (vocab && vocab.includes(char)) {
+                chip.style.color = '#ef4444';
+                chip.style.fontWeight = 'bold';
+            }
+            
             const handleChipAction = () => {
                 if(chip.classList.contains('hidden')) return;
-                
                 const emptySlot = slotElements.find(s => s.innerText === '');
                 if (emptySlot) {
                     emptySlot.innerText = char;
                     emptySlot.classList.add('filled');
-                    
+                    // Gắn màu đỏ lên ô điền nếu là từ vựng
+                    if (vocab && vocab.includes(char)) {
+                        emptySlot.style.color = '#ef4444';
+                    } else {
+                        emptySlot.style.color = '#1e3a8a';
+                    }
                     emptySlot.linkedChip = chip; 
-                    
                     chip.classList.add('hidden');
                     checkWin(); 
                 }
             };
 
-            // Gắn sự kiện: Bấm (cho điện thoại) và Hover (cho máy tính)
             chip.onclick = handleChipAction;
             chip.onmouseenter = handleChipAction;
 
@@ -284,10 +294,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
             wordElements.push(chip);
         });
 
-        // --- SỰ KIỆN CÁC NÚT ---
-        
-        // Sự kiện Phát âm khi hover (onmouseenter) và ngưng khi đưa chuột ra (onmouseleave)
-        // (Thêm sự kiện onclick hỗ trợ riêng cho trường hợp bạn bấm trên màn hình cảm ứng điện thoại)
         speakBtn.onmouseenter = () => { this.speak(originalText); };
         speakBtn.onmouseleave = () => { speechSynthesis.cancel(); };
         speakBtn.onclick = () => { this.speak(originalText); };
@@ -310,7 +316,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText) {
             statusText.className = 'exercise-status';
         };
 
-        // Gắn các nút vào nhóm
         btnGroup.appendChild(speakBtn);
         btnGroup.appendChild(showBtn);
         btnGroup.appendChild(resetBtn);
