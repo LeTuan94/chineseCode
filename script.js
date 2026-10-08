@@ -150,8 +150,8 @@ startPractice() {
             if (!textToPractice) continue;
             hasValidSentences = true;
 
-            // Truyền thêm item.vocab và item.wordMeaning vào hàm tạo giao diện
-            const block = this.createExerciseBlock(i + 1, textToPractice, item.meaning || item.wordMeaning, item.pinyin || item.wordPinyin, item.vocab, item.wordMeaning);
+            // Đã bổ sung thêm tham số thứ 7: item.wordPinyin
+            const block = this.createExerciseBlock(i + 1, textToPractice, item.meaning || item.wordMeaning, item.pinyin || item.wordPinyin, item.vocab, item.wordMeaning, item.wordPinyin);
             this.dom.practiceContainer.appendChild(block);
         }
 
@@ -162,8 +162,7 @@ startPractice() {
             this.showError("Các câu trong khoảng đã chọn không có dữ liệu để ghép!");
         }
     }
-
-    createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, vocabMeaning) {
+    createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, vocabMeaning, vocabPinyin) {
         const block = document.createElement('div');
         block.className = 'exercise-block';
 
@@ -174,7 +173,7 @@ startPractice() {
         title.innerHTML = `Câu ${sentenceIndex}: ${meaning || 'Không có dịch nghĩa'} <span class="pinyin-hint">(${pinyinText || 'Không có pinyin'})</span>`;
         block.appendChild(title);
 
-        // HIỂN THỊ TỪ VỰNG KÈM NGHĨA (ĐÁNH DẤU ĐỎ)
+        // HIỂN THỊ TỪ VỰNG KÈM NGHĨA VÀ PINYIN (ĐÁNH DẤU ĐỎ)
         if (vocab) {
             const vocabInfo = document.createElement('div');
             vocabInfo.style.marginBottom = '20px';
@@ -183,7 +182,11 @@ startPractice() {
             vocabInfo.style.borderLeft = '4px solid #ef4444';
             vocabInfo.style.borderRadius = '0 8px 8px 0';
             vocabInfo.style.color = '#333';
-            vocabInfo.innerHTML = `🎯 Từ cần học: <strong style="color: #ef4444; font-size: 18px; margin: 0 5px;">${vocab}</strong> <span>(${vocabMeaning || 'Chưa có nghĩa'})</span>`;
+            
+            // Nếu bảng dữ liệu không có sẵn Pinyin của từ, tự động dùng thư viện pinyinPro để tạo ra
+            const pinyinDisplay = vocabPinyin || (window.pinyinPro ? window.pinyinPro.pinyin(vocab) : '');
+            
+            vocabInfo.innerHTML = `🎯 Từ cần học: <strong style="color: #ef4444; font-size: 18px; margin: 0 5px;">${vocab}</strong> <span style="color: #8b5cf6; font-size: 16px; margin-right: 5px;">[${pinyinDisplay}]</span> <span>(${vocabMeaning || 'Chưa có nghĩa'})</span>`;
             block.appendChild(vocabInfo);
         }
 
@@ -263,7 +266,6 @@ startPractice() {
             chip.className = 'word-chip';
             chip.innerText = char;
             
-            // Tô đỏ chữ nếu thuộc từ vựng cần học
             if (vocab && vocab.includes(char)) {
                 chip.style.color = '#ef4444';
                 chip.style.fontWeight = 'bold';
@@ -275,7 +277,6 @@ startPractice() {
                 if (emptySlot) {
                     emptySlot.innerText = char;
                     emptySlot.classList.add('filled');
-                    // Gắn màu đỏ lên ô điền nếu là từ vựng
                     if (vocab && vocab.includes(char)) {
                         emptySlot.style.color = '#ef4444';
                     } else {
@@ -328,7 +329,6 @@ startPractice() {
         block.appendChild(actionsArea);
         return block;
     }
-    
     checkOverflows() {
         setTimeout(() => {
             if (this.dom.hskButtonsContainer && this.dom.hskHint) {
