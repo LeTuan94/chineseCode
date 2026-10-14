@@ -183,7 +183,6 @@ startPractice() {
             vocabInfo.style.borderRadius = '0 8px 8px 0';
             vocabInfo.style.color = '#333';
             
-            // Nếu bảng dữ liệu không có sẵn Pinyin của từ, tự động dùng thư viện pinyinPro để tạo ra
             const pinyinDisplay = vocabPinyin || (window.pinyinPro ? window.pinyinPro.pinyin(vocab) : '');
             
             vocabInfo.innerHTML = `🎯 Từ cần học: <strong style="color: #ef4444; font-size: 18px; margin: 0 5px;">${vocab}</strong> <span style="color: #8b5cf6; font-size: 16px; margin-right: 5px;">[${pinyinDisplay}]</span> <span>(${vocabMeaning || 'Chưa có nghĩa'})</span>`;
@@ -216,6 +215,19 @@ startPractice() {
         const resetBtn = document.createElement('button');
         resetBtn.className = 'reset-btn';
         resetBtn.innerHTML = '<i class="fas fa-undo"></i> Làm lại';
+
+        // KHUNG HIỂN THỊ ĐÁP ÁN RIÊNG BIỆT (MẶC ĐỊNH ẨN)
+        const answerBox = document.createElement('div');
+        answerBox.style.display = 'none';
+        answerBox.style.marginTop = '15px';
+        answerBox.style.padding = '10px 15px';
+        answerBox.style.background = '#eff6ff';
+        answerBox.style.borderLeft = '4px solid #3b82f6';
+        answerBox.style.borderRadius = '0 8px 8px 0';
+        answerBox.style.color = '#1e40af';
+        answerBox.style.fontWeight = 'bold';
+        answerBox.style.fontSize = '18px';
+        answerBox.innerText = `💡 Đáp án: ${cleanText}`;
 
         const chars = cleanText.split('');
         const scrambled = [...chars].sort(() => Math.random() - 0.5);
@@ -299,9 +311,17 @@ startPractice() {
         speakBtn.onmouseleave = () => { speechSynthesis.cancel(); };
         speakBtn.onclick = () => { this.speak(originalText); };
 
+        // LOGIC TOGGLE ẨN / HIỆN ĐÁP ÁN KHI CLICK
+        let isAnswerVisible = false;
         showBtn.onclick = () => {
-            statusText.innerText = `Đáp án: ${cleanText}`;
-            statusText.className = 'exercise-status text-blue';
+            isAnswerVisible = !isAnswerVisible;
+            if (isAnswerVisible) {
+                answerBox.style.display = 'block';
+                showBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ẩn đáp án';
+            } else {
+                answerBox.style.display = 'none';
+                showBtn.innerHTML = '<i class="fas fa-eye"></i> Xem đáp án';
+            }
         };
 
         resetBtn.onclick = () => {
@@ -327,6 +347,7 @@ startPractice() {
         block.appendChild(slotsArea);
         block.appendChild(wordsArea);
         block.appendChild(actionsArea);
+        block.appendChild(answerBox); // Gắn khung đáp án vào cuối khối bài tập
         return block;
     }
     checkOverflows() {
