@@ -229,12 +229,41 @@ startPractice() {
         answerBox.style.fontSize = '18px';
         answerBox.innerText = `💡 Đáp án: ${cleanText}`;
 
+        // HÀM XÁO TRỘN MẢNG CHUẨN FISHER-YATES (Đảm bảo random 100% và khác câu gốc)
+        const shuffleArray = (array, originalStr = '') => {
+            const arr = [...array];
+            if (arr.length <= 1) return arr;
+            
+            let attempts = 0;
+            do {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
+                attempts++;
+            } while (originalStr && arr.join('') === originalStr && attempts < 10);
+            
+            return arr;
+        };
+
         const chars = cleanText.split('');
-        const scrambled = [...chars].sort(() => Math.random() - 0.5);
+        const scrambled = shuffleArray(chars, cleanText);
 
         const slotElements = [];
         const wordElements = [];
 
+        // HÀM XÁO TRỘN LẠI VỊ TRÍ CÁC THẺ CHỮ TRONG DOM
+        const shuffleWordsDOM = () => {
+            const shuffledChips = shuffleArray(wordElements);
+            // Đảm bảo thứ tự hiển thị mới không vô tình trùng với câu gốc
+            if (shuffledChips.length > 1 && shuffledChips.map(c => c.innerText).join('') === cleanText) {
+                [shuffledChips[0], shuffledChips[1]] = [shuffledChips[1], shuffledChips[0]];
+            }
+            wordsArea.innerHTML = '';
+            shuffledChips.forEach(chip => wordsArea.appendChild(chip));
+        };
+
+        // Tạo các ô trống
         chars.forEach((char, idx) => {
             const slot = document.createElement('div');
             slot.className = 'slot';
@@ -242,7 +271,25 @@ startPractice() {
             const handleSlotAction = () => {
                 if (slot.innerText !== '') {
                     if (slot.linkedChip) {
-                        slot.linkedChip.classList.remove('hidden');
+                        const chip = slot.linkedChip;
+                        chip.classList.remove('hidden');
+
+                        // Hoán đổi chữ vừa trả về sang một vị trí ngẫu nhiên mới ở bên dưới
+                        const currentChips = Array.from(wordsArea.children);
+                        if (currentChips.length > 1) {
+                            const currentIndex = currentChips.indexOf(chip);
+                            let randomIndex = Math.floor(Math.random() * currentChips.length);
+                            if (randomIndex === currentIndex) {
+                                randomIndex = (currentIndex + 1 + Math.floor(Math.random() * (currentChips.length - 1))) % currentChips.length;
+                            }
+                            const targetChip = currentChips[randomIndex];
+                            const placeholder = document.createElement('div');
+                            wordsArea.insertBefore(placeholder, chip);
+                            wordsArea.insertBefore(chip, targetChip);
+                            wordsArea.insertBefore(targetChip, placeholder);
+                            wordsArea.removeChild(placeholder);
+                        }
+
                         slot.linkedChip = null;
                     }
                     slot.innerText = '';
@@ -273,6 +320,7 @@ startPractice() {
             }
         };
 
+        // Tạo các chip từ xáo trộn
         scrambled.forEach((char, idx) => {
             const chip = document.createElement('div');
             chip.className = 'word-chip';
@@ -324,6 +372,7 @@ startPractice() {
             }
         };
 
+        // NÚT LÀM LẠI: XÓA Ô TRỐNG, HIỆN LẠI CHỮ VÀ XÁO TRỘN VỊ TRÍ MỚI
         resetBtn.onclick = () => {
             slotElements.forEach(slot => {
                 slot.innerText = '';
@@ -333,6 +382,7 @@ startPractice() {
             wordElements.forEach(chip => {
                 chip.classList.remove('hidden');
             });
+            shuffleWordsDOM(); // Xáo trộn lại vị trí các chữ bên dưới
             statusText.innerText = '';
             statusText.className = 'exercise-status';
         };
@@ -347,7 +397,7 @@ startPractice() {
         block.appendChild(slotsArea);
         block.appendChild(wordsArea);
         block.appendChild(actionsArea);
-        block.appendChild(answerBox); // Gắn khung đáp án vào cuối khối bài tập
+        block.appendChild(answerBox);
         return block;
     }
     checkOverflows() {
