@@ -162,7 +162,7 @@ startPractice() {
             this.showError("Các câu trong khoảng đã chọn không có dữ liệu để ghép!");
         }
     }
-    createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, vocabMeaning, vocabPinyin) {
+createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, vocabMeaning, vocabPinyin) {
         const block = document.createElement('div');
         block.className = 'exercise-block';
 
@@ -216,20 +216,86 @@ startPractice() {
         resetBtn.className = 'reset-btn';
         resetBtn.innerHTML = '<i class="fas fa-undo"></i> Làm lại';
 
-        // KHUNG HIỂN THỊ ĐÁP ÁN RIÊNG BIỆT (MẶC ĐỊNH ẨN)
+        // KHUNG HIỂN THỊ ĐÁP ÁN DẠNG Ô VUÔNG & HOVER ANIMATION
         const answerBox = document.createElement('div');
-        answerBox.style.display = 'none';
-        answerBox.style.marginTop = '15px';
-        answerBox.style.padding = '10px 15px';
-        answerBox.style.background = '#eff6ff';
-        answerBox.style.borderLeft = '4px solid #3b82f6';
-        answerBox.style.borderRadius = '0 8px 8px 0';
-        answerBox.style.color = '#1e40af';
-        answerBox.style.fontWeight = 'bold';
-        answerBox.style.fontSize = '18px';
-        answerBox.innerText = `💡 Đáp án: ${cleanText}`;
+        answerBox.className = 'answer-box';
+        
+        const answerLabel = document.createElement('span');
+        answerLabel.className = 'answer-label';
+        answerLabel.innerText = '💡 Đáp án:';
+        answerBox.appendChild(answerLabel);
 
-        // HÀM XÁO TRỘN MẢNG CHUẨN FISHER-YATES (Đảm bảo random 100% và khác câu gốc)
+        const chars = cleanText.split('');
+
+        // Tạo từng ô chữ trong phần Đáp án
+        chars.forEach(char => {
+            const ansChar = document.createElement('div');
+            ansChar.className = 'answer-char';
+            ansChar.innerText = char;
+
+            const isTargetVocab = vocab && vocab.includes(char);
+            if (isTargetVocab) {
+                ansChar.style.color = '#ef4444';
+                ansChar.style.borderColor = '#ef4444';
+                ansChar.style.background = '#fef2f2';
+            }
+
+            // Tạo khung Popup chứa chữ viết HanziWriter khi hover
+            if (this.isChinese(char)) {
+                const popup = document.createElement('div');
+                popup.className = 'stroke-popup';
+
+                const pyDiv = document.createElement('div');
+                pyDiv.className = 'popup-pinyin';
+                pyDiv.innerText = window.pinyinPro ? window.pinyinPro.pinyin(char) : '';
+                if (isTargetVocab) pyDiv.style.color = '#ef4444';
+
+                const writerDiv = document.createElement('div');
+                writerDiv.className = 'popup-writer';
+
+                popup.appendChild(pyDiv);
+                popup.appendChild(writerDiv);
+                ansChar.appendChild(popup);
+
+                ansChar.onmouseenter = () => {
+                    ansChar.isHovered = true;
+                    popup.classList.add('show');
+
+                    // Khởi tạo HanziWriter kích thước 140x140 ở lần hover đầu tiên
+                    if (!ansChar.writerInstance) {
+                        ansChar.writerInstance = HanziWriter.create(writerDiv, char, {
+                            width: 140,
+                            height: 140,
+                            strokeAnimationSpeed: 2.5,
+                            delayBetweenStrokes: 40,
+                            padding: 8,
+                            strokeColor: isTargetVocab ? '#ef4444' : '#1e3a8a'
+                        });
+                    }
+
+                    const loopAnim = () => {
+                        if (!ansChar.isHovered) return;
+                        ansChar.writerInstance.animateCharacter({
+                            onComplete: () => {
+                                setTimeout(() => {
+                                    if (ansChar.isHovered) loopAnim();
+                                }, 400);
+                            }
+                        });
+                    };
+                    loopAnim();
+                };
+
+                ansChar.onmouseleave = () => {
+                    ansChar.isHovered = false;
+                    popup.classList.remove('show');
+                };
+            }
+
+            answerBox.appendChild(ansChar);
+        });
+
+        // HÀM XÁO TRỘN MẢNG CHUẨN FISHER-YATES
         const shuffleArray = (array, originalStr = '') => {
             const arr = [...array];
             if (arr.length <= 1) return arr;
@@ -246,16 +312,13 @@ startPractice() {
             return arr;
         };
 
-        const chars = cleanText.split('');
         const scrambled = shuffleArray(chars, cleanText);
 
         const slotElements = [];
         const wordElements = [];
 
-        // HÀM XÁO TRỘN LẠI VỊ TRÍ CÁC THẺ CHỮ TRONG DOM
         const shuffleWordsDOM = () => {
             const shuffledChips = shuffleArray(wordElements);
-            // Đảm bảo thứ tự hiển thị mới không vô tình trùng với câu gốc
             if (shuffledChips.length > 1 && shuffledChips.map(c => c.innerText).join('') === cleanText) {
                 [shuffledChips[0], shuffledChips[1]] = [shuffledChips[1], shuffledChips[0]];
             }
@@ -274,7 +337,6 @@ startPractice() {
                         const chip = slot.linkedChip;
                         chip.classList.remove('hidden');
 
-                        // Hoán đổi chữ vừa trả về sang một vị trí ngẫu nhiên mới ở bên dưới
                         const currentChips = Array.from(wordsArea.children);
                         if (currentChips.length > 1) {
                             const currentIndex = currentChips.indexOf(chip);
@@ -364,15 +426,14 @@ startPractice() {
         showBtn.onclick = () => {
             isAnswerVisible = !isAnswerVisible;
             if (isAnswerVisible) {
-                answerBox.style.display = 'block';
+                answerBox.classList.add('show');
                 showBtn.innerHTML = '<i class="fas fa-eye-slash"></i> Ẩn đáp án';
             } else {
-                answerBox.style.display = 'none';
+                answerBox.classList.remove('show');
                 showBtn.innerHTML = '<i class="fas fa-eye"></i> Xem đáp án';
             }
         };
 
-        // NÚT LÀM LẠI: XÓA Ô TRỐNG, HIỆN LẠI CHỮ VÀ XÁO TRỘN VỊ TRÍ MỚI
         resetBtn.onclick = () => {
             slotElements.forEach(slot => {
                 slot.innerText = '';
@@ -382,7 +443,7 @@ startPractice() {
             wordElements.forEach(chip => {
                 chip.classList.remove('hidden');
             });
-            shuffleWordsDOM(); // Xáo trộn lại vị trí các chữ bên dưới
+            shuffleWordsDOM();
             statusText.innerText = '';
             statusText.className = 'exercise-status';
         };
@@ -399,7 +460,8 @@ startPractice() {
         block.appendChild(actionsArea);
         block.appendChild(answerBox);
         return block;
-    }
+    }        
+    
     checkOverflows() {
         setTimeout(() => {
             if (this.dom.hskButtonsContainer && this.dom.hskHint) {
