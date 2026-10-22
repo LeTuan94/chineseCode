@@ -116,6 +116,20 @@
     .speak-btn { background: #dcfce7; color: #166534; border-color: #86efac; }
     .speak-btn:hover { background: #bbf7d0; color: #14532d; }
 
+   /* GIAO DIỆN Ô ĐÁP ÁN & POPUP VIẾT CHỮ */
+    .answer-box { display: none; align-items: center; flex-wrap: wrap; gap: 10px; margin-top: 18px; padding: 15px; background: #eff6ff; border-left: 4px solid #3b82f6; border-radius: 0 12px 12px 0; }
+    .answer-box.show { display: flex; }
+    .answer-label { font-weight: bold; color: #1e40af; font-size: 18px; margin-right: 5px; }
+    
+    .answer-char { position: relative; width: 50px; height: 50px; border: 2px solid #3b82f6; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; background: #dbeafe; color: #1e3a8a; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.08); transition: transform 0.2s, background 0.2s; user-select: none; }
+    .answer-char:hover { background: #bfdbfe; transform: translateY(-2px); z-index: 100; }
+
+    .stroke-popup { display: none; position: absolute; bottom: calc(100% + 12px); left: 50%; transform: translateX(-50%); background: #ffffff; border: 2px solid #3b82f6; border-radius: 15px; padding: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); z-index: 1000; flex-direction: column; align-items: center; pointer-events: none; }
+    .stroke-popup.show { display: flex; }
+    .stroke-popup::after { content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 8px; border-style: solid; border-color: #3b82f6 transparent transparent transparent; }
+    .popup-pinyin { font-size: 18px; font-weight: bold; color: #8b5cf6; margin-bottom: 5px; }
+    .popup-writer { width: 140px; height: 140px; background: #f8fafc; border-radius: 10px; border: 1px dashed #cbd5e1; }
+
     /* ==================== 8. RESPONSIVE ==================== */
     @media screen and (max-width: 1600px) { .top-wrapper, .animation-wrapper, .search-wrapper.fixed { width: 95%; } .sentenceHeader, .sentenceRow { grid-template-columns: 50px 140px 140px 100px 150px 200px 170px 220px 70px; } }
     @media screen and (max-width: 1200px) { .sentenceHeader, .sentenceRow { grid-template-columns: 40px 120px 120px 80px 120px 160px 140px 180px 60px; } }
