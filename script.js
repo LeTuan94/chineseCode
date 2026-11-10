@@ -227,7 +227,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
 
         const chars = cleanText.split('');
 
-        // Tạo từng ô chữ trong phần Đáp án
         chars.forEach(char => {
             const ansChar = document.createElement('div');
             ansChar.className = 'answer-char';
@@ -240,7 +239,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
                 ansChar.style.background = '#fef2f2';
             }
 
-            // Tạo khung Popup chứa chữ viết HanziWriter khi hover
             if (this.isChinese(char)) {
                 const popup = document.createElement('div');
                 popup.className = 'stroke-popup';
@@ -261,7 +259,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
                     ansChar.isHovered = true;
                     popup.classList.add('show');
 
-                    // Khởi tạo HanziWriter kích thước 140x140 ở lần hover đầu tiên
                     if (!ansChar.writerInstance) {
                         ansChar.writerInstance = HanziWriter.create(writerDiv, char, {
                             width: 140,
@@ -326,16 +323,17 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
             shuffledChips.forEach(chip => wordsArea.appendChild(chip));
         };
 
-        // Tạo các ô trống
+        // Tạo các ô trống và gán ký tự đúng cho từng vị trí (dataset.expected)
         chars.forEach((char, idx) => {
             const slot = document.createElement('div');
             slot.className = 'slot';
+            slot.dataset.expected = char;
             
             const handleSlotAction = () => {
                 if (slot.innerText !== '') {
                     if (slot.linkedChip) {
                         const chip = slot.linkedChip;
-                        chip.classList.remove('hidden');
+                        chip.classList.remove('hidden', 'wrong');
 
                         const currentChips = Array.from(wordsArea.children);
                         if (currentChips.length > 1) {
@@ -370,15 +368,10 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
 
         const checkWin = () => {
             const currentString = slotElements.map(s => s.innerText).join('');
-            if (currentString.length === cleanText.length) {
-                if (currentString === cleanText) {
-                    statusText.innerText = 'Chính xác! 🎉';
-                    statusText.className = 'exercise-status text-green';
-                    this.speak(originalText);
-                } else {
-                    statusText.innerText = 'Chưa đúng vị trí, hãy thử lại nhé!';
-                    statusText.className = 'exercise-status text-red';
-                }
+            if (currentString.length === cleanText.length && currentString === cleanText) {
+                statusText.innerText = 'Chính xác! 🎉';
+                statusText.className = 'exercise-status text-green';
+                this.speak(originalText);
             }
         };
 
@@ -388,30 +381,41 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
             chip.className = 'word-chip';
             chip.innerText = char;
             
-            if (vocab && vocab.includes(char)) {
-                chip.style.color = '#ef4444';
-                chip.style.fontWeight = 'bold';
-            }
-            
             const handleChipAction = () => {
-                if(chip.classList.contains('hidden')) return;
+                if (chip.classList.contains('hidden')) return;
+                
                 const emptySlot = slotElements.find(s => s.innerText === '');
-                if (emptySlot) {
+                if (!emptySlot) return;
+
+                // KIỂM TRA VỊ TRÍ: Chỉ cho phép nhảy lên nếu khớp với chữ của ô trống hiện tại
+                if (char === emptySlot.dataset.expected) {
+                    chip.classList.remove('wrong');
                     emptySlot.innerText = char;
                     emptySlot.classList.add('filled');
+                    
+                    // Tô đỏ khi chữ đã nhảy lên ô nếu thuộc từ vựng cần học
                     if (vocab && vocab.includes(char)) {
                         emptySlot.style.color = '#ef4444';
                     } else {
                         emptySlot.style.color = '#1e3a8a';
                     }
+                    
                     emptySlot.linkedChip = chip; 
                     chip.classList.add('hidden');
                     checkWin(); 
+                } else {
+                    // Nếu sai vị trí: giữ nguyên ở dưới và đổi sang màu đỏ
+                    chip.classList.add('wrong');
                 }
             };
 
             chip.onclick = handleChipAction;
             chip.onmouseenter = handleChipAction;
+            
+            // Khi rời chuột khỏi chữ sai thì trả lại màu bình thường
+            chip.onmouseleave = () => {
+                chip.classList.remove('wrong');
+            };
 
             wordsArea.appendChild(chip);
             wordElements.push(chip);
@@ -421,7 +425,6 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
         speakBtn.onmouseleave = () => { speechSynthesis.cancel(); };
         speakBtn.onclick = () => { this.speak(originalText); };
 
-        // LOGIC TOGGLE ẨN / HIỆN ĐÁP ÁN KHI CLICK
         let isAnswerVisible = false;
         showBtn.onclick = () => {
             isAnswerVisible = !isAnswerVisible;
@@ -441,7 +444,7 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
                 slot.linkedChip = null;
             });
             wordElements.forEach(chip => {
-                chip.classList.remove('hidden');
+                chip.classList.remove('hidden', 'wrong');
             });
             shuffleWordsDOM();
             statusText.innerText = '';
@@ -460,7 +463,7 @@ createExerciseBlock(sentenceIndex, originalText, meaning, pinyinText, vocab, voc
         block.appendChild(actionsArea);
         block.appendChild(answerBox);
         return block;
-    }        
+    }       
     
     checkOverflows() {
         setTimeout(() => {
